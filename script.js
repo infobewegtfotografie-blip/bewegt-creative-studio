@@ -99,6 +99,14 @@
     });
   });
 
+  const contactSection = document.getElementById('contact');
+  if(contactSection && 'IntersectionObserver' in window){
+    const contactObserver = new IntersectionObserver(([entry]) => {
+      document.body.classList.toggle('contact-in-view', entry.isIntersecting);
+    }, { threshold: 0.12 });
+    contactObserver.observe(contactSection);
+  }
+
   function applyLang(lang){
     const dict = translations[lang] || translations.en;
     document.documentElement.lang = lang;
@@ -133,6 +141,39 @@
   Object.assign(translations.de, {
     "pricing.currency.label": "Preise anzeigen in",
     "pricing.currency.note": "Die Währungsumrechnung ist unverbindlich. Finale Angebote werden nach Projektumfang, Ort und Produktionsbedarf bestätigt."
+  });
+  Object.assign(translations.en, {
+    "form.name": "Name",
+    "form.email": "Email",
+    "form.service": "Service needed",
+    "form.service.placeholder": "Choose a service",
+    "form.message": "Tell us about your project",
+    "form.submit": "Send project request",
+    "form.thanks.title": "Thank you.",
+    "form.thanks.copy": "Your project request has been sent. We will get back to you soon.",
+    "form.thanks.back": "Back to the studio"
+  });
+  Object.assign(translations.fr, {
+    "form.name": "Nom",
+    "form.email": "E-mail",
+    "form.service": "Service souhaité",
+    "form.service.placeholder": "Choisissez un service",
+    "form.message": "Parlez-nous de votre projet",
+    "form.submit": "Envoyer la demande",
+    "form.thanks.title": "Merci.",
+    "form.thanks.copy": "Votre demande de projet a bien été envoyée. Nous vous répondrons prochainement.",
+    "form.thanks.back": "Retour au studio"
+  });
+  Object.assign(translations.de, {
+    "form.name": "Name",
+    "form.email": "E-Mail",
+    "form.service": "Gewünschte Leistung",
+    "form.service.placeholder": "Leistung auswählen",
+    "form.message": "Erzählen Sie uns von Ihrem Projekt",
+    "form.submit": "Projektanfrage senden",
+    "form.thanks.title": "Vielen Dank.",
+    "form.thanks.copy": "Ihre Projektanfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.",
+    "form.thanks.back": "Zurück zum Studio"
   });
   applyLang(document.documentElement.lang);
 

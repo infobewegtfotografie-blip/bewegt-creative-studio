@@ -361,8 +361,42 @@
       <p class="eyebrow" data-i18n="nav.contact">Contact</p>
       <h2 data-i18n-html="cta.heading">Let’s Work<br>Together.</h2>
       <p data-i18n="cta.sub">Tell us your story. Photography, film production, live streaming, podcast production or graphic design.</p>
-      <a class="btn btn-light" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" data-i18n="buttons.whatsapp">Start on WhatsApp</a>
-      <a class="btn btn-outline" href="mailto:contact@bewegtstudio.com">contact@bewegtstudio.com</a>
+      <form class="contact-form" name="project-inquiry" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="project-inquiry">
+        <p class="contact-honeypot" hidden aria-hidden="true">
+          <label>Do not fill this out if you are human: <input name="bot-field"></label>
+        </p>
+        <div class="contact-form-grid">
+          <label>
+            <span data-i18n="form.name">Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span data-i18n="form.email">Email</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+        </div>
+        <label>
+          <span data-i18n="form.service">Service needed</span>
+          <select name="service" required>
+            <option value="" data-i18n="form.service.placeholder">Choose a service</option>
+            <option value="Photography" data-i18n="service.photography.title">Photography</option>
+            <option value="Video Production" data-i18n="service.video-production.title">Video Production</option>
+            <option value="Live Streaming" data-i18n="service.live-streaming.title">Live Streaming</option>
+            <option value="Graphic Design" data-i18n="service.graphic-design.title">Graphic Design</option>
+            <option value="Podcast Production" data-i18n="service.podcast-production.title">Podcast Production</option>
+          </select>
+        </label>
+        <label>
+          <span data-i18n="form.message">Tell us about your project</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button class="btn btn-light" type="submit" data-i18n="form.submit">Send project request</button>
+      </form>
+      <div class="contact-alternatives">
+        <a class="btn btn-outline" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" data-i18n="buttons.whatsapp">Start on WhatsApp</a>
+        <a class="contact-email" href="mailto:contact@bewegtstudio.com">contact@bewegtstudio.com</a>
+      </div>
     </div>
   </section>
 </main>
