@@ -361,7 +361,7 @@
       <p class="eyebrow" data-i18n="nav.contact">Contact</p>
       <h2 data-i18n-html="cta.heading">Let’s Work<br>Together.</h2>
       <p data-i18n="cta.sub">Tell us your story. Photography, film production, live streaming, podcast production or graphic design.</p>
-      <form class="contact-form" name="project-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="contact-form" id="projectInquiryForm" name="project-inquiry" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="project-inquiry">
         <p class="contact-honeypot" hidden aria-hidden="true">
           <label>Do not fill this out if you are human: <input name="bot-field"></label>
@@ -392,6 +392,7 @@
           <textarea name="message" rows="5" required></textarea>
         </label>
         <button class="btn btn-light" type="submit" data-i18n="form.submit">Send project request</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       </form>
       <div class="contact-alternatives">
         <a class="btn btn-outline" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" data-i18n="buttons.whatsapp">Start on WhatsApp</a>

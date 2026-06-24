@@ -149,6 +149,9 @@
     "form.service.placeholder": "Choose a service",
     "form.message": "Tell us about your project",
     "form.submit": "Send project request",
+    "form.sending": "Sending…",
+    "form.success": "Thank you. Your project request has been sent.",
+    "form.error": "The message could not be sent. Please try again or contact us on WhatsApp.",
     "form.thanks.title": "Thank you.",
     "form.thanks.copy": "Your project request has been sent. We will get back to you soon.",
     "form.thanks.back": "Back to the studio"
@@ -160,6 +163,9 @@
     "form.service.placeholder": "Choisissez un service",
     "form.message": "Parlez-nous de votre projet",
     "form.submit": "Envoyer la demande",
+    "form.sending": "Envoi en cours…",
+    "form.success": "Merci. Votre demande de projet a bien été envoyée.",
+    "form.error": "Le message n’a pas pu être envoyé. Réessayez ou contactez-nous sur WhatsApp.",
     "form.thanks.title": "Merci.",
     "form.thanks.copy": "Votre demande de projet a bien été envoyée. Nous vous répondrons prochainement.",
     "form.thanks.back": "Retour au studio"
@@ -171,11 +177,60 @@
     "form.service.placeholder": "Leistung auswählen",
     "form.message": "Erzählen Sie uns von Ihrem Projekt",
     "form.submit": "Projektanfrage senden",
+    "form.sending": "Wird gesendet…",
+    "form.success": "Vielen Dank. Ihre Projektanfrage wurde gesendet.",
+    "form.error": "Die Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder kontaktieren Sie uns über WhatsApp.",
     "form.thanks.title": "Vielen Dank.",
     "form.thanks.copy": "Ihre Projektanfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.",
     "form.thanks.back": "Zurück zum Studio"
   });
   applyLang(document.documentElement.lang);
+
+  const projectInquiryForm = document.getElementById('projectInquiryForm');
+  const formStatus = document.getElementById('formStatus');
+  if(projectInquiryForm && formStatus){
+    const submitButton = projectInquiryForm.querySelector('button[type="submit"]');
+
+    function formCopy(key){
+      const lang = document.documentElement.lang || 'en';
+      return (translations[lang] && translations[lang][key]) || translations.en[key];
+    }
+
+    projectInquiryForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if(!projectInquiryForm.reportValidity()) return;
+
+      formStatus.className = 'form-status';
+      formStatus.textContent = '';
+      if(submitButton){
+        submitButton.disabled = true;
+        submitButton.textContent = formCopy('form.sending');
+      }
+
+      try{
+        const body = new URLSearchParams(new FormData(projectInquiryForm));
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString()
+        });
+        if(!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+
+        projectInquiryForm.reset();
+        formStatus.textContent = formCopy('form.success');
+        formStatus.className = 'form-status is-visible is-success';
+      }catch(error){
+        console.error(error);
+        formStatus.textContent = formCopy('form.error');
+        formStatus.className = 'form-status is-visible is-error';
+      }finally{
+        if(submitButton){
+          submitButton.disabled = false;
+          submitButton.textContent = formCopy('form.submit');
+        }
+      }
+    });
+  }
 
   const currencyButtons = Array.from(document.querySelectorAll('.currency-btn'));
   const currencyConfig = {
