@@ -35,22 +35,153 @@
 <link rel="preload" as="image" href="img/hero.webp" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "BEWEGT CREATIVE STUDIO",
-    "url": "https://bewegtcreative.com",
-    "logo": "https://bewegtcreative.com/img/og-image.jpg",
-    "description": "International creative studio for photography, video production, live streaming, graphic design and podcast production between Germany, Europe and Africa.",
-    "areaServed": ["Germany", "Europe", "Africa", "Togo"],
-    "serviceType": ["Photography", "Video Production", "Live Streaming", "Graphic Design", "Podcast Production"],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer service",
-      "availableLanguage": ["English", "French", "German"]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://bewegtcreative.com/#organization",
+      "name": "BEWEGT CREATIVE STUDIO",
+      "alternateName": "BEWEGT",
+      "url": "https://bewegtcreative.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://bewegtcreative.com/img/og-image.jpg"
+      },
+      "email": "contact@bewegtcreative.com",
+      "slogan": "Visual experiences that move people.",
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Germany"
+        },
+        {
+          "@type": "Place",
+          "name": "Europe"
+        },
+        {
+          "@type": "Place",
+          "name": "Africa"
+        },
+        {
+          "@type": "Country",
+          "name": "Togo"
+        }
+      ],
+      "sameAs": [
+        "https://www.youtube.com/@bewegtcreativestudio"
+      ]
     },
-    "sameAs": []
-  }
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://bewegtcreative.com/#professionalservice",
+      "name": "BEWEGT CREATIVE STUDIO",
+      "url": "https://bewegtcreative.com/",
+      "image": "https://bewegtcreative.com/img/og-image.jpg",
+      "description": "International creative studio for photography, video production, live streaming, graphic design and podcast production between Germany, Europe and Africa.",
+      "email": "contact@bewegtcreative.com",
+      "parentOrganization": {
+        "@id": "https://bewegtcreative.com/#organization"
+      },
+      "priceRange": "$$",
+      "areaServed": [
+        "Germany",
+        "Europe",
+        "Africa",
+        "Togo"
+      ],
+      "availableLanguage": [
+        "English",
+        "French",
+        "German"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Creative production services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Photography",
+              "description": "Portraits, weddings, events, brands and personal branding photography with a cinematic eye."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Video Production",
+              "description": "Films, documentaries, interviews and cinematic content for stories that matter."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Live Streaming",
+              "description": "Multi-camera live streaming for churches, concerts, conferences and hybrid events."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Graphic Design",
+              "description": "Posters, visual campaigns, brand identity and digital communication."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Podcast Production",
+              "description": "Recording, editing, audio identity and podcast visuals for meaningful conversations."
+            }
+          }
+        ]
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "contact@bewegtcreative.com",
+        "availableLanguage": [
+          "English",
+          "French",
+          "German"
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bewegtcreative.com/#website",
+      "url": "https://bewegtcreative.com/",
+      "name": "BEWEGT CREATIVE STUDIO",
+      "publisher": {
+        "@id": "https://bewegtcreative.com/#organization"
+      },
+      "inLanguage": [
+        "en",
+        "fr",
+        "de"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://bewegtcreative.com/#webpage",
+      "url": "https://bewegtcreative.com/",
+      "name": "BEWEGT CREATIVE STUDIO — Visual experiences that move.",
+      "description": "Creative studio for photography, video, live streaming, design and podcast — between Germany, Europe and Africa.",
+      "isPartOf": {
+        "@id": "https://bewegtcreative.com/#website"
+      },
+      "about": {
+        "@id": "https://bewegtcreative.com/#professionalservice"
+      },
+      "inLanguage": "en"
+    }
+  ]
+}
   </script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLSN7VEWBQ"></script>
