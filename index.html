@@ -52,6 +52,14 @@
     "sameAs": []
   }
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLSN7VEWBQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RLSN7VEWBQ');
+  </script>
 </head>
 <body>
 
@@ -496,6 +504,45 @@
   <span class="whatsapp-pulse"></span>
   <span>WhatsApp</span>
 </a>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (typeof gtag === 'function') {
+          gtag('event', 'whatsapp_click', {
+            event_category: 'contact',
+            event_label: link.href
+          });
+        }
+      });
+    });
+
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (typeof gtag === 'function') {
+          gtag('event', 'email_click', {
+            event_category: 'contact',
+            event_label: link.href
+          });
+        }
+      });
+    });
+
+    var form = document.getElementById('projectInquiryForm');
+    if (form) {
+      form.addEventListener('submit', function () {
+        if (typeof gtag === 'function') {
+          gtag('event', 'project_inquiry_submit', {
+            event_category: 'lead',
+            event_label: 'Netlify contact form'
+          });
+        }
+      });
+    }
+  });
+</script>
+
 <script src="script.js" defer></script>
 </body>
 </html>
