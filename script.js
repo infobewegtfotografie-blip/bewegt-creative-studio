@@ -153,7 +153,9 @@
     "form.error": "The message could not be sent. Please try again or contact us on WhatsApp.",
     "form.thanks.title": "Thank you.",
     "form.thanks.copy": "Your project request has been sent. We will get back to you soon.",
-    "form.thanks.back": "Back to the studio"
+    "form.thanks.back": "Back to the studio",
+    "sound.play": "Play",
+    "sound.pause": "Pause"
   });
   Object.assign(translations.fr, {
     "form.name": "Nom",
@@ -167,7 +169,9 @@
     "form.error": "Le message n’a pas pu être envoyé. Réessayez ou contactez-nous sur WhatsApp.",
     "form.thanks.title": "Merci.",
     "form.thanks.copy": "Votre demande de projet a bien été envoyée. Nous vous répondrons prochainement.",
-    "form.thanks.back": "Retour au studio"
+    "form.thanks.back": "Retour au studio",
+    "sound.play": "Play",
+    "sound.pause": "Pause"
   });
   Object.assign(translations.de, {
     "form.name": "Name",
@@ -181,10 +185,10 @@
     "form.error": "Die Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder kontaktieren Sie uns über WhatsApp.",
     "form.thanks.title": "Vielen Dank.",
     "form.thanks.copy": "Ihre Projektanfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.",
-    "form.thanks.back": "Zurück zum Studio"
+    "form.thanks.back": "Zurück zum Studio",
+    "sound.play": "Play",
+    "sound.pause": "Pause"
   });
-  applyLang(document.documentElement.lang);
-
   // Form handled natively by Netlify — redirects to /thank-you after submission
 
   const currencyButtons = Array.from(document.querySelectorAll('.currency-btn'));
