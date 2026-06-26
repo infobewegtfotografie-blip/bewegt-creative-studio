@@ -371,6 +371,12 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
     }
   }
 
+  document.querySelectorAll('.video-play-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+      loadYouTube(button);
+    });
+  });
+
   /* ═══ NEWSLETTER FORM (Netlify) ═══ */
   (function() {
     var nlForm = document.getElementById('newsletterForm');

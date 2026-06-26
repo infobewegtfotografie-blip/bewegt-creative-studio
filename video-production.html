@@ -174,16 +174,15 @@
       <h2 data-i18n="embed.video.heading">Video Showreel</h2>
     </div>
     <div class="video-embed-wrapper">
-      <!-- BEWEGT: remplacer VIDEO_ID par l'ID YouTube de votre vidéo (ex: dQw4w9WgXcQ) -->
-      <!-- Format URL: https://www.youtube.com/embed/VIDEO_ID -->
-      <div class="video-placeholder" id="youtubeEmbed" data-video-id="YOUTUBE_VIDEO_ID">
+      <!-- BEWEGT official showreel: https://www.youtube.com/watch?v=qted0u_10Fo -->
+      <div class="video-placeholder" id="youtubeEmbed" data-video-id="qted0u_10Fo">
         <div class="video-placeholder-inner">
-          <div class="video-play-btn" onclick="loadYouTube(this)" aria-label="Play showreel">
+          <button class="video-play-btn" type="button" aria-label="Play showreel">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="32" cy="32" r="32" fill="rgba(255,255,255,0.15)"/>
               <polygon points="26,20 50,32 26,44" fill="white"/>
             </svg>
-          </div>
+          </button>
           <p class="video-placeholder-label" data-i18n="embed.video.cta">Watch BEWEGT showreel</p>
           <p class="video-placeholder-note" data-i18n="embed.video.note">Opens YouTube — no tracking until you click play</p>
         </div>
@@ -264,7 +263,7 @@
     </div>
     <div>
       <span data-i18n="footer.social">Social</span>
-      <a href="https://www.youtube.com/@bewegtcreativestudio" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.youtube.com/@bewegtcreativestudio" target="_blank" rel="noopener" aria-label="BEWEGT CREATIVE STUDIO on YouTube">YouTube</a>
     </div>
   </div>
   <p class="copyright" data-i18n="footer.legal">© 2026 BEWEGT CREATIVE STUDIO. All Rights Reserved.</p>
@@ -280,6 +279,7 @@
     <span class="sound-volume-label">Vol</span>
     <input id="soundVolume" type="range" min="0" max="100" value="45" aria-label="Sound volume">
   </label>
+</div>
 <audio id="siteSound" preload="none"></audio>
 
 <a class="whatsapp-float" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">
