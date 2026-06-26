@@ -14,6 +14,46 @@
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = """default-src 'self';
+  script-src 'self' 'unsafe-inline'
+    https://www.googletagmanager.com
+    https://www.clarity.ms
+    https://cdn.clarity.ms
+    https://calendly.com
+    https://assets.calendly.com;
+  style-src 'self' 'unsafe-inline'
+    https://assets.calendly.com;
+  frame-src
+    https://www.youtube-nocookie.com
+    https://www.youtube.com
+    https://player.vimeo.com
+    https://calendly.com
+    https://open.spotify.com
+    https://podcasters.spotify.com;
+  img-src 'self' data: blob:
+    https://www.google-analytics.com
+    https://www.googletagmanager.com
+    https://www.clarity.ms
+    https://i.ytimg.com
+    https://img.youtube.com;
+  font-src 'self'
+    https://assets.calendly.com;
+  connect-src 'self'
+    https://www.google-analytics.com
+    https://analytics.google.com
+    https://region1.google-analytics.com
+    https://region1.analytics.google.com
+    https://stats.g.doubleclick.net
+    https://www.googletagmanager.com
+    https://www.clarity.ms
+    https://c.bing.com
+    https://calendly.com;
+  media-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+  frame-ancestors 'none'"""
 
 [[headers]]
   for = "/"
@@ -54,11 +94,6 @@
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=86400"
-
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
 
 [[redirects]]
   from = "/*"

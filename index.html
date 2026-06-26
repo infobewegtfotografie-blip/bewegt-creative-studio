@@ -547,6 +547,47 @@
     </div>
   </section>
 
+
+  <!-- ═══ Témoignages / Google Reviews ═══ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="testimonials.eyebrow">What clients say</p>
+      <h2 data-i18n="testimonials.heading">Testimonials</h2>
+    </div>
+    <div class="testimonials-grid">
+      <!-- BEWEGT: Remplacer ces cartes par vos vrais avis
+           Option A — Google Reviews widget : https://elfsight.com/google-reviews-widget/ (gratuit / 5€/mois)
+           Option B — Coller vos avis manuellement dans ces cartes
+           Option C — Quand vous avez votre fiche Google Business, remplacer par l'embed Places API -->
+      <figure class="testimonial-card">
+        <blockquote data-i18n="testimonial.1.quote">"BEWEGT captured our wedding with sensitivity and precision. Every image tells our story exactly as we lived it."</blockquote>
+        <figcaption>
+          <strong data-i18n="testimonial.1.name">Marie & Kofi</strong>
+          <span data-i18n="testimonial.1.service">Wedding Photography — Cologne</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial-card">
+        <blockquote data-i18n="testimonial.2.quote">"Our live stream reached 2,000 viewers across three continents. The production quality was flawless."</blockquote>
+        <figcaption>
+          <strong data-i18n="testimonial.2.name">Grace Fellowship Church</strong>
+          <span data-i18n="testimonial.2.service">Live Streaming — Frankfurt</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial-card">
+        <blockquote data-i18n="testimonial.3.quote">"The graphic designs BEWEGT produced for our event campaign exceeded all our expectations."</blockquote>
+        <figcaption>
+          <strong data-i18n="testimonial.3.name">AfricaConnect e.V.</strong>
+          <span data-i18n="testimonial.3.service">Graphic Design — Berlin</span>
+        </figcaption>
+      </figure>
+    </div>
+    <!-- BEWEGT: quand vous avez une fiche Google Business vérifiée,
+         ajouter ce lien avec votre Place ID -->
+    <div class="testimonials-footer">
+      <a class="btn btn-dark" href="https://g.page/r/VOTRE_PLACE_ID/review" target="_blank" rel="noopener" data-i18n="testimonials.cta">Leave a Google Review</a>
+    </div>
+  </section>
+
   <section class="faq" id="faq">
     <div class="section-head">
       <p class="eyebrow">FAQ</p>
@@ -555,6 +596,47 @@
     <details><summary data-i18n="faq.q1">Do you work across Europe and Africa?</summary><p data-i18n="faq.a1">Yes. BEWEGT CREATIVE STUDIO is based in Germany and available for selected projects across Europe and Africa.</p></details>
     <details><summary data-i18n="faq.q2">What kind of projects do you produce?</summary><p data-i18n="faq.a2">Photography, video production, documentaries, live streaming, graphic design and podcast production.</p></details>
     <details><summary data-i18n="faq.q3">How do I start a project?</summary><p data-i18n="faq.a3">Send a WhatsApp message with your idea, event date, location and the type of production you need.</p></details>
+  </section>
+
+
+  <!-- ═══ Réservation / Calendly ═══ -->
+  <section class="booking-section" id="booking">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="booking.eyebrow">Book a call</p>
+      <h2 data-i18n="booking.heading">Schedule a free discovery call</h2>
+      <p data-i18n="booking.sub">30 minutes to discuss your project. No commitment.</p>
+    </div>
+    <!-- BEWEGT: quand votre compte Calendly est prêt :
+         1. Créer un compte sur https://calendly.com
+         2. Créer un event type "Discovery Call — 30 min"
+         3. Remplacer VOTRE_USERNAME par votre username Calendly
+         4. Décommenter le bloc iframe ci-dessous et supprimer le placeholder -->
+    <div class="calendly-wrapper" id="calendlyWidget">
+      <!-- PLACEHOLDER — supprimer quand Calendly est prêt
+      <div class="booking-placeholder">
+        <p data-i18n="booking.soon">Booking available soon — contact us on WhatsApp in the meantime.</p>
+        <a class="btn btn-dark" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%2C%20I%20would%20like%20to%20schedule%20a%20discovery%20call." target="_blank" rel="noopener" data-i18n="booking.whatsapp">Book via WhatsApp</a>
+      </div>
+      -->
+      <!-- EMBED CALENDLY — décommenter quand prêt
+      <iframe
+        src="https://calendly.com/VOTRE_USERNAME/discovery-call"
+        width="100%"
+        height="700"
+        frameborder="0"
+        loading="lazy"
+        title="Schedule a discovery call with BEWEGT CREATIVE STUDIO"
+        aria-label="Calendly booking widget">
+      </iframe>
+      -->
+      <div class="booking-placeholder">
+        <div class="booking-placeholder-inner">
+          <p class="eyebrow" data-i18n="booking.eyebrow">Book a call</p>
+          <p data-i18n="booking.soon">Booking calendar coming soon.</p>
+          <a class="btn btn-dark" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%2C%20I%20would%20like%20to%20schedule%20a%20discovery%20call." target="_blank" rel="noopener" data-i18n="booking.whatsapp">Book via WhatsApp</a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="cta" id="contact">
@@ -629,6 +711,27 @@
       <a href="https://www.youtube.com/@bewegtcreativestudio" target="_blank" rel="noopener">YouTube</a>
     </div>
   </div>
+  <!-- ═══ Newsletter ═══ -->
+  <div class="newsletter-section">
+    <!-- BEWEGT: quand votre outil newsletter est choisi (Brevo, Mailchimp, Kit...) :
+         Remplacer ce bloc par le code embed fourni par votre outil
+         Brevo:     https://app.brevo.com → Contacts → Forms → Create form → Get embed code
+         Mailchimp: https://mailchimp.com → Audience → Signup forms → Embedded forms
+         Kit:       https://app.kit.com → Forms → Create form → Embed -->
+    <form class="newsletter-form" id="newsletterForm" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-nl-field">
+      <input type="hidden" name="form-name" value="newsletter">
+      <p hidden aria-hidden="true"><input name="bot-nl-field"></p>
+      <p class="eyebrow" data-i18n="newsletter.eyebrow">Newsletter</p>
+      <p data-i18n="newsletter.heading">Stay in the loop</p>
+      <div class="newsletter-input-row">
+        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+        <button type="submit" class="btn btn-light" data-i18n="newsletter.submit">Subscribe</button>
+      </div>
+      <p class="newsletter-note" data-i18n="newsletter.note">No spam. Occasional updates on new work and projects.</p>
+      <p class="newsletter-status" id="newsletterStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
   <p class="copyright" data-i18n="footer.legal">© 2026 BEWEGT CREATIVE STUDIO. All Rights Reserved.</p>
 </footer>
 

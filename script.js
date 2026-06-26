@@ -185,6 +185,112 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
     "sound.pause": "Pause"
   });
 
+  Object.assign(translations.en, {
+    "embed.video.eyebrow": "Watch our work",
+    "embed.video.heading": "Video Showreel",
+    "embed.video.cta": "Watch BEWEGT showreel",
+    "embed.video.note": "Opens YouTube — no tracking until you click play",
+    "embed.podcast.eyebrow": "Listen",
+    "embed.podcast.heading": "Our Podcast",
+    "embed.podcast.sub": "Produced by BEWEGT — conversations that matter.",
+    "embed.podcast.cta": "Podcast coming soon",
+    "embed.podcast.note": "We\'re preparing something worth listening to.",
+    "embed.podcast.notify": "Get notified on WhatsApp",
+    "testimonials.eyebrow": "What clients say",
+    "testimonials.heading": "Testimonials",
+    "testimonial.1.quote": "\"BEWEGT captured our wedding with sensitivity and precision. Every image tells our story exactly as we lived it.\"",
+    "testimonial.1.name": "Marie & Kofi",
+    "testimonial.1.service": "Wedding Photography — Cologne",
+    "testimonial.2.quote": "\"Our live stream reached 2,000 viewers across three continents. The production quality was flawless.\"",
+    "testimonial.2.name": "Grace Fellowship Church",
+    "testimonial.2.service": "Live Streaming — Frankfurt",
+    "testimonial.3.quote": "\"The graphic designs BEWEGT produced for our event campaign exceeded all our expectations.\"",
+    "testimonial.3.name": "AfricaConnect e.V.",
+    "testimonial.3.service": "Graphic Design — Berlin",
+    "testimonials.cta": "Leave a Google Review",
+    "booking.eyebrow": "Book a call",
+    "booking.heading": "Schedule a free discovery call",
+    "booking.sub": "30 minutes to discuss your project. No commitment.",
+    "booking.soon": "Booking calendar coming soon.",
+    "booking.whatsapp": "Book via WhatsApp",
+    "newsletter.eyebrow": "Newsletter",
+    "newsletter.heading": "Stay in the loop",
+    "newsletter.submit": "Subscribe",
+    "newsletter.note": "No spam. Occasional updates on new work and projects.",
+    "newsletter.success": "Thank you — you\'re on the list.",
+    "newsletter.error": "Something went wrong. Please try again."
+  });
+  Object.assign(translations.fr, {
+    "embed.video.eyebrow": "Voir nos réalisations",
+    "embed.video.heading": "Showreel vidéo",
+    "embed.video.cta": "Voir le showreel BEWEGT",
+    "embed.video.note": "Ouvre YouTube — aucun tracking avant que vous cliquiez",
+    "embed.podcast.eyebrow": "Écouter",
+    "embed.podcast.heading": "Notre Podcast",
+    "embed.podcast.sub": "Produit par BEWEGT — des conversations qui comptent.",
+    "embed.podcast.cta": "Podcast bientôt disponible",
+    "embed.podcast.note": "Nous préparons quelque chose qui vaut la peine d\'être écouté.",
+    "embed.podcast.notify": "Être notifié sur WhatsApp",
+    "testimonials.eyebrow": "Ce que disent nos clients",
+    "testimonials.heading": "Témoignages",
+    "testimonial.1.quote": "\"BEWEGT a capturé notre mariage avec sensibilité et précision. Chaque image raconte notre histoire telle que nous l\'avons vécue.\"",
+    "testimonial.1.name": "Marie & Kofi",
+    "testimonial.1.service": "Photographie de mariage — Cologne",
+    "testimonial.2.quote": "\"Notre live a touché 2 000 spectateurs sur trois continents. La qualité de production était irréprochable.\"",
+    "testimonial.2.name": "Grace Fellowship Church",
+    "testimonial.2.service": "Live Streaming — Francfort",
+    "testimonial.3.quote": "\"Les designs graphiques de BEWEGT pour notre campagne événementielle ont dépassé toutes nos attentes.\"",
+    "testimonial.3.name": "AfricaConnect e.V.",
+    "testimonial.3.service": "Design Graphique — Berlin",
+    "testimonials.cta": "Laisser un avis Google",
+    "booking.eyebrow": "Réserver un appel",
+    "booking.heading": "Planifier un appel découverte gratuit",
+    "booking.sub": "30 minutes pour discuter de votre projet. Sans engagement.",
+    "booking.soon": "Calendrier de réservation bientôt disponible.",
+    "booking.whatsapp": "Réserver via WhatsApp",
+    "newsletter.eyebrow": "Newsletter",
+    "newsletter.heading": "Restez informé",
+    "newsletter.submit": "S\'inscrire",
+    "newsletter.note": "Pas de spam. Des mises à jour occasionnelles sur nos nouvelles réalisations.",
+    "newsletter.success": "Merci — vous êtes sur la liste.",
+    "newsletter.error": "Une erreur est survenue. Veuillez réessayer."
+  });
+  Object.assign(translations.de, {
+    "embed.video.eyebrow": "Unsere Arbeiten ansehen",
+    "embed.video.heading": "Video Showreel",
+    "embed.video.cta": "BEWEGT Showreel ansehen",
+    "embed.video.note": "Öffnet YouTube — kein Tracking bis zum Klick",
+    "embed.podcast.eyebrow": "Zuhören",
+    "embed.podcast.heading": "Unser Podcast",
+    "embed.podcast.sub": "Produziert von BEWEGT — Gespräche, die zählen.",
+    "embed.podcast.cta": "Podcast bald verfügbar",
+    "embed.podcast.note": "Wir bereiten etwas vor, das es wert ist, gehört zu werden.",
+    "embed.podcast.notify": "Per WhatsApp benachrichtigt werden",
+    "testimonials.eyebrow": "Was unsere Kunden sagen",
+    "testimonials.heading": "Referenzen",
+    "testimonial.1.quote": "\"BEWEGT hat unsere Hochzeit mit Sensibilität und Präzision festgehalten. Jedes Bild erzählt unsere Geschichte.\"",
+    "testimonial.1.name": "Marie & Kofi",
+    "testimonial.1.service": "Hochzeitsfotografie — Köln",
+    "testimonial.2.quote": "\"Unser Livestream erreichte 2.000 Zuschauer auf drei Kontinenten. Die Produktionsqualität war makellos.\"",
+    "testimonial.2.name": "Grace Fellowship Church",
+    "testimonial.2.service": "Live Streaming — Frankfurt",
+    "testimonial.3.quote": "\"Die Grafikdesigns von BEWEGT für unsere Kampagne haben alle Erwartungen übertroffen.\"",
+    "testimonial.3.name": "AfricaConnect e.V.",
+    "testimonial.3.service": "Grafikdesign — Berlin",
+    "testimonials.cta": "Google-Bewertung hinterlassen",
+    "booking.eyebrow": "Termin buchen",
+    "booking.heading": "Kostenloses Kennenlerngespräch buchen",
+    "booking.sub": "30 Minuten für Ihr Projekt. Unverbindlich.",
+    "booking.soon": "Buchungskalender bald verfügbar.",
+    "booking.whatsapp": "Per WhatsApp buchen",
+    "newsletter.eyebrow": "Newsletter",
+    "newsletter.heading": "Auf dem Laufenden bleiben",
+    "newsletter.submit": "Anmelden",
+    "newsletter.note": "Kein Spam. Gelegentliche Updates zu neuen Projekten.",
+    "newsletter.success": "Danke — Sie sind dabei.",
+    "newsletter.error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  });
+
   const savedLang = localStorage.getItem('bewegtLang') || 'en';
   applyLang(savedLang);
   document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => {
@@ -192,6 +298,104 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
     setSoundLabel();
     if(siteSound && soundToggle && isSoundPlaying) playWelcomeMessage(true);
   }));
+
+
+  /* ═══ GA4 ADVANCED TRACKING ═══ */
+  (function() {
+    if (typeof gtag !== 'function') return;
+
+    // Scroll depth tracking (25 / 50 / 75 / 90%)
+    var scrollMarks = {25: false, 50: false, 75: false, 90: false};
+    window.addEventListener('scroll', function() {
+      var scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      Object.keys(scrollMarks).forEach(function(mark) {
+        if (!scrollMarks[mark] && scrollPct >= mark) {
+          scrollMarks[mark] = true;
+          gtag('event', 'scroll_depth', { depth_threshold: Number(mark), page_path: location.pathname });
+        }
+      });
+    }, { passive: true });
+
+    // Time on page (30s / 60s / 3min)
+    var timeMarks = [[30,'30s'], [60,'1min'], [180,'3min']];
+    timeMarks.forEach(function(m) {
+      setTimeout(function() {
+        gtag('event', 'time_on_page', { time_threshold: m[1], page_path: location.pathname });
+      }, m[0] * 1000);
+    });
+
+    // Section visibility (IntersectionObserver)
+    if ('IntersectionObserver' in window) {
+      var sections = document.querySelectorAll('section[id], #testimonials, #booking, #showreel, #listen');
+      var sectionObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+            gtag('event', 'section_view', { section_id: entry.target.id, page_path: location.pathname });
+            sectionObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      sections.forEach(function(s) { sectionObs.observe(s); });
+    }
+
+    // Outbound link tracking
+    document.querySelectorAll('a[target="_blank"]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        gtag('event', 'outbound_click', { url: link.href, label: link.textContent.trim() });
+      });
+    });
+  })();
+
+  /* ═══ YOUTUBE LAZY LOADER (privacy-first) ═══ */
+  function loadYouTube(btn) {
+    var wrapper = btn.closest('[data-video-id]');
+    if (!wrapper) return;
+    var videoId = wrapper.getAttribute('data-video-id');
+    if (!videoId || videoId === 'YOUTUBE_VIDEO_ID') {
+      alert('BEWEGT: brancher un ID YouTube dans data-video-id');
+      return;
+    }
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.title = 'BEWEGT CREATIVE STUDIO — Video Showreel';
+    wrapper.innerHTML = '';
+    wrapper.appendChild(iframe);
+    wrapper.style.aspectRatio = '16/9';
+    if (typeof gtag === 'function') {
+      gtag('event', 'video_play', { video_id: videoId, page_path: location.pathname });
+    }
+  }
+
+  /* ═══ NEWSLETTER FORM (Netlify) ═══ */
+  (function() {
+    var nlForm = document.getElementById('newsletterForm');
+    var nlStatus = document.getElementById('newsletterStatus');
+    if (!nlForm || !nlStatus) return;
+    nlForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var data = new FormData(nlForm);
+      fetch('/', { method: 'POST', body: data })
+        .then(function(r) {
+          if (r.ok) {
+            var dict = (typeof translations !== 'undefined' && translations[localStorage.getItem('bewegtLang') || 'en']) || {};
+            nlStatus.textContent = dict['newsletter.success'] || 'Thank you — you\'re on the list.';
+            nlStatus.style.color = 'var(--gold, #c9a84c)';
+            nlForm.reset();
+            if (typeof gtag === 'function') gtag('event', 'newsletter_signup', { page_path: location.pathname });
+          } else { throw new Error(); }
+        })
+        .catch(function() {
+          var dict = (typeof translations !== 'undefined' && translations[localStorage.getItem('bewegtLang') || 'en']) || {};
+          nlStatus.textContent = dict['newsletter.error'] || 'Something went wrong. Please try again.';
+          nlStatus.style.color = '#c0392b';
+        });
+    });
+  })();
 
   // Form handled natively by Netlify — redirects to /thank-you after submission
 

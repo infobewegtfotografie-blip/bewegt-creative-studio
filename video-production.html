@@ -33,6 +33,24 @@
   <link rel="alternate" hreflang="de" href="https://bewegtcreative.com/video-production.html">
   <link rel="alternate" hreflang="x-default" href="https://bewegtcreative.com/video-production.html">
 <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLSN7VEWBQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RLSN7VEWBQ');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xcqct6l89z");
+  </script>
+
 </head>
 <body>
 
@@ -145,6 +163,31 @@
     <p class="pricing-note" data-i18n="pricing.note">Every quote depends on duration, location, crew, production level, post-production and usage rights. Local and international formulas are available on request.</p>
     <div class="pricing-actions">
       <a class="btn btn-dark" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
+    </div>
+  </section>
+
+
+  <!-- ═══ YouTube Showreel ═══ -->
+  <section class="video-embed-section" id="showreel">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="embed.video.eyebrow">Watch our work</p>
+      <h2 data-i18n="embed.video.heading">Video Showreel</h2>
+    </div>
+    <div class="video-embed-wrapper">
+      <!-- BEWEGT: remplacer VIDEO_ID par l'ID YouTube de votre vidéo (ex: dQw4w9WgXcQ) -->
+      <!-- Format URL: https://www.youtube.com/embed/VIDEO_ID -->
+      <div class="video-placeholder" id="youtubeEmbed" data-video-id="YOUTUBE_VIDEO_ID">
+        <div class="video-placeholder-inner">
+          <div class="video-play-btn" onclick="loadYouTube(this)" aria-label="Play showreel">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="32" fill="rgba(255,255,255,0.15)"/>
+              <polygon points="26,20 50,32 26,44" fill="white"/>
+            </svg>
+          </div>
+          <p class="video-placeholder-label" data-i18n="embed.video.cta">Watch BEWEGT showreel</p>
+          <p class="video-placeholder-note" data-i18n="embed.video.note">Opens YouTube — no tracking until you click play</p>
+        </div>
+      </div>
     </div>
   </section>
 
