@@ -121,34 +121,16 @@
     localStorage.setItem('bewegtLang', lang);
     setBackToTopLabel();
   }
-  const savedLang = localStorage.getItem('bewegtLang') || 'en';
-  applyLang(savedLang);
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => {
-    applyLang(btn.dataset.lang);
-    setSoundLabel();
-    if(siteSound && soundToggle && isSoundPlaying) playWelcomeMessage(true);
-  }));
-
   Object.assign(translations.en, {
     "pricing.currency.label": "Display prices in",
-    "pricing.currency.note": "Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs."
-  });
-  Object.assign(translations.fr, {
-    "pricing.currency.label": "Afficher les prix en",
-    "pricing.currency.note": "La conversion des devises est indicative. Les devis finaux sont confirmés selon le périmètre, le lieu et les besoins de production."
-  });
-  Object.assign(translations.de, {
-    "pricing.currency.label": "Preise anzeigen in",
-    "pricing.currency.note": "Die Währungsumrechnung ist unverbindlich. Finale Angebote werden nach Projektumfang, Ort und Produktionsbedarf bestätigt."
-  });
-  Object.assign(translations.en, {
+    "pricing.currency.note": "Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.",
     "form.name": "Name",
     "form.email": "Email",
     "form.service": "Service needed",
     "form.service.placeholder": "Choose a service",
     "form.message": "Tell us about your project",
     "form.submit": "Send project request",
-    "form.sending": "Sending…",
+    "form.sending": "Sending\u2026",
     "form.success": "Thank you. Your project request has been sent.",
     "form.error": "The message could not be sent. Please try again or contact us on WhatsApp.",
     "form.thanks.title": "Thank you.",
@@ -158,37 +140,50 @@
     "sound.pause": "Pause"
   });
   Object.assign(translations.fr, {
+    "pricing.currency.label": "Afficher les prix en",
+    "pricing.currency.note": "La conversion des devises est indicative. Les devis finaux sont confirm\u00e9s selon le p\u00e9rim\u00e8tre, le lieu et les besoins de production.",
     "form.name": "Nom",
     "form.email": "E-mail",
-    "form.service": "Service souhaité",
+    "form.service": "Service souhait\u00e9",
     "form.service.placeholder": "Choisissez un service",
     "form.message": "Parlez-nous de votre projet",
     "form.submit": "Envoyer la demande",
-    "form.sending": "Envoi en cours…",
-    "form.success": "Merci. Votre demande de projet a bien été envoyée.",
-    "form.error": "Le message n’a pas pu être envoyé. Réessayez ou contactez-nous sur WhatsApp.",
+    "form.sending": "Envoi en cours\u2026",
+    "form.success": "Merci. Votre demande de projet a bien \u00e9t\u00e9 envoy\u00e9e.",
+    "form.error": "Le message n'a pas pu \u00eatre envoy\u00e9. R\u00e9essayez ou contactez-nous sur WhatsApp.",
     "form.thanks.title": "Merci.",
-    "form.thanks.copy": "Votre demande de projet a bien été envoyée. Nous vous répondrons prochainement.",
+    "form.thanks.copy": "Votre demande de projet a bien \u00e9t\u00e9 envoy\u00e9e. Nous vous r\u00e9pondrons prochainement.",
     "form.thanks.back": "Retour au studio",
     "sound.play": "Play",
     "sound.pause": "Pause"
   });
   Object.assign(translations.de, {
+    "pricing.currency.label": "Preise anzeigen in",
+    "pricing.currency.note": "Die W\u00e4hrungsumrechnung ist unverbindlich. Finale Angebote werden nach Projektumfang, Ort und Produktionsbedarf best\u00e4tigt.",
     "form.name": "Name",
     "form.email": "E-Mail",
-    "form.service": "Gewünschte Leistung",
-    "form.service.placeholder": "Leistung auswählen",
-    "form.message": "Erzählen Sie uns von Ihrem Projekt",
+    "form.service": "Gew\u00fcnschte Leistung",
+    "form.service.placeholder": "Leistung ausw\u00e4hlen",
+    "form.message": "Erz\u00e4hlen Sie uns von Ihrem Projekt",
     "form.submit": "Projektanfrage senden",
-    "form.sending": "Wird gesendet…",
+    "form.sending": "Wird gesendet\u2026",
     "form.success": "Vielen Dank. Ihre Projektanfrage wurde gesendet.",
-    "form.error": "Die Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder kontaktieren Sie uns über WhatsApp.",
+    "form.error": "Die Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder kontaktieren Sie uns \u00fcber WhatsApp.",
     "form.thanks.title": "Vielen Dank.",
-    "form.thanks.copy": "Ihre Projektanfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.",
-    "form.thanks.back": "Zurück zum Studio",
+    "form.thanks.copy": "Ihre Projektanfrage wurde gesendet. Wir melden uns in K\u00fcrze bei Ihnen.",
+    "form.thanks.back": "Zur\u00fcck zum Studio",
     "sound.play": "Play",
     "sound.pause": "Pause"
   });
+
+  const savedLang = localStorage.getItem('bewegtLang') || 'en';
+  applyLang(savedLang);
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => {
+    applyLang(btn.dataset.lang);
+    setSoundLabel();
+    if(siteSound && soundToggle && isSoundPlaying) playWelcomeMessage(true);
+  }));
+
   // Form handled natively by Netlify — redirects to /thank-you after submission
 
   const currencyButtons = Array.from(document.querySelectorAll('.currency-btn'));
