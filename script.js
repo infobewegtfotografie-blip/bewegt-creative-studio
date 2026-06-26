@@ -410,7 +410,6 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
   }
 
   if(soundToggle){
-    if(siteSound) siteSound.src = soundTracks[currentSoundTrack].src;
     setSoundLabel();
     applySoundVolume();
     soundToggle.addEventListener('click', () => {
