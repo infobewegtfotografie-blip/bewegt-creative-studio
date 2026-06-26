@@ -824,15 +824,18 @@ details{border-color:rgba(42,33,27,.12)}
     overflow-wrap: break-word;
   }
 
-  /* 6 — Visual service H2 : titres longs FR/DE (ex: "Production Vidéo") */
+  /* 6 — Visual service H2 : titres longs FR/DE (ex: "Videoproduktion") */
   .visual-service h2 {
-    font-size: clamp(36px, 8vw, 108px);
+    font-size: clamp(26px, 7vw, 108px);
     word-break: break-word;
     overflow-wrap: break-word;
+    white-space: normal;
+    hyphens: auto;
   }
 
   .visual-service div {
     right: 18px;
+    left: 20px;
   }
 
   /* 7 — Statement (section intro) */
