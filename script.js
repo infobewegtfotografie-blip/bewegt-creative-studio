@@ -113,10 +113,19 @@
       const key = el.getAttribute('data-i18n');
       if(dict[key]) el.textContent = dict[key];
     });
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      const key = el.getAttribute('data-i18n-html');
-      if(dict[key]) el.innerHTML = dict[key];
-    });
+    const htmlAllowedKeys = ['studio.statement', 'cta.heading'];
+
+document.querySelectorAll('[data-i18n-html]').forEach(el => {
+  const key = el.getAttribute('data-i18n-html');
+
+  if (!dict[key]) return;
+
+  if (htmlAllowedKeys.includes(key)) {
+    el.innerHTML = dict[key];
+  } else {
+    el.textContent = dict[key];
+  }
+});
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('is-active', btn.dataset.lang === lang));
     localStorage.setItem('bewegtLang', lang);
     setBackToTopLabel();
