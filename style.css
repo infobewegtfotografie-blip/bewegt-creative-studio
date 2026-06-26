@@ -21,11 +21,34 @@
 @media(max-width:1100px){.services-grid{grid-template-columns:repeat(2,1fr)}.service-list{grid-template-columns:repeat(2,1fr)}.design-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:780px){.nav-links{position:fixed;inset:0;background:var(--ink);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:40px;transform:translateY(-100%);transition:.35s;gap:20px;overflow:auto}.nav-links.is-open{transform:translateY(0)}.nav-links a,.nav-dropdown button{color:white!important;font-size:24px}.nav-dropdown{width:100%}.nav-dropdown-menu{position:static;width:100%;opacity:0;pointer-events:none;transform:none;background:transparent;box-shadow:none;border:0;padding:0;margin-top:0;grid-template-columns:1fr;gap:8px;max-height:0;overflow:hidden}.nav-dropdown:hover .nav-dropdown-menu{opacity:0;pointer-events:none;max-height:0}.nav-dropdown:focus-within .nav-dropdown-menu,.nav-dropdown.is-open .nav-dropdown-menu{opacity:1;pointer-events:auto;max-height:520px;margin-top:12px}.nav-dropdown-menu:before{display:none}.nav-service-link{grid-template-columns:74px 1fr!important;min-height:74px;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}.nav-service-link img{width:74px}.nav-service-link span{padding:10px 12px}.nav-service-link strong{font-size:18px;color:white}.nav-service-link small{display:none}.menu-toggle{display:flex;position:relative;z-index:1001}.services-grid,.service-list,.design-grid,.footer-grid{grid-template-columns:1fr}.visual-services{padding-bottom:82px}.visual-service{min-height:420px}.service-card{min-height:auto}.statement,.services-section,.work-section,.faq,.service-intro{padding-top:82px;padding-bottom:82px}.design-card,.design-card img{min-height:420px}.lightbox{padding:68px 16px 86px}.lightbox-nav{top:auto;bottom:18px}.lightbox-prev{left:22px}.lightbox-next{right:22px}.lang-switcher{border-left:0;padding-left:0}.lang-btn{font-size:22px;padding:4px}.sound-control{left:16px;bottom:16px}.sound-volume input{width:38px}.whatsapp-float{right:16px;bottom:16px}}
 
-@font-face{font-family:Satoshi;src:url("fonts/Satoshi-Variable.ttf") format("truetype");font-weight:300 900;font-display:swap}
-@font-face{font-family:Manrope;src:url("fonts/Manrope-VariableFont_wght.ttf") format("truetype");font-weight:300 800;font-display:swap}
-@font-face{font-family:"Cormorant Garamond";src:url("fonts/CormorantGaramond-Italic-VariableFont_wght.ttf") format("truetype");font-style:italic;font-weight:300 700;font-display:swap}
-@font-face{font-family:Montserrat;src:url("fonts/Montserrat-VariableFont_wght.ttf") format("truetype");font-weight:100 900;font-display:swap}
+@font-face {
+  font-family: "Satoshi";
+  src: url("fonts/Satoshi-Variable.woff2") format("woff2"),
+       url("fonts/Satoshi-Variable.ttf") format("truetype");
+  font-display: swap;
+}
 
+@font-face {
+  font-family: "Manrope";
+  src: url("fonts/Manrope-VariableFont_wght.woff2") format("woff2"),
+       url("fonts/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("fonts/CormorantGaramond-Italic-VariableFont_wght.woff2") format("woff2"),
+       url("fonts/CormorantGaramond-Italic-VariableFont_wght.ttf") format("truetype");
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-VariableFont_wght.woff2") format("woff2"),
+       url("fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
+}
 :root{
   --bg:#F7F3EA;
   --ink:#11100E;
