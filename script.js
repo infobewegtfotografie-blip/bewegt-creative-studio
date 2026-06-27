@@ -371,12 +371,6 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
     }
   }
 
-  document.querySelectorAll('.video-play-btn').forEach(function(button) {
-    button.addEventListener('click', function() {
-      loadYouTube(button);
-    });
-  });
-
   /* ═══ NEWSLETTER FORM (Netlify) ═══ */
   (function() {
     var nlForm = document.getElementById('newsletterForm');
@@ -406,11 +400,71 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
   // Form handled natively by Netlify — redirects to /thank-you after submission
 
   const currencyButtons = Array.from(document.querySelectorAll('.currency-btn'));
+  // Taux de change — valeurs de fallback (utilisées si l'API échoue)
+  const FALLBACK_RATES = { EUR: 1 / 655.957, USD: 1 / 610 };
+
   const currencyConfig = {
-    FCFA: { rate: 1, prefix: '', suffix: ' FCFA' },
-    EUR: { rate: 1 / 655.957, prefix: '€', suffix: '' },
-    USD: { rate: 1 / 610, prefix: '$', suffix: '' }
+    FCFA: { rate: 1,               prefix: '',  suffix: ' FCFA' },
+    EUR:  { rate: FALLBACK_RATES.EUR, prefix: '€', suffix: '' },
+    USD:  { rate: FALLBACK_RATES.USD, prefix: '$', suffix: '' }
   };
+
+  // Indicateur visuel du taux en direct
+  function showRateIndicator(source, rateEUR, rateUSD) {
+    var el = document.getElementById('liveRateIndicator');
+    if (!el) return;
+    var d = new Date();
+    var ts = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+    var eurDisp = Math.round(1 / rateEUR).toLocaleString('fr-FR');
+    var usdDisp = Math.round(1 / rateUSD).toLocaleString('fr-FR');
+    el.textContent = (source === 'live' ? '🟢 ' : '🟡 ') +
+      '1 EUR = ' + eurDisp + ' FCFA · 1 USD = ' + usdDisp + ' FCFA' +
+      (source === 'live' ? ' · Taux du ' + ts : ' · Taux indicatif');
+    el.title = source === 'live' ? 'Source : exchangerate-api.com' : 'Taux de secours — API indisponible';
+  }
+
+  // Chargement des taux depuis l'API (avec cache localStorage 6h)
+  (function fetchLiveRates() {
+    var CACHE_KEY   = 'bewegt_fx_cache';
+    var CACHE_TTL   = 6 * 60 * 60 * 1000; // 6 heures en ms
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem(CACHE_KEY)); } catch(e) {}
+
+    function applyRates(rEUR, rUSD, source) {
+      currencyConfig.EUR.rate = rEUR;
+      currencyConfig.USD.rate = rUSD;
+      var activeCurrency = localStorage.getItem('bewegtCurrency') || 'FCFA';
+      if (document.querySelectorAll('[data-fcfa]').length) updateCurrency(activeCurrency);
+      showRateIndicator(source, rEUR, rUSD);
+    }
+
+    // Utiliser le cache s'il est encore valide
+    if (cached && cached.ts && (Date.now() - cached.ts) < CACHE_TTL) {
+      applyRates(cached.EUR, cached.USD, 'live');
+      return;
+    }
+
+    // Appel API — gratuit, sans clé, CORS ouvert
+    fetch('https://open.er-api.com/v6/latest/XOF')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.rates && data.rates.EUR && data.rates.USD) {
+          var rEUR = data.rates.EUR; // XOF → EUR
+          var rUSD = data.rates.USD; // XOF → USD
+          // Mettre en cache
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ EUR: rEUR, USD: rUSD, ts: Date.now() }));
+          } catch(e) {}
+          applyRates(rEUR, rUSD, 'live');
+        } else {
+          applyRates(FALLBACK_RATES.EUR, FALLBACK_RATES.USD, 'fallback');
+        }
+      })
+      .catch(function() {
+        // API indisponible → utiliser les taux de secours
+        applyRates(FALLBACK_RATES.EUR, FALLBACK_RATES.USD, 'fallback');
+      });
+  })();
 
   function compactFcfa(value){
     if(value >= 1000000) return `${Number((value / 1000000).toFixed(1))}M FCFA`;

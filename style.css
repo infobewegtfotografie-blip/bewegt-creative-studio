@@ -1236,3 +1236,13 @@ details{border-color:rgba(42,33,27,.12)}
   .newsletter-input-row input[type="email"],
   .newsletter-input-row .btn { width: 100%; }
 }
+
+/* ── Live Rate Indicator ── */
+.live-rate-indicator {
+  font-size: 11px;
+  color: var(--text-muted, rgba(0,0,0,.45));
+  margin-top: 6px;
+  letter-spacing: .02em;
+  font-family: var(--font-mono, monospace);
+  transition: color .3s;
+}

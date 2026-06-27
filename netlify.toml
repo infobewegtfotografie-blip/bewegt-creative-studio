@@ -48,7 +48,8 @@
     https://www.googletagmanager.com
     https://www.clarity.ms
     https://c.bing.com
-    https://calendly.com;
+    https://calendly.com
+    https://open.er-api.com;
   media-src 'self';
   object-src 'none';
   base-uri 'self';
