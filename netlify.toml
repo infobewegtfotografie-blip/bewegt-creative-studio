@@ -1,6 +1,9 @@
 [build]
   publish = "."
 
+[[plugins]]
+  package = "./update-sitemap.js"
+
 [[redirects]]
   from = "/thank-you"
   to = "/thank-you.html"
