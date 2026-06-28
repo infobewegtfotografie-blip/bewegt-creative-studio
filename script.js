@@ -354,7 +354,7 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
     if (!videoId || videoId === 'YOUTUBE_VIDEO_ID') {
       alert('BEWEGT: brancher un ID YouTube dans data-video-id');
       return;
-    }
+    } 
     var iframe = document.createElement('iframe');
     iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0';
     iframe.width = '100%';
@@ -370,6 +370,21 @@ document.querySelectorAll('[data-i18n-html]').forEach(el => {
       gtag('event', 'video_play', { video_id: videoId, page_path: location.pathname });
     }
   }
+
+  /* ═══ YOUTUBE CLICK BINDING ═══ */
+  document.querySelectorAll('.video-play-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { loadYouTube(btn); });
+  });
+  document.querySelectorAll('.video-placeholder[data-video-id]').forEach(function(p) {
+    p.addEventListener('click', function(e) {
+      if (!e.target.closest('.video-play-btn')) {
+        var b = p.querySelector('.video-play-btn');
+        if (b) loadYouTube(b);
+      }
+    });
+  });
+
+  /* ═══ NEWSLETTER FORM (Netlify) ═══ */
 
   /* ═══ NEWSLETTER FORM (Netlify) ═══ */
   (function() {
