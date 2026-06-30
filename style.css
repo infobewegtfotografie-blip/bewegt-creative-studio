@@ -791,28 +791,28 @@ details{border-color:rgba(42,33,27,.12)}
 }
 
 /* =====================================================
-   MOBILE TEXT FIX — textes coupés sur mobile (toutes langues)
-   Problèmes identifiés :
-   1. .hero h1 / .page-hero h1 — clamp min trop grand + line-height trop serré
-   2. .hero h1 span — clamp(22px,4vw,48px) → sur 390px = ~16px, lisible mais le span
-      ne wrap pas bien avec letter-spacing élevé
-   3. .visual-service h2 — clamp(48px,8vw,108px) → sur 390px = ~31px OK mais
+   MOBILE TEXT FIX â€” textes coupÃ©s sur mobile (toutes langues)
+   ProblÃ¨mes identifiÃ©s :
+   1. .hero h1 / .page-hero h1 â€” clamp min trop grand + line-height trop serrÃ©
+   2. .hero h1 span â€” clamp(22px,4vw,48px) â†’ sur 390px = ~16px, lisible mais le span
+      ne wrap pas bien avec letter-spacing Ã©levÃ©
+   3. .visual-service h2 â€” clamp(48px,8vw,108px) â†’ sur 390px = ~31px OK mais
       right:24px insuffisant quand le texte FR/DE est plus long
    4. .hero-content>p:last-of-type / .page-hero-content p:last-child
-      → clamp(20px,2.4vw,30px) = 20px sur mobile, correct, mais padding 0 24px
+      â†’ clamp(20px,2.4vw,30px) = 20px sur mobile, correct, mais padding 0 24px
       peut couper le texte FR/DE plus long
-   5. .section-head h2 — clamp(42px,7vw,86px) → sur 390px = ~42px + padding:0 20px
-      → textes DE/FR longs risquent de déborder
-   6. .pricing-card li strong — white-space:nowrap coupe les prix en DE/FR
-      (déjà corrigé à 560px mais pas entre 560–780px)
-   7. .cta h2 — clamp(42px,8vw,92px) → BR tag dans DE "Lass uns<br>zusammenarbeiten."
-      ne pose pas de problème mais sur 380px le min 42px peut serrer
-   8. .studio-story — grid min 280px qui déborde sur petits écrans
+   5. .section-head h2 â€” clamp(42px,7vw,86px) â†’ sur 390px = ~42px + padding:0 20px
+      â†’ textes DE/FR longs risquent de dÃ©border
+   6. .pricing-card li strong â€” white-space:nowrap coupe les prix en DE/FR
+      (dÃ©jÃ  corrigÃ© Ã  560px mais pas entre 560â€“780px)
+   7. .cta h2 â€” clamp(42px,8vw,92px) â†’ BR tag dans DE "Lass uns<br>zusammenarbeiten."
+      ne pose pas de problÃ¨me mais sur 380px le min 42px peut serrer
+   8. .studio-story â€” grid min 280px qui dÃ©borde sur petits Ã©crans
    ===================================================== */
 
 @media (max-width: 480px) {
 
-  /* 1 — Hero H1 : réduire le minimum pour les longs titres FR/DE */
+  /* 1 â€” Hero H1 : rÃ©duire le minimum pour les longs titres FR/DE */
   .hero h1 {
     font-size: clamp(48px, 13vw, 160px);
     line-height: .96;
@@ -820,35 +820,35 @@ details{border-color:rgba(42,33,27,.12)}
     overflow-wrap: break-word;
   }
 
-  /* 2 — Hero H1 span (sous-titre en capitales) : éviter le débordement latéral */
+  /* 2 â€” Hero H1 span (sous-titre en capitales) : Ã©viter le dÃ©bordement latÃ©ral */
   .hero h1 span {
     font-size: clamp(14px, 4vw, 48px);
     letter-spacing: .12em;
     word-break: break-word;
   }
 
-  /* 3 — Page hero H1 (pages services) */
+  /* 3 â€” Page hero H1 (pages services) */
   .page-hero h1 {
     font-size: clamp(44px, 13vw, 150px);
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
-  /* 4 — Subtitle hero : assurer que le texte FR/DE plus long passe */
+  /* 4 â€” Subtitle hero : assurer que le texte FR/DE plus long passe */
   .hero-content > p:last-of-type,
   .page-hero-content p:last-child {
     font-size: clamp(16px, 4.5vw, 30px);
     padding: 0 4px;
   }
 
-  /* 5 — Section heads : éviter que les titres FR/DE sortent */
+  /* 5 â€” Section heads : Ã©viter que les titres FR/DE sortent */
   .section-head h2 {
     font-size: clamp(34px, 9vw, 86px);
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
-  /* 6 — Visual service H2 : titres longs FR/DE (ex: "Videoproduktion") */
+  /* 6 â€” Visual service H2 : titres longs FR/DE (ex: "Videoproduktion") */
   .visual-service h2 {
     font-size: clamp(26px, 7vw, 108px);
     word-break: break-word;
@@ -862,34 +862,34 @@ details{border-color:rgba(42,33,27,.12)}
     left: 20px;
   }
 
-  /* 7 — Statement (section intro) */
+  /* 7 â€” Statement (section intro) */
   .statement p {
     font-size: clamp(22px, 6vw, 58px);
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
-  /* 8 — Service intro (pages services) */
+  /* 8 â€” Service intro (pages services) */
   .service-intro p {
     font-size: clamp(22px, 5.5vw, 54px);
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
-  /* 9 — CTA H2 (ex: "Lass uns zusammenarbeiten.") */
+  /* 9 â€” CTA H2 (ex: "Lass uns zusammenarbeiten.") */
   .cta h2 {
     font-size: clamp(34px, 9vw, 92px);
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
-  /* 10 — Pricing strong : nowrap coupe les valeurs converties en EUR/USD sur DE/FR */
+  /* 10 â€” Pricing strong : nowrap coupe les valeurs converties en EUR/USD sur DE/FR */
   .pricing-card li strong {
     white-space: normal;
     text-align: left;
   }
 
-  /* 11 — Studio story : éviter le min-width qui force un scroll horizontal */
+  /* 11 â€” Studio story : Ã©viter le min-width qui force un scroll horizontal */
   .studio-story {
     grid-template-columns: 1fr !important;
   }
@@ -900,14 +900,14 @@ details{border-color:rgba(42,33,27,.12)}
     overflow-wrap: break-word;
   }
 
-  /* 12 — Nav service link : les titres longs FR/DE dans le menu mobile */
+  /* 12 â€” Nav service link : les titres longs FR/DE dans le menu mobile */
   .nav-service-link strong {
     font-size: 16px;
     line-height: 1.2;
     word-break: break-word;
   }
 
-  /* 13 — Buttons : éviter que les textes FR/DE longs dépassent */
+  /* 13 â€” Buttons : Ã©viter que les textes FR/DE longs dÃ©passent */
   .btn {
     word-break: break-word;
     overflow-wrap: break-word;
@@ -915,12 +915,12 @@ details{border-color:rgba(42,33,27,.12)}
     hyphens: auto;
   }
 
-  /* 14 — Footer grid */
+  /* 14 â€” Footer grid */
   .footer-grid {
     grid-template-columns: 1fr;
   }
 
-  /* 15 — Contact CTA */
+  /* 15 â€” Contact CTA */
   .cta#contact > div {
     max-width: 100%;
     width: 100%;
@@ -932,7 +932,7 @@ details{border-color:rgba(42,33,27,.12)}
   }
 }
 
-/* Entre 480px et 780px : corrections intermédiaires */
+/* Entre 480px et 780px : corrections intermÃ©diaires */
 @media (min-width: 481px) and (max-width: 780px) {
 
   .hero h1 {
@@ -956,7 +956,7 @@ details{border-color:rgba(42,33,27,.12)}
     overflow-wrap: break-word;
   }
 
-  /* Pricing nowrap entre 560–780px */
+  /* Pricing nowrap entre 560â€“780px */
   .pricing-card li strong {
     white-space: normal;
   }
@@ -966,7 +966,7 @@ details{border-color:rgba(42,33,27,.12)}
   }
 }
 
-/* Très petits écrans (< 360px) : sécurité globale */
+/* TrÃ¨s petits Ã©crans (< 360px) : sÃ©curitÃ© globale */
 @media (max-width: 360px) {
 
   .hero h1 {
@@ -1000,12 +1000,12 @@ details{border-color:rgba(42,33,27,.12)}
 }
 
 
-/* ═══════════════════════════════════════════════════════
-   NOUVELLES SECTIONS — YouTube / Podcast / Testimonials
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   NOUVELLES SECTIONS â€” YouTube / Podcast / Testimonials
    Calendly / Newsletter
-   ═══════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* ── Video Embed Section ── */
+/* â”€â”€ Video Embed Section â”€â”€ */
 .video-embed-section {
   padding: clamp(60px,8vw,120px) clamp(22px,6vw,80px);
   max-width: 1280px;
@@ -1051,9 +1051,16 @@ details{border-color:rgba(42,33,27,.12)}
 .video-placeholder-inner {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
   text-align: center;
   color: white;
   padding: 20px;
+  box-sizing: border-box;
 }
 .video-play-btn {
   display: inline-flex;
@@ -1070,13 +1077,17 @@ details{border-color:rgba(42,33,27,.12)}
   border-radius: 50%;
 }
 .video-placeholder-label {
-  font-size: clamp(16px,2.5vw,20px);
+  font-size: clamp(15px,2.5vw,20px);
   font-weight: 500;
   margin-bottom: 8px;
+  max-width: 320px;
+  line-height: 1.3;
 }
 .video-placeholder-note {
   font-size: 13px;
   opacity: .55;
+  max-width: 280px;
+  line-height: 1.4;
 }
 .video-youtube-link {
   display: inline-block;
@@ -1087,7 +1098,7 @@ details{border-color:rgba(42,33,27,.12)}
   text-underline-offset: 4px;
 }
 
-/* ── Podcast Embed Section ── */
+/* â”€â”€ Podcast Embed Section â”€â”€ */
 .podcast-embed-wrapper {
   margin-top: 40px;
   border-radius: 12px;
@@ -1124,7 +1135,7 @@ details{border-color:rgba(42,33,27,.12)}
   max-width: 360px;
 }
 
-/* ── Testimonials Section ── */
+/* â”€â”€ Testimonials Section â”€â”€ */
 .testimonials-section {
   padding: clamp(60px,8vw,120px) clamp(22px,6vw,80px);
   max-width: 1280px;
@@ -1173,7 +1184,7 @@ details{border-color:rgba(42,33,27,.12)}
   text-align: center;
 }
 
-/* ── Booking / Calendly Section ── */
+/* â”€â”€ Booking / Calendly Section â”€â”€ */
 .booking-section {
   padding: clamp(60px,8vw,120px) clamp(22px,6vw,80px);
   max-width: 1280px;
@@ -1208,7 +1219,7 @@ details{border-color:rgba(42,33,27,.12)}
   gap: 14px;
 }
 
-/* ── Newsletter Section ── */
+/* â”€â”€ Newsletter Section â”€â”€ */
 .newsletter-section {
   padding: 40px clamp(22px,6vw,80px) 0;
   border-top: 0.5px solid rgba(255,255,255,.12);
@@ -1257,7 +1268,7 @@ details{border-color:rgba(42,33,27,.12)}
   min-height: 18px;
 }
 
-/* ── Mobile responsive ── */
+/* â”€â”€ Mobile responsive â”€â”€ */
 @media (max-width: 780px) {
   .testimonials-grid { grid-template-columns: 1fr; }
   .video-embed-section,
@@ -1268,7 +1279,7 @@ details{border-color:rgba(42,33,27,.12)}
   .newsletter-input-row .btn { width: 100%; }
 }
 
-/* ── Live Rate Indicator ── */
+/* â”€â”€ Live Rate Indicator â”€â”€ */
 .live-rate-indicator {
   font-size: 11px;
   color: var(--text-muted, rgba(0,0,0,.45));
