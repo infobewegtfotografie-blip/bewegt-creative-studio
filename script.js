@@ -418,7 +418,7 @@
     USD: 1 / 610,
     GBP: 1 / 770,
     NGN: 1 / 1.05,      // 1 FCFA ≈ 1.05 NGN (Naira plus faible que le FCFA)
-    KES: 1 / 4.7,
+    GHS: 1 / 0.024,   // 1 FCFA ≈ 0.024 GHS (cedi ghanéen, taux indicatif)
     CNY: 1 / 88
   };
 
@@ -428,7 +428,7 @@
     USD:  { rate: FALLBACK_RATES.USD, prefix: '$',  suffix: '' },
     GBP:  { rate: FALLBACK_RATES.GBP, prefix: '£',  suffix: '' },
     NGN:  { rate: FALLBACK_RATES.NGN, prefix: '₦',  suffix: '' },
-    KES:  { rate: FALLBACK_RATES.KES, prefix: 'KSh ', suffix: '' },
+    GHS:  { rate: FALLBACK_RATES.GHS, prefix: 'GH₵', suffix: '' },
     CNY:  { rate: FALLBACK_RATES.CNY, prefix: '¥',  suffix: '' }
   };
 
@@ -450,7 +450,7 @@
   (function fetchLiveRates() {
     var CACHE_KEY   = 'bewegt_fx_cache_v2';
     var CACHE_TTL   = 6 * 60 * 60 * 1000; // 6 heures en ms
-    var CURRENCIES  = ['EUR', 'USD', 'GBP', 'NGN', 'KES', 'CNY'];
+    var CURRENCIES  = ['EUR', 'USD', 'GBP', 'NGN', 'GHS', 'CNY'];
     var cached = null;
     try { cached = JSON.parse(localStorage.getItem(CACHE_KEY)); } catch(e) {}
 
