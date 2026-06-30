@@ -32,7 +32,7 @@
   <link rel="alternate" hreflang="fr" href="https://bewegtcreative.com/video-production.html">
   <link rel="alternate" hreflang="de" href="https://bewegtcreative.com/video-production.html">
   <link rel="alternate" hreflang="x-default" href="https://bewegtcreative.com/video-production.html">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20260630b">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLSN7VEWBQ"></script>
   <script>
@@ -119,88 +119,50 @@
 <article><h3 data-i18n='service.video-production.item5.title'>Social Media Content</h3><p data-i18n='service.video-production.item5.desc'>Professional social media content for meaningful visual communication.</p></article>
   </section>
 
-  <section class="pricing-section service-pricing-section" id="pricing" aria-label="Service pricing">
+  <section class="pricing-section service-pricing-section" id="pricing" aria-label="Service pricing" data-pricing-engine="video">
     <div class="section-head">
       <p class="eyebrow" data-i18n="pricing.eyebrow">Service Packages</p>
       <h2 data-i18n="pricing.heading">Clear starting points, tailored production.</h2>
-      <p data-i18n="pricing.sub">Indicative packages inspired by local realities in Togo, African markets, Europe and international brand standards.</p>
+      <p data-i18n="pricing.sub">Choose a service to see its three tiers.</p>
     </div>
-    <div class="currency-panel" aria-label="Currency display">
+
+    <p class="pricing-market-line">
+      <span data-market-label data-africa="Pricing shown for Africa" data-europe="Pricing shown for Europe / International">Pricing shown for Africa</span>
+      &nbsp;·&nbsp;
+      <a href="#" data-market-switch data-to-europe="Switch to Europe" data-to-africa="Switch to Africa">Switch to Europe</a>
+    </p>
+
+    <div class="pricing-currency-row" data-currency-row>
       <span data-i18n="pricing.currency.label">Display prices in</span>
-      <div class="currency-toggle" role="group" aria-label="Currency selector">
-        <button type="button" class="currency-btn is-active" data-currency="FCFA">FCFA</button>
-        <button type="button" class="currency-btn" data-currency="EUR">EUR</button>
-        <button type="button" class="currency-btn" data-currency="USD">USD</button>
-        <button type="button" class="currency-btn" data-currency="NGN" aria-label="Nigerian naira">NGN</button>
-        <button type="button" class="currency-btn" data-currency="GHS" aria-label="Ghanaian cedi">GHS</button>
-        <button type="button" class="currency-btn" data-currency="GBP" aria-label="British pound">GBP</button>
-        <button type="button" class="currency-btn" data-currency="CNY" aria-label="Chinese yuan">CNY</button>
-      </div>
-      <p data-i18n="pricing.currency.note">Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.</p>
+      <button type="button" class="currency-btn is-active" data-currency="FCFA">FCFA</button>
+      <button type="button" class="currency-btn" data-currency="EUR">EUR</button>
+      <button type="button" class="currency-btn" data-currency="USD">USD</button>
+      <button type="button" class="currency-btn" data-currency="GBP">GBP</button>
     </div>
-    <div class="market-panel" aria-label="Market selector">
-      <span data-i18n="pricing.market.label">Pricing for</span>
-      <div class="market-toggle" role="group" aria-label="Market selector">
-        <button type="button" class="market-btn is-active" data-market="africa" data-i18n="pricing.market.africa">Africa</button>
-        <button type="button" class="market-btn" data-market="europe" data-i18n="pricing.market.europe">Europe / International</button>
-      </div>
-    </div>
-    <div class="pricing-grid service-pricing-grid" data-market-grid="africa">
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.tier.basic">Basic</p>
-        <h3 data-i18n="pricing.tier.basic.title">Essential coverage</h3>
-        <p class="pricing-desc" data-i18n="pricing.tier.basic.desc">Clean, professional production for individuals, creators and smaller events.</p>
-        <ul>
-          <li><span data-i18n="service.video-production.title">Service</span><strong class="price-value" data-price-low="180000" data-price-high="350000">180k - 350k FCFA</strong></li>
-        </ul>
+
+    <div class="tier-grid">
+      <article class="tier-card" data-tier="basic">
+        <p class="tier-kicker" data-i18n="pricing.tier.basic">Basic</p>
+        <p class="tier-price">180k - 350k FCFA</p>
+        <p class="tier-desc" data-i18n="pricing.tier.basic.desc">Clean, professional production for individuals, creators and smaller events.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
-      <article class="pricing-card pricing-card-featured">
-        <p class="pricing-kicker" data-i18n="pricing.tier.standard">Standard</p>
-        <h3 data-i18n="pricing.tier.standard.title">Recommended BEWEGT package</h3>
-        <p class="pricing-desc" data-i18n="pricing.tier.standard.desc">Stronger direction, cleaner production and refined post-production for serious projects.</p>
-        <ul>
-          <li><span data-i18n="service.video-production.title">Service</span><strong class="price-value" data-price-low="350000" data-price-high="650000">350k - 650k FCFA</strong></li>
-        </ul>
+      <article class="tier-card is-featured" data-tier="standard">
+        <span class="tier-badge" data-i18n="pricing.tier.standard.badge">Most popular</span>
+        <p class="tier-kicker" data-i18n="pricing.tier.standard">Standard</p>
+        <p class="tier-price">350k - 650k FCFA</p>
+        <p class="tier-desc" data-i18n="pricing.tier.standard.desc">Stronger direction, cleaner production and refined post-production for serious projects.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.tier.premium">Premium</p>
-        <h3 data-i18n="pricing.tier.premium.title">Full creative direction</h3>
-        <p class="pricing-desc" data-i18n="pricing.tier.premium.desc">Premium productions, brand campaigns and complete creative direction.</p>
-        <ul>
-          <li><span data-i18n="service.video-production.title">Service</span><strong class="price-value" data-price-low="900000" data-price-plus="true">900k FCFA+</strong></li>
-        </ul>
+      <article class="tier-card" data-tier="premium">
+        <p class="tier-kicker" data-i18n="pricing.tier.premium">Premium</p>
+        <p class="tier-price">900k FCFA+</p>
+        <p class="tier-desc" data-i18n="pricing.tier.premium.desc">Premium productions, brand campaigns and complete creative direction.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
     </div>
-    <div class="pricing-grid service-pricing-grid" data-market-grid="europe" hidden>
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.tier.basic">Basic</p>
-        <h3 data-i18n="pricing.tier.basic.title">Essential coverage</h3>
-        <p class="pricing-desc" data-i18n="pricing.tier.basic.desc">Clean, professional production for individuals, creators and smaller events.</p>
-        <ul>
-          <li><span data-i18n="service.video-production.title">Service</span><strong class="price-value-eur">€800 - €1,400</strong></li>
-        </ul>
-      </article>
-      <article class="pricing-card pricing-card-featured">
-        <p class="pricing-kicker" data-i18n="pricing.tier.standard">Standard</p>
-        <h3 data-i18n="pricing.tier.standard.title">Recommended BEWEGT package</h3>
-        <p class="pricing-desc" data-i18n="pricing.tier.standard.desc">Stronger direction, cleaner production and refined post-production for serious projects.</p>
-        <ul>
-          <li><span data-i18n="service.video-production.title">Service</span><strong class="price-value-eur">€1,400 - €2,400</strong></li>
-        </ul>
-      </article>
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.tier.premium">Premium</p>
-        <h3 data-i18n="pricing.tier.premium.title">Full creative direction</h3>
-        <p class="pricing-desc" data-i18n="pricing.tier.premium.desc">Premium productions, brand campaigns and complete creative direction.</p>
-        <ul>
-          <li><span data-i18n="service.video-production.title">Service</span><strong class="price-value-eur">€3,500+</strong></li>
-        </ul>
-      </article>
-    </div>
+
     <p class="pricing-note" data-i18n="pricing.note">Every quote depends on duration, location, crew, production level, post-production and usage rights. Local and international formulas are available on request.</p>
-    <div class="pricing-actions">
-      <a class="btn btn-dark" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
-    </div>
   </section>
 
 
@@ -325,6 +287,6 @@
   <span class="whatsapp-pulse"></span>
   <span>WhatsApp</span>
 </a>
-<script src="script.js?v=20260630" defer></script>
+<script src="script.js?v=20260630c" defer></script>
 </body>
 </html>
