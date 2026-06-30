@@ -33,7 +33,7 @@
   <link rel="alternate" hreflang="de" href="https://bewegtcreative.com/">
   <link rel="alternate" hreflang="x-default" href="https://bewegtcreative.com/">
 <link rel="preload" as="image" href="img/hero.webp" type="image/webp" fetchpriority="high">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20260630c">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -294,68 +294,73 @@
     </a>
   </section>
 
-  <section class="pricing-section" id="pricing" aria-label="Service packages">
+  <section class="pricing-section" id="pricing" aria-label="Service packages" data-pricing-engine="index">
     <div class="section-head">
       <p class="eyebrow" data-i18n="pricing.eyebrow">Service Packages</p>
       <h2 data-i18n="pricing.heading">Clear starting points, tailored production.</h2>
-      <p data-i18n="pricing.sub">Indicative packages inspired by local realities in Togo, African markets, Europe and international brand standards.</p>
+      <p data-i18n="pricing.sub">Choose a service to see its three tiers.</p>
     </div>
-    <div class="currency-panel" aria-label="Currency display">
+
+    <p class="pricing-market-line">
+      <span data-market-label data-africa="Pricing shown for Africa" data-europe="Pricing shown for Europe / International">Pricing shown for Africa</span>
+      &nbsp;·&nbsp;
+      <a href="#" data-market-switch data-to-europe="Switch to Europe" data-to-africa="Switch to Africa">Switch to Europe</a>
+    </p>
+
+    <div class="pricing-service-row" role="group" aria-label="Select a service">
+      <button type="button" class="pricing-service-btn is-active" data-service="photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span data-i18n="pricing.photo">Photography</span>
+      </button>
+      <button type="button" class="pricing-service-btn" data-service="video">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        <span data-i18n="pricing.video">Video</span>
+      </button>
+      <button type="button" class="pricing-service-btn" data-service="live">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.93 4.93a10 10 0 0 0 0 14.14M19.07 4.93a10 10 0 0 1 0 14.14M7.76 7.76a6 6 0 0 0 0 8.48M16.24 7.76a6 6 0 0 1 0 8.48"/><circle cx="12" cy="12" r="2"/></svg>
+        <span data-i18n="pricing.live">Live streaming</span>
+      </button>
+      <button type="button" class="pricing-service-btn" data-service="design">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.5-.79 1.5-1.5 0-.39-.14-.74-.39-1.01-.23-.25-.36-.58-.36-.94 0-.78.62-1.4 1.4-1.4H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"/></svg>
+        <span data-i18n="pricing.design">Graphic design</span>
+      </button>
+      <button type="button" class="pricing-service-btn" data-service="podcast">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        <span data-i18n="pricing.podcast">Podcast</span>
+      </button>
+    </div>
+
+    <div class="pricing-currency-row" data-currency-row>
       <span data-i18n="pricing.currency.label">Display prices in</span>
-      <div class="currency-toggle" role="group" aria-label="Currency selector">
-        <button type="button" class="currency-btn is-active" data-currency="FCFA">FCFA</button>
-        <button type="button" class="currency-btn" data-currency="EUR">EUR</button>
-        <button type="button" class="currency-btn" data-currency="USD">USD</button>
-        <button type="button" class="currency-btn" data-currency="NGN" aria-label="Nigerian naira">NGN</button>
-        <button type="button" class="currency-btn" data-currency="GHS" aria-label="Ghanaian cedi">GHS</button>
-        <button type="button" class="currency-btn" data-currency="GBP" aria-label="British pound">GBP</button>
-        <button type="button" class="currency-btn" data-currency="CNY" aria-label="Chinese yuan">CNY</button>
-      </div>
-      <p data-i18n="pricing.currency.note">Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.</p>
-      <p id="liveRateIndicator" class="live-rate-indicator" aria-live="polite">⏳ Chargement du taux de change…</p>
+      <button type="button" class="currency-btn is-active" data-currency="FCFA">FCFA</button>
+      <button type="button" class="currency-btn" data-currency="EUR">EUR</button>
+      <button type="button" class="currency-btn" data-currency="USD">USD</button>
+      <button type="button" class="currency-btn" data-currency="GBP">GBP</button>
     </div>
-    <div class="pricing-grid">
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.local.kicker">Local Access</p>
-        <h3 data-i18n="pricing.local.title">For Togo & West Africa</h3>
-        <p class="pricing-desc" data-i18n="pricing.local.desc">Professional entry points for individuals, churches, creators and local events.</p>
-        <ul>
-          <li><span data-i18n="pricing.photo">Photography</span><strong class="price-value" data-price-low="75000" data-price-high="150000">75k - 150k FCFA</strong></li>
-          <li><span data-i18n="pricing.video">Video</span><strong class="price-value" data-price-low="150000" data-price-high="300000">150k - 300k FCFA</strong></li>
-          <li><span data-i18n="pricing.live">Live streaming</span><strong class="price-value" data-price-low="150000" data-price-high="300000">150k - 300k FCFA</strong></li>
-          <li><span data-i18n="pricing.design">Graphic design</span><strong class="price-value" data-price-low="25000" data-price-high="75000">25k - 75k FCFA</strong></li>
-          <li><span data-i18n="pricing.podcast">Podcast</span><strong class="price-value" data-price-low="100000" data-price-high="200000">100k - 200k FCFA</strong></li>
-        </ul>
+
+    <div class="tier-grid">
+      <article class="tier-card" data-tier="basic">
+        <p class="tier-kicker" data-i18n="pricing.tier.basic">Basic</p>
+        <p class="tier-price">100k - 180k FCFA</p>
+        <p class="tier-desc" data-i18n="pricing.tier.basic.desc">Clean, professional production for individuals, creators and smaller events.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
-      <article class="pricing-card pricing-card-featured">
-        <p class="pricing-kicker" data-i18n="pricing.signature.kicker">Signature</p>
-        <h3 data-i18n="pricing.signature.title">Recommended BEWEGT package</h3>
-        <p class="pricing-desc" data-i18n="pricing.signature.desc">For serious projects needing stronger direction, cleaner production and refined post-production.</p>
-        <ul>
-          <li><span data-i18n="pricing.photo">Photography</span><strong class="price-value" data-price-low="250000" data-price-high="500000">250k - 500k FCFA</strong></li>
-          <li><span data-i18n="pricing.video">Video</span><strong class="price-value" data-price-low="500000" data-price-high="1200000">500k - 1.2M FCFA</strong></li>
-          <li><span data-i18n="pricing.live">Live streaming</span><strong class="price-value" data-price-low="450000" data-price-high="900000">450k - 900k FCFA</strong></li>
-          <li><span data-i18n="pricing.design">Graphic design</span><strong class="price-value" data-price-low="150000" data-price-high="350000">150k - 350k FCFA</strong></li>
-          <li><span data-i18n="pricing.podcast">Podcast</span><strong class="price-value" data-price-low="350000" data-price-high="800000">350k - 800k FCFA</strong></li>
-        </ul>
+      <article class="tier-card is-featured" data-tier="standard">
+        <span class="tier-badge" data-i18n="pricing.tier.standard.badge">Most popular</span>
+        <p class="tier-kicker" data-i18n="pricing.tier.standard">Standard</p>
+        <p class="tier-price">200k - 380k FCFA</p>
+        <p class="tier-desc" data-i18n="pricing.tier.standard.desc">Stronger direction, cleaner production and refined post-production for serious projects.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.international.kicker">International / Brand</p>
-        <h3 data-i18n="pricing.international.title">For Europe, diaspora & institutions</h3>
-        <p class="pricing-desc" data-i18n="pricing.international.desc">For premium productions, brand campaigns, NGOs, companies and full creative direction.</p>
-        <ul>
-          <li><span data-i18n="pricing.photo">Photography</span><strong class="price-value" data-price-low="800000" data-price-plus="true">800k FCFA+</strong></li>
-          <li><span data-i18n="pricing.video">Video</span><strong class="price-value" data-price-low="1800000" data-price-plus="true">1.8M FCFA+</strong></li>
-          <li><span data-i18n="pricing.live">Live streaming</span><strong class="price-value" data-price-low="1200000" data-price-plus="true">1.2M FCFA+</strong></li>
-          <li><span data-i18n="pricing.design">Graphic design</span><strong class="price-value" data-price-low="600000" data-price-plus="true">600k FCFA+</strong></li>
-          <li><span data-i18n="pricing.podcast">Podcast</span><strong class="price-value" data-price-low="1200000" data-price-plus="true">1.2M FCFA+</strong></li>
-        </ul>
+      <article class="tier-card" data-tier="premium">
+        <p class="tier-kicker" data-i18n="pricing.tier.premium">Premium</p>
+        <p class="tier-price">500k FCFA+</p>
+        <p class="tier-desc" data-i18n="pricing.tier.premium.desc">Premium productions, brand campaigns and complete creative direction.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
     </div>
+
     <p class="pricing-note" data-i18n="pricing.note">Every quote depends on duration, location, crew, production level, post-production and usage rights. Local and international formulas are available on request.</p>
-    <div class="pricing-actions">
-      <a class="btn btn-dark" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
-    </div>
   </section>
 
   <section class="work-section" id="work">
@@ -556,11 +561,7 @@
       <h2 data-i18n="testimonials.heading">Testimonials</h2>
     </div>
     <div class="testimonials-grid">
-      <!-- BEWEGT: Remplacer ces cartes par vos vrais avis
-           Option A — Google Reviews widget : https://elfsight.com/google-reviews-widget/ (gratuit / 5€/mois)
-           Option B — Coller vos avis manuellement dans ces cartes
-           Option C — Quand vous avez votre fiche Google Business, remplacer par l'embed Places API -->
-      <figure class="testimonial-card">
+        <figure class="testimonial-card">
         <blockquote data-i18n="testimonial.1.quote">"BEWEGT captured our wedding with sensitivity and precision. Every image tells our story exactly as we lived it."</blockquote>
         <figcaption>
           <strong data-i18n="testimonial.1.name">Marie & Kofi</strong>
@@ -582,7 +583,9 @@
         </figcaption>
       </figure>
     </div>
-    <!-- Ajouter le lien Google Review lorsque la fiche Business et son Place ID seront vérifiés. -->
+    <div class="testimonials-actions">
+      <a class="btn btn-light" href="https://www.google.com/search?q=BEWEGT+CREATIVE+STUDIO+avis" target="_blank" rel="noopener" data-i18n="testimonials.cta">Leave a Google Review</a>
+    </div>
   </section>
 
   <section class="faq" id="faq">
@@ -790,6 +793,6 @@
   });
 </script>
 
-<script src="script.js" defer></script>
+<script src="script.js?v=20260630d" defer></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 (function(){
-  const translations = {"en": {"nav.home": "Home", "nav.studio": "Studio", "nav.services": "Services", "nav.work": "Work", "nav.contact": "Contact", "nav.faq": "FAQ", "nav.start": "Start a Project", "hero.subtitle": "Visual experiences that move people.", "buttons.explore": "Explore Services", "buttons.start": "Start a Project", "buttons.whatsapp": "Start on WhatsApp", "studio.statement": "<strong>BEWEGT CREATIVE STUDIO</strong> is an international visual production studio working between Germany, Europe and Africa — photography, film, live experiences, design and sound for people telling something true.", "services.heading": "What we create", "services.sub": "Each service has its own dedicated page with clear offers, use cases and project direction.", "pricing.eyebrow": "Service Packages", "pricing.heading": "Clear starting points, tailored production.", "pricing.sub": "Indicative packages inspired by local realities in Togo, African markets, Europe and international brand standards.", "pricing.local.kicker": "Local Access", "pricing.local.title": "For Togo & West Africa", "pricing.local.desc": "Professional entry points for individuals, churches, creators and local events.", "pricing.signature.kicker": "Signature", "pricing.signature.title": "Recommended BEWEGT package", "pricing.signature.desc": "For serious projects needing stronger direction, cleaner production and refined post-production.", "pricing.international.kicker": "International / Brand", "pricing.international.title": "For Europe, diaspora & institutions", "pricing.international.desc": "For premium productions, brand campaigns, NGOs, companies and full creative direction.", "pricing.photo": "Photography", "pricing.video": "Video", "pricing.live": "Live streaming", "pricing.design": "Graphic design", "pricing.podcast": "Podcast", "pricing.note": "Every quote depends on duration, location, crew, production level, post-production and usage rights. Local and international formulas are available on request.", "pricing.cta": "Request a tailored quote", "work.eyebrow": "Selected Work", "work.heading": "Graphic Design Portfolio", "work.sub": "Posters, creative portraits, birthday visuals and event campaigns designed for digital communication.", "faq.heading": "Before we start", "faq.q1": "Do you work across Europe and Africa?", "faq.a1": "Yes. BEWEGT CREATIVE STUDIO is based in Germany and available for selected projects across Europe and Africa.", "faq.q2": "What kind of projects do you produce?", "faq.a2": "Photography, video production, documentaries, live streaming, graphic design and podcast production.", "faq.q3": "How do I start a project?", "faq.a3": "Send a WhatsApp message with your idea, event date, location and the type of production you need.", "cta.heading": "Let's Work<br>Together.", "cta.sub": "Tell us your story. Photography, film production, live streaming, podcast production or graphic design.", "footer.tagline": "Visual experiences that move people.", "footer.contact": "Contact", "footer.social": "Social", "footer.legal": "© 2026 BEWEGT CREATIVE STUDIO. All Rights Reserved.", "page.service": "Service", "page.explore": "Explore more", "page.share": "Share your idea, date, location and the kind of production you need.", "work.design": "Design Portfolio", "work.selected": "Selected design work", "service.photography.title": "Photography", "service.photography.tagline": "Portraits, weddings, events and visual stories with a cinematic eye.", "service.photography.intro": "BEWEGT creates photography for people, brands, churches and communities who want images that feel honest, elegant and timeless.", "service.photography.cta": "Start a Photography Project", "service.photography.item0.title": "Portraits", "service.photography.item0.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item1.title": "Weddings", "service.photography.item1.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item2.title": "Events", "service.photography.item2.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item3.title": "Churches", "service.photography.item3.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item4.title": "Corporate Photography", "service.photography.item4.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item5.title": "Personal Branding", "service.photography.item5.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.title": "Video Production", "service.video-production.tagline": "Films, documentaries, interviews and cinematic content for stories that matter.", "service.video-production.intro": "From concept to final edit, BEWEGT produces videos with structure, emotion and a premium visual language.", "service.video-production.cta": "Start a Video Project", "service.video-production.item0.title": "Wedding Films", "service.video-production.item0.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item1.title": "Documentaries", "service.video-production.item1.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item2.title": "Music Videos", "service.video-production.item2.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item3.title": "Corporate Videos", "service.video-production.item3.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item4.title": "Interviews", "service.video-production.item4.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item5.title": "Social Media Content", "service.video-production.item5.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.title": "Live Streaming", "service.live-streaming.tagline": "Multi-camera streaming for churches, concerts, conferences and hybrid events.", "service.live-streaming.intro": "BEWEGT supports live moments with reliable production workflows, clear sound and professional switching.", "service.live-streaming.cta": "Plan a Live Stream", "service.live-streaming.item0.title": "Church Live Streaming", "service.live-streaming.item0.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item1.title": "Conference Streaming", "service.live-streaming.item1.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item2.title": "Concert Streaming", "service.live-streaming.item2.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item3.title": "Hybrid Events", "service.live-streaming.item3.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item4.title": "Multi-Camera Production", "service.live-streaming.item4.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item5.title": "Broadcast Support", "service.live-streaming.item5.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.title": "Graphic Design", "service.graphic-design.tagline": "Posters, visual campaigns, brand identity and digital communication.", "service.graphic-design.intro": "BEWEGT designs visual materials that help events, artists, ministries and brands communicate with impact.", "service.graphic-design.cta": "Start a Design Project", "service.graphic-design.item0.title": "Posters", "service.graphic-design.item0.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item1.title": "Birthday Designs", "service.graphic-design.item1.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item2.title": "Campaigns", "service.graphic-design.item2.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item3.title": "Brand Identity", "service.graphic-design.item3.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item4.title": "Social Media", "service.graphic-design.item4.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item5.title": "Business Materials", "service.graphic-design.item5.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.title": "Podcast Production", "service.podcast-production.tagline": "Recording, editing, audio identity and podcast visuals for meaningful conversations.", "service.podcast-production.intro": "BEWEGT helps creators, churches, businesses and communities produce podcasts with clarity, warmth and structure.", "service.podcast-production.cta": "Start a Podcast Project", "service.podcast-production.item0.title": "Recording", "service.podcast-production.item0.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item1.title": "Editing", "service.podcast-production.item1.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item2.title": "Audio Branding", "service.podcast-production.item2.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item3.title": "Voice Recording", "service.podcast-production.item3.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item4.title": "Visual Podcast Setup", "service.podcast-production.item4.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item5.title": "Distribution", "service.podcast-production.item5.desc": "A clear, professional service designed for strong visual communication."}, "fr": {"nav.home": "Accueil", "nav.studio": "Studio", "nav.services": "Services", "nav.work": "Réalisations", "nav.contact": "Contact", "nav.faq": "FAQ", "nav.start": "Démarrer un projet", "hero.subtitle": "Des expériences visuelles qui créent l'émotion.", "buttons.explore": "Voir les services", "buttons.start": "Démarrer un projet", "buttons.whatsapp": "Commencer sur WhatsApp", "studio.statement": "<strong>BEWEGT CREATIVE STUDIO</strong> est un studio international de production visuelle entre l'Allemagne, l'Europe et l'Afrique — photographie, film, expériences live, design et son pour celles et ceux qui ont une histoire vraie à raconter.", "services.heading": "Ce que nous créons", "services.sub": "Chaque service possède sa page dédiée avec des offres claires, des usages précis et une direction de projet.", "pricing.eyebrow": "Packs & tarifs", "pricing.heading": "Des points de départ clairs, une production sur mesure.", "pricing.sub": "Des formules indicatives inspirées des réalités du Togo, des marchés africains, de l'Europe et des standards internationaux.", "pricing.local.kicker": "Local Access", "pricing.local.title": "Pour le Togo & l'Afrique de l'Ouest", "pricing.local.desc": "Des entrées professionnelles pour particuliers, églises, créateurs et événements locaux.", "pricing.signature.kicker": "Signature", "pricing.signature.title": "Le pack BEWEGT recommandé", "pricing.signature.desc": "Pour les projets sérieux qui demandent plus de direction, une production propre et une post-production soignée.", "pricing.international.kicker": "International / Brand", "pricing.international.title": "Pour l'Europe, la diaspora & les institutions", "pricing.international.desc": "Pour productions premium, campagnes de marque, ONG, entreprises et direction créative complète.", "pricing.photo": "Photographie", "pricing.video": "Vidéo", "pricing.live": "Live streaming", "pricing.design": "Design graphique", "pricing.podcast": "Podcast", "pricing.note": "Chaque devis dépend de la durée, du lieu, de l'équipe, du niveau de production, de la post-production et des droits d'utilisation. Des formules locales et internationales sont disponibles sur demande.", "pricing.cta": "Demander un devis sur mesure", "work.eyebrow": "Réalisations", "work.heading": "Portfolio Design Graphique", "work.sub": "Affiches, portraits créatifs, visuels d'anniversaire et campagnes événementielles pour la communication digitale.", "faq.heading": "Avant de commencer", "faq.q1": "Travaillez-vous en Europe et en Afrique ?", "faq.a1": "Oui. BEWEGT CREATIVE STUDIO est basé en Allemagne et disponible pour des projets sélectionnés en Europe et en Afrique.", "faq.q2": "Quels types de projets produisez-vous ?", "faq.a2": "Photographie, production vidéo, documentaires, live streaming, design graphique et production podcast.", "faq.q3": "Comment démarrer un projet ?", "faq.a3": "Envoyez un message WhatsApp avec votre idée, la date, le lieu et le type de production souhaité.", "cta.heading": "Travaillons<br>ensemble.", "cta.sub": "Racontez-nous votre histoire. Photographie, production vidéo, live streaming, production podcast ou design graphique.", "footer.tagline": "Des expériences visuelles qui créent l'émotion.", "footer.contact": "Contact", "footer.social": "Réseaux", "footer.legal": "© 2026 BEWEGT CREATIVE STUDIO. Tous droits réservés.", "page.service": "Service", "page.explore": "Explorer plus", "page.share": "Partagez votre idée, la date, le lieu et le type de production souhaité.", "work.design": "Portfolio Design", "work.selected": "Sélection de designs", "service.photography.title": "Photographie", "service.photography.tagline": "Portraits, mariages, événements et histoires visuelles avec un regard cinématographique.", "service.photography.intro": "BEWEGT crée des photographies pour les personnes, marques, églises et communautés qui veulent des images sincères, élégantes et intemporelles.", "service.photography.cta": "Démarrer un projet photo", "service.photography.item0.title": "Portraits", "service.photography.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item1.title": "Mariages", "service.photography.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item2.title": "Événements", "service.photography.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item3.title": "Églises", "service.photography.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item4.title": "Photographie corporate", "service.photography.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item5.title": "Personal branding", "service.photography.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.title": "Production Vidéo", "service.video-production.tagline": "Films, documentaires, interviews et contenus cinématographiques pour des histoires qui comptent.", "service.video-production.intro": "Du concept au montage final, BEWEGT produit des vidéos avec structure, émotion et langage visuel premium.", "service.video-production.cta": "Démarrer un projet vidéo", "service.video-production.item0.title": "Films de mariage", "service.video-production.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item1.title": "Documentaires", "service.video-production.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item2.title": "Clips musicaux", "service.video-production.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item3.title": "Vidéos corporate", "service.video-production.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item4.title": "Interviews", "service.video-production.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item5.title": "Contenu réseaux sociaux", "service.video-production.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.title": "Live Streaming", "service.live-streaming.tagline": "Streaming multicaméra pour églises, concerts, conférences et événements hybrides.", "service.live-streaming.intro": "BEWEGT accompagne les moments live avec un workflow fiable, un son clair et une réalisation professionnelle.", "service.live-streaming.cta": "Planifier un live stream", "service.live-streaming.item0.title": "Live streaming d'église", "service.live-streaming.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item1.title": "Streaming de conférences", "service.live-streaming.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item2.title": "Streaming de concerts", "service.live-streaming.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item3.title": "Événements hybrides", "service.live-streaming.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item4.title": "Production multicaméra", "service.live-streaming.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item5.title": "Support broadcast", "service.live-streaming.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.title": "Design Graphique", "service.graphic-design.tagline": "Affiches, campagnes visuelles, identité de marque et communication digitale.", "service.graphic-design.intro": "BEWEGT conçoit des visuels qui aident les événements, artistes, ministères et marques à communiquer avec impact.", "service.graphic-design.cta": "Démarrer un projet design", "service.graphic-design.item0.title": "Affiches", "service.graphic-design.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item1.title": "Designs d'anniversaire", "service.graphic-design.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item2.title": "Campagnes", "service.graphic-design.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item3.title": "Identité de marque", "service.graphic-design.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item4.title": "Réseaux sociaux", "service.graphic-design.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item5.title": "Supports professionnels", "service.graphic-design.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.title": "Production Podcast", "service.podcast-production.tagline": "Enregistrement, montage, identité audio et visuels podcast pour des conversations qui comptent.", "service.podcast-production.intro": "BEWEGT aide créateurs, églises, entreprises et communautés à produire des podcasts clairs, chaleureux et structurés.", "service.podcast-production.cta": "Démarrer un projet podcast", "service.podcast-production.item0.title": "Enregistrement", "service.podcast-production.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item1.title": "Montage", "service.podcast-production.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item2.title": "Branding audio", "service.podcast-production.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item3.title": "Enregistrement voix", "service.podcast-production.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item4.title": "Setup podcast vidéo", "service.podcast-production.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item5.title": "Distribution", "service.podcast-production.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte."}, "de": {"nav.home": "Home", "nav.studio": "Studio", "nav.services": "Leistungen", "nav.work": "Arbeiten", "nav.contact": "Kontakt", "nav.faq": "FAQ", "nav.start": "Projekt starten", "hero.subtitle": "Visuelle Erlebnisse, die Menschen bewegen.", "buttons.explore": "Leistungen ansehen", "buttons.start": "Projekt starten", "buttons.whatsapp": "Auf WhatsApp starten", "studio.statement": "<strong>BEWEGT CREATIVE STUDIO</strong> ist ein internationales Studio für visuelle Produktion zwischen Deutschland, Europa und Afrika — Fotografie, Film, Live-Erlebnisse, Design und Sound für Menschen, die etwas Echtes erzählen.", "services.heading": "Was wir schaffen", "services.sub": "Jede Leistung hat eine eigene Seite mit klaren Angeboten, Einsatzbereichen und Projektstruktur.", "pricing.eyebrow": "Pakete & Preise", "pricing.heading": "Klare Einstiegspunkte, maßgeschneiderte Produktion.", "pricing.sub": "Richtpreise, inspiriert von lokalen Realitäten in Togo, afrikanischen Märkten, Europa und internationalen Markenstandards.", "pricing.local.kicker": "Local Access", "pricing.local.title": "Für Togo & Westafrika", "pricing.local.desc": "Professionelle Einstiegspunkte für Privatpersonen, Kirchen, Creator und lokale Events.", "pricing.signature.kicker": "Signature", "pricing.signature.title": "Das empfohlene BEWEGT Paket", "pricing.signature.desc": "Für ernsthafte Projekte mit stärkerer Regie, sauberer Produktion und verfeinerter Postproduktion.", "pricing.international.kicker": "International / Brand", "pricing.international.title": "Für Europa, Diaspora & Institutionen", "pricing.international.desc": "Für Premium-Produktionen, Markenkampagnen, NGOs, Unternehmen und komplette kreative Leitung.", "pricing.photo": "Fotografie", "pricing.video": "Video", "pricing.live": "Live Streaming", "pricing.design": "Grafikdesign", "pricing.podcast": "Podcast", "pricing.note": "Jedes Angebot hängt von Dauer, Ort, Team, Produktionsniveau, Postproduktion und Nutzungsrechten ab. Lokale und internationale Formeln sind auf Anfrage verfügbar.", "pricing.cta": "Individuelles Angebot anfragen", "work.eyebrow": "Ausgewählte Arbeiten", "work.heading": "Grafikdesign Portfolio", "work.sub": "Poster, kreative Porträts, Geburtstagsvisuals und Kampagnen für digitale Kommunikation.", "faq.heading": "Bevor wir starten", "faq.q1": "Arbeiten Sie in Europa und Afrika?", "faq.a1": "Ja. BEWEGT CREATIVE STUDIO ist in Deutschland ansässig und für ausgewählte Projekte in Europa und Afrika verfügbar.", "faq.q2": "Welche Projekte produzieren Sie?", "faq.a2": "Fotografie, Videoproduktion, Dokumentarfilm, Live Streaming, Grafikdesign und Podcast-Produktion.", "faq.q3": "Wie starte ich ein Projekt?", "faq.a3": "Senden Sie eine WhatsApp-Nachricht mit Ihrer Idee, Datum, Ort und der gewünschten Produktion.", "cta.heading": "Lass uns<br>zusammenarbeiten.", "cta.sub": "Erzählen Sie uns Ihre Geschichte. Fotografie, Filmproduktion, Live Streaming, Podcast-Produktion oder Grafikdesign.", "footer.tagline": "Visuelle Erlebnisse, die Menschen bewegen.", "footer.contact": "Kontakt", "footer.social": "Social", "footer.legal": "© 2026 BEWEGT CREATIVE STUDIO. Alle Rechte vorbehalten.", "page.service": "Leistung", "page.explore": "Mehr entdecken", "page.share": "Teilen Sie Ihre Idee, Datum, Ort und die gewünschte Produktion.", "work.design": "Design Portfolio", "work.selected": "Ausgewählte Designarbeiten", "service.photography.title": "Fotografie", "service.photography.tagline": "Porträts, Hochzeiten, Events und visuelle Geschichten mit filmischem Blick.", "service.photography.intro": "BEWEGT erstellt Fotografie für Menschen, Marken, Kirchen und Communities, die ehrliche, elegante und zeitlose Bilder möchten.", "service.photography.cta": "Fotoprojekt starten", "service.photography.item0.title": "Porträts", "service.photography.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item1.title": "Hochzeiten", "service.photography.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item2.title": "Events", "service.photography.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item3.title": "Kirchen", "service.photography.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item4.title": "Corporate Fotografie", "service.photography.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item5.title": "Personal Branding", "service.photography.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.title": "Videoproduktion", "service.video-production.tagline": "Filme, Dokumentationen, Interviews und filmische Inhalte für Geschichten, die zählen.", "service.video-production.intro": "Vom Konzept bis zum finalen Schnitt produziert BEWEGT Videos mit Struktur, Emotion und hochwertiger Bildsprache.", "service.video-production.cta": "Videoprojekt starten", "service.video-production.item0.title": "Hochzeitsfilme", "service.video-production.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item1.title": "Dokumentationen", "service.video-production.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item2.title": "Musikvideos", "service.video-production.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item3.title": "Corporate Videos", "service.video-production.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item4.title": "Interviews", "service.video-production.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item5.title": "Social-Media-Content", "service.video-production.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.title": "Live Streaming", "service.live-streaming.tagline": "Multikamera-Streaming für Kirchen, Konzerte, Konferenzen und hybride Events.", "service.live-streaming.intro": "BEWEGT begleitet Live-Momente mit zuverlässigen Abläufen, klarem Sound und professioneller Bildregie.", "service.live-streaming.cta": "Live Stream planen", "service.live-streaming.item0.title": "Kirchen-Livestreaming", "service.live-streaming.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item1.title": "Konferenz-Streaming", "service.live-streaming.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item2.title": "Konzert-Streaming", "service.live-streaming.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item3.title": "Hybride Events", "service.live-streaming.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item4.title": "Multikamera-Produktion", "service.live-streaming.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item5.title": "Broadcast-Support", "service.live-streaming.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.title": "Grafikdesign", "service.graphic-design.tagline": "Poster, visuelle Kampagnen, Markenidentität und digitale Kommunikation.", "service.graphic-design.intro": "BEWEGT gestaltet visuelle Materialien, die Events, Künstlern, Gemeinden und Marken starke Kommunikation ermöglichen.", "service.graphic-design.cta": "Designprojekt starten", "service.graphic-design.item0.title": "Poster", "service.graphic-design.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item1.title": "Geburtstagsdesigns", "service.graphic-design.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item2.title": "Kampagnen", "service.graphic-design.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item3.title": "Markenidentität", "service.graphic-design.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item4.title": "Social Media", "service.graphic-design.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item5.title": "Geschäftsmaterialien", "service.graphic-design.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.title": "Podcast-Produktion", "service.podcast-production.tagline": "Aufnahme, Schnitt, Audio-Identität und Podcast-Visuals für bedeutungsvolle Gespräche.", "service.podcast-production.intro": "BEWEGT unterstützt Creator, Kirchen, Unternehmen und Communities bei klaren, warmen und strukturierten Podcasts.", "service.podcast-production.cta": "Podcastprojekt starten", "service.podcast-production.item0.title": "Aufnahme", "service.podcast-production.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item1.title": "Schnitt", "service.podcast-production.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item2.title": "Audio-Branding", "service.podcast-production.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item3.title": "Sprachaufnahme", "service.podcast-production.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item4.title": "Video-Podcast-Setup", "service.podcast-production.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item5.title": "Distribution", "service.podcast-production.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation."}};
+  const translations = {"en": {"nav.home": "Home", "nav.studio": "Studio", "nav.services": "Services", "nav.work": "Work", "nav.contact": "Contact", "nav.faq": "FAQ", "nav.start": "Start a Project", "hero.subtitle": "Visual experiences that move people.", "buttons.explore": "Explore Services", "buttons.start": "Start a Project", "buttons.whatsapp": "Start on WhatsApp", "studio.statement": "<strong>BEWEGT CREATIVE STUDIO</strong> is an international visual production studio working between Germany, Europe and Africa — photography, film, live experiences, design and sound for people telling something true.", "services.heading": "What we create", "services.sub": "Each service has its own dedicated page with clear offers, use cases and project direction.", "pricing.eyebrow": "Service Packages", "pricing.heading": "Clear starting points, tailored production.", "pricing.sub": "Indicative packages inspired by local realities in Togo, African markets, Europe and international brand standards.", "pricing.local.kicker": "Local Access", "pricing.local.title": "For Togo & West Africa", "pricing.local.desc": "Professional entry points for individuals, churches, creators and local events.", "pricing.signature.kicker": "Signature", "pricing.signature.title": "Recommended BEWEGT package", "pricing.signature.desc": "For serious projects needing stronger direction, cleaner production and refined post-production.", "pricing.international.kicker": "International / Brand", "pricing.international.title": "For Europe, diaspora & institutions", "pricing.international.desc": "For premium productions, brand campaigns, NGOs, companies and full creative direction.", "pricing.photo": "Photography", "pricing.video": "Video", "pricing.live": "Live streaming", "pricing.design": "Graphic design", "pricing.podcast": "Podcast", "pricing.note": "Every quote depends on duration, location, crew, production level, post-production and usage rights. Local and international formulas are available on request.", "pricing.cta": "Request a tailored quote", "pricing.market.label": "Pricing for", "pricing.market.africa": "Africa", "pricing.market.europe": "Europe / International", "pricing.tier.basic": "Basic", "pricing.tier.basic.title": "Essential coverage", "pricing.tier.basic.desc": "Clean, professional production for individuals, creators and smaller events.", "pricing.tier.standard": "Standard", "pricing.tier.standard.title": "Recommended BEWEGT package", "pricing.tier.standard.desc": "Stronger direction, cleaner production and refined post-production for serious projects.", "pricing.tier.premium": "Premium", "pricing.tier.premium.title": "Full creative direction", "pricing.tier.premium.desc": "Premium productions, brand campaigns and complete creative direction.", "pricing.tier.standard.badge": "Most popular", "work.eyebrow": "Selected Work", "work.heading": "Graphic Design Portfolio", "work.sub": "Posters, creative portraits, birthday visuals and event campaigns designed for digital communication.", "faq.heading": "Before we start", "faq.q1": "Do you work across Europe and Africa?", "faq.a1": "Yes. BEWEGT CREATIVE STUDIO is based in Germany and available for selected projects across Europe and Africa.", "faq.q2": "What kind of projects do you produce?", "faq.a2": "Photography, video production, documentaries, live streaming, graphic design and podcast production.", "faq.q3": "How do I start a project?", "faq.a3": "Send a WhatsApp message with your idea, event date, location and the type of production you need.", "cta.heading": "Let's Work<br>Together.", "cta.sub": "Tell us your story. Photography, film production, live streaming, podcast production or graphic design.", "footer.tagline": "Visual experiences that move people.", "footer.contact": "Contact", "footer.social": "Social", "footer.legal": "© 2026 BEWEGT CREATIVE STUDIO. All Rights Reserved.", "page.service": "Service", "page.explore": "Explore more", "page.share": "Share your idea, date, location and the kind of production you need.", "work.design": "Design Portfolio", "work.selected": "Selected design work", "service.photography.title": "Photography", "service.photography.tagline": "Portraits, weddings, events and visual stories with a cinematic eye.", "service.photography.intro": "BEWEGT creates photography for people, brands, churches and communities who want images that feel honest, elegant and timeless.", "service.photography.cta": "Start a Photography Project", "service.photography.item0.title": "Portraits", "service.photography.item0.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item1.title": "Weddings", "service.photography.item1.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item2.title": "Events", "service.photography.item2.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item3.title": "Churches", "service.photography.item3.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item4.title": "Corporate Photography", "service.photography.item4.desc": "A clear, professional service designed for strong visual communication.", "service.photography.item5.title": "Personal Branding", "service.photography.item5.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.title": "Video Production", "service.video-production.tagline": "Films, documentaries, interviews and cinematic content for stories that matter.", "service.video-production.intro": "From concept to final edit, BEWEGT produces videos with structure, emotion and a premium visual language.", "service.video-production.cta": "Start a Video Project", "service.video-production.item0.title": "Wedding Films", "service.video-production.item0.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item1.title": "Documentaries", "service.video-production.item1.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item2.title": "Music Videos", "service.video-production.item2.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item3.title": "Corporate Videos", "service.video-production.item3.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item4.title": "Interviews", "service.video-production.item4.desc": "A clear, professional service designed for strong visual communication.", "service.video-production.item5.title": "Social Media Content", "service.video-production.item5.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.title": "Live Streaming", "service.live-streaming.tagline": "Multi-camera streaming for churches, concerts, conferences and hybrid events.", "service.live-streaming.intro": "BEWEGT supports live moments with reliable production workflows, clear sound and professional switching.", "service.live-streaming.cta": "Plan a Live Stream", "service.live-streaming.item0.title": "Church Live Streaming", "service.live-streaming.item0.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item1.title": "Conference Streaming", "service.live-streaming.item1.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item2.title": "Concert Streaming", "service.live-streaming.item2.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item3.title": "Hybrid Events", "service.live-streaming.item3.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item4.title": "Multi-Camera Production", "service.live-streaming.item4.desc": "A clear, professional service designed for strong visual communication.", "service.live-streaming.item5.title": "Broadcast Support", "service.live-streaming.item5.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.title": "Graphic Design", "service.graphic-design.tagline": "Posters, visual campaigns, brand identity and digital communication.", "service.graphic-design.intro": "BEWEGT designs visual materials that help events, artists, ministries and brands communicate with impact.", "service.graphic-design.cta": "Start a Design Project", "service.graphic-design.item0.title": "Posters", "service.graphic-design.item0.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item1.title": "Birthday Designs", "service.graphic-design.item1.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item2.title": "Campaigns", "service.graphic-design.item2.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item3.title": "Brand Identity", "service.graphic-design.item3.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item4.title": "Social Media", "service.graphic-design.item4.desc": "A clear, professional service designed for strong visual communication.", "service.graphic-design.item5.title": "Business Materials", "service.graphic-design.item5.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.title": "Podcast Production", "service.podcast-production.tagline": "Recording, editing, audio identity and podcast visuals for meaningful conversations.", "service.podcast-production.intro": "BEWEGT helps creators, churches, businesses and communities produce podcasts with clarity, warmth and structure.", "service.podcast-production.cta": "Start a Podcast Project", "service.podcast-production.item0.title": "Recording", "service.podcast-production.item0.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item1.title": "Editing", "service.podcast-production.item1.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item2.title": "Audio Branding", "service.podcast-production.item2.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item3.title": "Voice Recording", "service.podcast-production.item3.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item4.title": "Visual Podcast Setup", "service.podcast-production.item4.desc": "A clear, professional service designed for strong visual communication.", "service.podcast-production.item5.title": "Distribution", "service.podcast-production.item5.desc": "A clear, professional service designed for strong visual communication."}, "fr": {"nav.home": "Accueil", "nav.studio": "Studio", "nav.services": "Services", "nav.work": "Réalisations", "nav.contact": "Contact", "nav.faq": "FAQ", "nav.start": "Démarrer un projet", "hero.subtitle": "Des expériences visuelles qui créent l'émotion.", "buttons.explore": "Voir les services", "buttons.start": "Démarrer un projet", "buttons.whatsapp": "Commencer sur WhatsApp", "studio.statement": "<strong>BEWEGT CREATIVE STUDIO</strong> est un studio international de production visuelle entre l'Allemagne, l'Europe et l'Afrique — photographie, film, expériences live, design et son pour celles et ceux qui ont une histoire vraie à raconter.", "services.heading": "Ce que nous créons", "services.sub": "Chaque service possède sa page dédiée avec des offres claires, des usages précis et une direction de projet.", "pricing.eyebrow": "Packs & tarifs", "pricing.heading": "Des points de départ clairs, une production sur mesure.", "pricing.sub": "Des formules indicatives inspirées des réalités du Togo, des marchés africains, de l'Europe et des standards internationaux.", "pricing.local.kicker": "Local Access", "pricing.local.title": "Pour le Togo & l'Afrique de l'Ouest", "pricing.local.desc": "Des entrées professionnelles pour particuliers, églises, créateurs et événements locaux.", "pricing.signature.kicker": "Signature", "pricing.signature.title": "Le pack BEWEGT recommandé", "pricing.signature.desc": "Pour les projets sérieux qui demandent plus de direction, une production propre et une post-production soignée.", "pricing.international.kicker": "International / Brand", "pricing.international.title": "Pour l'Europe, la diaspora & les institutions", "pricing.international.desc": "Pour productions premium, campagnes de marque, ONG, entreprises et direction créative complète.", "pricing.photo": "Photographie", "pricing.video": "Vidéo", "pricing.live": "Live streaming", "pricing.design": "Design graphique", "pricing.podcast": "Podcast", "pricing.note": "Chaque devis dépend de la durée, du lieu, de l'équipe, du niveau de production, de la post-production et des droits d'utilisation. Des formules locales et internationales sont disponibles sur demande.", "pricing.cta": "Demander un devis sur mesure", "pricing.market.label": "Tarifs pour", "pricing.market.africa": "Afrique", "pricing.market.europe": "Europe / International", "pricing.tier.basic": "Basique", "pricing.tier.basic.title": "Couverture essentielle", "pricing.tier.basic.desc": "Production propre et professionnelle pour particuliers, créateurs et petits événements.", "pricing.tier.standard": "Standard", "pricing.tier.standard.title": "Le pack BEWEGT recommandé", "pricing.tier.standard.desc": "Direction plus affirmée, production soignée et post-production raffinée pour les projets sérieux.", "pricing.tier.premium": "Premium", "pricing.tier.premium.title": "Direction créative complète", "pricing.tier.premium.desc": "Productions premium, campagnes de marque et direction créative complète.", "pricing.tier.standard.badge": "Le plus populaire", "work.eyebrow": "Réalisations", "work.heading": "Portfolio Design Graphique", "work.sub": "Affiches, portraits créatifs, visuels d'anniversaire et campagnes événementielles pour la communication digitale.", "faq.heading": "Avant de commencer", "faq.q1": "Travaillez-vous en Europe et en Afrique ?", "faq.a1": "Oui. BEWEGT CREATIVE STUDIO est basé en Allemagne et disponible pour des projets sélectionnés en Europe et en Afrique.", "faq.q2": "Quels types de projets produisez-vous ?", "faq.a2": "Photographie, production vidéo, documentaires, live streaming, design graphique et production podcast.", "faq.q3": "Comment démarrer un projet ?", "faq.a3": "Envoyez un message WhatsApp avec votre idée, la date, le lieu et le type de production souhaité.", "cta.heading": "Travaillons<br>ensemble.", "cta.sub": "Racontez-nous votre histoire. Photographie, production vidéo, live streaming, production podcast ou design graphique.", "footer.tagline": "Des expériences visuelles qui créent l'émotion.", "footer.contact": "Contact", "footer.social": "Réseaux", "footer.legal": "© 2026 BEWEGT CREATIVE STUDIO. Tous droits réservés.", "page.service": "Service", "page.explore": "Explorer plus", "page.share": "Partagez votre idée, la date, le lieu et le type de production souhaité.", "work.design": "Portfolio Design", "work.selected": "Sélection de designs", "service.photography.title": "Photographie", "service.photography.tagline": "Portraits, mariages, événements et histoires visuelles avec un regard cinématographique.", "service.photography.intro": "BEWEGT crée des photographies pour les personnes, marques, églises et communautés qui veulent des images sincères, élégantes et intemporelles.", "service.photography.cta": "Démarrer un projet photo", "service.photography.item0.title": "Portraits", "service.photography.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item1.title": "Mariages", "service.photography.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item2.title": "Événements", "service.photography.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item3.title": "Églises", "service.photography.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item4.title": "Photographie corporate", "service.photography.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.photography.item5.title": "Personal branding", "service.photography.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.title": "Production Vidéo", "service.video-production.tagline": "Films, documentaires, interviews et contenus cinématographiques pour des histoires qui comptent.", "service.video-production.intro": "Du concept au montage final, BEWEGT produit des vidéos avec structure, émotion et langage visuel premium.", "service.video-production.cta": "Démarrer un projet vidéo", "service.video-production.item0.title": "Films de mariage", "service.video-production.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item1.title": "Documentaires", "service.video-production.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item2.title": "Clips musicaux", "service.video-production.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item3.title": "Vidéos corporate", "service.video-production.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item4.title": "Interviews", "service.video-production.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.video-production.item5.title": "Contenu réseaux sociaux", "service.video-production.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.title": "Live Streaming", "service.live-streaming.tagline": "Streaming multicaméra pour églises, concerts, conférences et événements hybrides.", "service.live-streaming.intro": "BEWEGT accompagne les moments live avec un workflow fiable, un son clair et une réalisation professionnelle.", "service.live-streaming.cta": "Planifier un live stream", "service.live-streaming.item0.title": "Live streaming d'église", "service.live-streaming.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item1.title": "Streaming de conférences", "service.live-streaming.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item2.title": "Streaming de concerts", "service.live-streaming.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item3.title": "Événements hybrides", "service.live-streaming.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item4.title": "Production multicaméra", "service.live-streaming.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.live-streaming.item5.title": "Support broadcast", "service.live-streaming.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.title": "Design Graphique", "service.graphic-design.tagline": "Affiches, campagnes visuelles, identité de marque et communication digitale.", "service.graphic-design.intro": "BEWEGT conçoit des visuels qui aident les événements, artistes, ministères et marques à communiquer avec impact.", "service.graphic-design.cta": "Démarrer un projet design", "service.graphic-design.item0.title": "Affiches", "service.graphic-design.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item1.title": "Designs d'anniversaire", "service.graphic-design.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item2.title": "Campagnes", "service.graphic-design.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item3.title": "Identité de marque", "service.graphic-design.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item4.title": "Réseaux sociaux", "service.graphic-design.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.graphic-design.item5.title": "Supports professionnels", "service.graphic-design.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.title": "Production Podcast", "service.podcast-production.tagline": "Enregistrement, montage, identité audio et visuels podcast pour des conversations qui comptent.", "service.podcast-production.intro": "BEWEGT aide créateurs, églises, entreprises et communautés à produire des podcasts clairs, chaleureux et structurés.", "service.podcast-production.cta": "Démarrer un projet podcast", "service.podcast-production.item0.title": "Enregistrement", "service.podcast-production.item0.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item1.title": "Montage", "service.podcast-production.item1.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item2.title": "Branding audio", "service.podcast-production.item2.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item3.title": "Enregistrement voix", "service.podcast-production.item3.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item4.title": "Setup podcast vidéo", "service.podcast-production.item4.desc": "Un service clair et professionnel pensé pour une communication visuelle forte.", "service.podcast-production.item5.title": "Distribution", "service.podcast-production.item5.desc": "Un service clair et professionnel pensé pour une communication visuelle forte."}, "de": {"nav.home": "Home", "nav.studio": "Studio", "nav.services": "Leistungen", "nav.work": "Arbeiten", "nav.contact": "Kontakt", "nav.faq": "FAQ", "nav.start": "Projekt starten", "hero.subtitle": "Visuelle Erlebnisse, die Menschen bewegen.", "buttons.explore": "Leistungen ansehen", "buttons.start": "Projekt starten", "buttons.whatsapp": "Auf WhatsApp starten", "studio.statement": "<strong>BEWEGT CREATIVE STUDIO</strong> ist ein internationales Studio für visuelle Produktion zwischen Deutschland, Europa und Afrika — Fotografie, Film, Live-Erlebnisse, Design und Sound für Menschen, die etwas Echtes erzählen.", "services.heading": "Was wir schaffen", "services.sub": "Jede Leistung hat eine eigene Seite mit klaren Angeboten, Einsatzbereichen und Projektstruktur.", "pricing.eyebrow": "Pakete & Preise", "pricing.heading": "Klare Einstiegspunkte, maßgeschneiderte Produktion.", "pricing.sub": "Richtpreise, inspiriert von lokalen Realitäten in Togo, afrikanischen Märkten, Europa und internationalen Markenstandards.", "pricing.local.kicker": "Local Access", "pricing.local.title": "Für Togo & Westafrika", "pricing.local.desc": "Professionelle Einstiegspunkte für Privatpersonen, Kirchen, Creator und lokale Events.", "pricing.signature.kicker": "Signature", "pricing.signature.title": "Das empfohlene BEWEGT Paket", "pricing.signature.desc": "Für ernsthafte Projekte mit stärkerer Regie, sauberer Produktion und verfeinerter Postproduktion.", "pricing.international.kicker": "International / Brand", "pricing.international.title": "Für Europa, Diaspora & Institutionen", "pricing.international.desc": "Für Premium-Produktionen, Markenkampagnen, NGOs, Unternehmen und komplette kreative Leitung.", "pricing.photo": "Fotografie", "pricing.video": "Video", "pricing.live": "Live Streaming", "pricing.design": "Grafikdesign", "pricing.podcast": "Podcast", "pricing.note": "Jedes Angebot hängt von Dauer, Ort, Team, Produktionsniveau, Postproduktion und Nutzungsrechten ab. Lokale und internationale Formeln sind auf Anfrage verfügbar.", "pricing.cta": "Individuelles Angebot anfragen", "pricing.market.label": "Preise für", "pricing.market.africa": "Afrika", "pricing.market.europe": "Europa / International", "pricing.tier.basic": "Basic", "pricing.tier.basic.title": "Grundausstattung", "pricing.tier.basic.desc": "Saubere, professionelle Produktion für Privatpersonen, Creator und kleinere Events.", "pricing.tier.standard": "Standard", "pricing.tier.standard.title": "Das empfohlene BEWEGT Paket", "pricing.tier.standard.desc": "Stärkere Regie, saubere Produktion und verfeinerte Postproduktion für ernsthafte Projekte.", "pricing.tier.premium": "Premium", "pricing.tier.premium.title": "Volle kreative Leitung", "pricing.tier.premium.desc": "Premium-Produktionen, Markenkampagnen und komplette kreative Leitung.", "pricing.tier.standard.badge": "Am beliebtesten", "work.eyebrow": "Ausgewählte Arbeiten", "work.heading": "Grafikdesign Portfolio", "work.sub": "Poster, kreative Porträts, Geburtstagsvisuals und Kampagnen für digitale Kommunikation.", "faq.heading": "Bevor wir starten", "faq.q1": "Arbeiten Sie in Europa und Afrika?", "faq.a1": "Ja. BEWEGT CREATIVE STUDIO ist in Deutschland ansässig und für ausgewählte Projekte in Europa und Afrika verfügbar.", "faq.q2": "Welche Projekte produzieren Sie?", "faq.a2": "Fotografie, Videoproduktion, Dokumentarfilm, Live Streaming, Grafikdesign und Podcast-Produktion.", "faq.q3": "Wie starte ich ein Projekt?", "faq.a3": "Senden Sie eine WhatsApp-Nachricht mit Ihrer Idee, Datum, Ort und der gewünschten Produktion.", "cta.heading": "Lass uns<br>zusammenarbeiten.", "cta.sub": "Erzählen Sie uns Ihre Geschichte. Fotografie, Filmproduktion, Live Streaming, Podcast-Produktion oder Grafikdesign.", "footer.tagline": "Visuelle Erlebnisse, die Menschen bewegen.", "footer.contact": "Kontakt", "footer.social": "Social", "footer.legal": "© 2026 BEWEGT CREATIVE STUDIO. Alle Rechte vorbehalten.", "page.service": "Leistung", "page.explore": "Mehr entdecken", "page.share": "Teilen Sie Ihre Idee, Datum, Ort und die gewünschte Produktion.", "work.design": "Design Portfolio", "work.selected": "Ausgewählte Designarbeiten", "service.photography.title": "Fotografie", "service.photography.tagline": "Porträts, Hochzeiten, Events und visuelle Geschichten mit filmischem Blick.", "service.photography.intro": "BEWEGT erstellt Fotografie für Menschen, Marken, Kirchen und Communities, die ehrliche, elegante und zeitlose Bilder möchten.", "service.photography.cta": "Fotoprojekt starten", "service.photography.item0.title": "Porträts", "service.photography.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item1.title": "Hochzeiten", "service.photography.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item2.title": "Events", "service.photography.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item3.title": "Kirchen", "service.photography.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item4.title": "Corporate Fotografie", "service.photography.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.photography.item5.title": "Personal Branding", "service.photography.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.title": "Videoproduktion", "service.video-production.tagline": "Filme, Dokumentationen, Interviews und filmische Inhalte für Geschichten, die zählen.", "service.video-production.intro": "Vom Konzept bis zum finalen Schnitt produziert BEWEGT Videos mit Struktur, Emotion und hochwertiger Bildsprache.", "service.video-production.cta": "Videoprojekt starten", "service.video-production.item0.title": "Hochzeitsfilme", "service.video-production.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item1.title": "Dokumentationen", "service.video-production.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item2.title": "Musikvideos", "service.video-production.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item3.title": "Corporate Videos", "service.video-production.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item4.title": "Interviews", "service.video-production.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.video-production.item5.title": "Social-Media-Content", "service.video-production.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.title": "Live Streaming", "service.live-streaming.tagline": "Multikamera-Streaming für Kirchen, Konzerte, Konferenzen und hybride Events.", "service.live-streaming.intro": "BEWEGT begleitet Live-Momente mit zuverlässigen Abläufen, klarem Sound und professioneller Bildregie.", "service.live-streaming.cta": "Live Stream planen", "service.live-streaming.item0.title": "Kirchen-Livestreaming", "service.live-streaming.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item1.title": "Konferenz-Streaming", "service.live-streaming.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item2.title": "Konzert-Streaming", "service.live-streaming.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item3.title": "Hybride Events", "service.live-streaming.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item4.title": "Multikamera-Produktion", "service.live-streaming.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.live-streaming.item5.title": "Broadcast-Support", "service.live-streaming.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.title": "Grafikdesign", "service.graphic-design.tagline": "Poster, visuelle Kampagnen, Markenidentität und digitale Kommunikation.", "service.graphic-design.intro": "BEWEGT gestaltet visuelle Materialien, die Events, Künstlern, Gemeinden und Marken starke Kommunikation ermöglichen.", "service.graphic-design.cta": "Designprojekt starten", "service.graphic-design.item0.title": "Poster", "service.graphic-design.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item1.title": "Geburtstagsdesigns", "service.graphic-design.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item2.title": "Kampagnen", "service.graphic-design.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item3.title": "Markenidentität", "service.graphic-design.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item4.title": "Social Media", "service.graphic-design.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.graphic-design.item5.title": "Geschäftsmaterialien", "service.graphic-design.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.title": "Podcast-Produktion", "service.podcast-production.tagline": "Aufnahme, Schnitt, Audio-Identität und Podcast-Visuals für bedeutungsvolle Gespräche.", "service.podcast-production.intro": "BEWEGT unterstützt Creator, Kirchen, Unternehmen und Communities bei klaren, warmen und strukturierten Podcasts.", "service.podcast-production.cta": "Podcastprojekt starten", "service.podcast-production.item0.title": "Aufnahme", "service.podcast-production.item0.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item1.title": "Schnitt", "service.podcast-production.item1.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item2.title": "Audio-Branding", "service.podcast-production.item2.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item3.title": "Sprachaufnahme", "service.podcast-production.item3.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item4.title": "Video-Podcast-Setup", "service.podcast-production.item4.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation.", "service.podcast-production.item5.title": "Distribution", "service.podcast-production.item5.desc": "Eine klare, professionelle Leistung für starke visuelle Kommunikation."}};
   const nav = document.getElementById('nav');
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
@@ -57,6 +57,58 @@
   window.addEventListener('scroll', updateBackToTop, {passive:true});
   setBackToTopLabel();
   updateBackToTop();
+
+  /* ═══ TO-CONTENT button (mirrors back-to-top, scrolls down) ═══ */
+  const toContent = document.createElement('button');
+  toContent.className = 'to-content';
+  toContent.type = 'button';
+  toContent.innerHTML = '<span aria-hidden="true">↓</span>';
+  document.body.appendChild(toContent);
+
+  function setToContentLabel(){
+    const labels = {
+      en: 'Scroll to content',
+      fr: 'Voir le contenu',
+      de: 'Zum Inhalt scrollen'
+    };
+    toContent.setAttribute('aria-label', labels[document.documentElement.lang] || labels.en);
+  }
+
+  function updateToContent(){
+    const nearTop = window.scrollY < Math.min(280, window.innerHeight * 0.35);
+    const pastHero = document.body.scrollHeight > window.innerHeight * 1.4;
+    toContent.classList.toggle('is-visible', nearTop && pastHero);
+  }
+
+  function scrollToContent(){
+    const target = Math.min(window.innerHeight * 0.92, document.body.scrollHeight - window.innerHeight);
+    const startY = window.scrollY;
+    const distance = target - startY;
+    const duration = Math.min(900, Math.max(420, Math.abs(distance) * 0.32));
+    const startTime = performance.now();
+
+    function easeOutCubic(t){
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function step(now){
+      const progress = Math.min((now - startTime) / duration, 1);
+      window.scrollTo(0, Math.round(startY + distance * easeOutCubic(progress)));
+      if(progress < 1){
+        requestAnimationFrame(step);
+      }else{
+        updateToContent();
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  toContent.addEventListener('click', scrollToContent);
+  window.addEventListener('scroll', updateToContent, {passive:true});
+  window.addEventListener('resize', updateToContent, {passive:true});
+  setToContentLabel();
+  updateToContent();
 
   if(menuToggle && navLinks){
     menuToggle.addEventListener('click', () => {
@@ -127,6 +179,7 @@
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('is-active', btn.dataset.lang === lang));
     localStorage.setItem('bewegtLang', lang);
     setBackToTopLabel();
+    if (typeof setToContentLabel === 'function') setToContentLabel();
   }
   Object.assign(translations.en, {
     "service.video-production.hero.line1": "Video-",
@@ -191,9 +244,9 @@
 
   Object.assign(translations.en, {
     "embed.video.eyebrow": "Watch our work",
-    "embed.video.heading": "Featured Production",
-    "embed.video.cta": "Watch the BEWEGT production",
-    "embed.video.note": "Opens YouTube — no tracking until you click play", "embed.video.external": "Watch on YouTube",
+    "embed.video.heading": "Video Showreel",
+    "embed.video.cta": "Watch BEWEGT showreel",
+    "embed.video.note": "Opens YouTube — no tracking until you click play",
     "embed.podcast.eyebrow": "Listen",
     "embed.podcast.heading": "Our Podcast",
     "embed.podcast.sub": "Produced by BEWEGT — conversations that matter.",
@@ -226,9 +279,9 @@
   });
   Object.assign(translations.fr, {
     "embed.video.eyebrow": "Voir nos réalisations",
-    "embed.video.heading": "Production à la une",
-    "embed.video.cta": "Voir la production BEWEGT",
-    "embed.video.note": "Ouvre YouTube — aucun tracking avant que vous cliquiez", "embed.video.external": "Voir sur YouTube",
+    "embed.video.heading": "Showreel vidéo",
+    "embed.video.cta": "Voir le showreel BEWEGT",
+    "embed.video.note": "Ouvre YouTube — aucun tracking avant que vous cliquiez",
     "embed.podcast.eyebrow": "Écouter",
     "embed.podcast.heading": "Notre Podcast",
     "embed.podcast.sub": "Produit par BEWEGT — des conversations qui comptent.",
@@ -261,9 +314,9 @@
   });
   Object.assign(translations.de, {
     "embed.video.eyebrow": "Unsere Arbeiten ansehen",
-    "embed.video.heading": "Ausgewählte Produktion",
-    "embed.video.cta": "BEWEGT Produktion ansehen",
-    "embed.video.note": "Öffnet YouTube — kein Tracking bis zum Klick", "embed.video.external": "Auf YouTube ansehen",
+    "embed.video.heading": "Video Showreel",
+    "embed.video.cta": "BEWEGT Showreel ansehen",
+    "embed.video.note": "Öffnet YouTube — kein Tracking bis zum Klick",
     "embed.podcast.eyebrow": "Zuhören",
     "embed.podcast.heading": "Unser Podcast",
     "embed.podcast.sub": "Produziert von BEWEGT — Gespräche, die zählen.",
@@ -360,18 +413,15 @@
       return;
     }
     var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&playsinline=1&modestbranding=1';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0';
     iframe.width = '100%';
     iframe.height = '100%';
     iframe.frameBorder = '0';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
-    iframe.loading = 'eager';
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.title = wrapper.getAttribute('data-video-title') || 'BEWEGT CREATIVE STUDIO — YouTube video';
+    iframe.title = 'BEWEGT CREATIVE STUDIO — Video Showreel';
     wrapper.innerHTML = '';
     wrapper.appendChild(iframe);
-    wrapper.classList.add('is-loaded');
     wrapper.style.aspectRatio = '16/9';
     if (typeof gtag === 'function') {
       gtag('event', 'video_play', { video_id: videoId, page_path: location.pathname });
@@ -384,7 +434,7 @@
   });
   document.querySelectorAll('.video-placeholder[data-video-id]').forEach(function(p) {
     p.addEventListener('click', function(e) {
-      if (!e.target.closest('.video-play-btn') && !e.target.closest('a')) {
+      if (!e.target.closest('.video-play-btn')) {
         var b = p.querySelector('.video-play-btn');
         if (b) loadYouTube(b);
       }
@@ -417,140 +467,43 @@
     });
   })();
 
-  /* ═══ PROJECT INQUIRY FORM (Netlify) ═══
-     Submit in place so a successful request never navigates to a stale route.
-     The HTML action remains as a no-JavaScript fallback. */
-  (function() {
-    var projectForm = document.getElementById('projectInquiryForm');
-    var projectStatus = document.getElementById('formStatus');
-    if (!projectForm || !projectStatus) return;
+  // Form handled natively by Netlify — redirects to /thank-you after submission
 
-    var submitButton = projectForm.querySelector('button[type="submit"]');
-
-    function projectCopy(key) {
-      var lang = localStorage.getItem('bewegtLang') || document.documentElement.lang || 'en';
-      var dict = translations[lang] || translations.en;
-      return dict[key] || translations.en[key] || '';
+  /* ═══ PRICING ENGINE v2 — service-first selector, auto market detection ═══ */
+  const PRICING_DATA = {
+    photo: {
+      icon: 'ti-camera',
+      africa: { basic: [100000,180000,null], standard: [200000,380000,null], premium: [500000,null,null] },
+      europe: { basic: '€450 - €800', standard: '€900 - €1,600', premium: '€2,200+' }
+    },
+    video: {
+      icon: 'ti-video',
+      africa: { basic: [180000,350000,null], standard: [350000,650000,null], premium: [900000,null,null] },
+      europe: { basic: '€800 - €1,400', standard: '€1,400 - €2,400', premium: '€3,500+' }
+    },
+    live: {
+      icon: 'ti-broadcast',
+      africa: { basic: [200000,380000,null], standard: [400000,750000,null], premium: [1000000,null,null] },
+      europe: { basic: '€700 - €1,200', standard: '€1,300 - €2,200', premium: '€3,000+' }
+    },
+    design: {
+      icon: 'ti-palette',
+      africa: { basic: [30000,70000,null], standard: [80000,180000,null], premium: [350000,null,null] },
+      europe: { basic: '€200 - €400', standard: '€450 - €800', premium: '€1,500+' }
+    },
+    podcast: {
+      icon: 'ti-microphone',
+      africa: { basic: [130000,250000,null], standard: [280000,500000,null], premium: [700000,null,null] },
+      europe: { basic: '€600 - €1,100', standard: '€1,200 - €2,000', premium: '€2,800+' }
     }
-
-    projectForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (!projectForm.reportValidity()) return;
-
-      projectStatus.className = 'form-status';
-      projectStatus.textContent = '';
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = projectCopy('form.sending');
-      }
-
-      var data = new URLSearchParams(new FormData(projectForm));
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: data.toString()
-      })
-        .then(function(response) {
-          if (!response.ok) throw new Error('Form submission failed: ' + response.status);
-          projectForm.reset();
-          projectStatus.textContent = projectCopy('form.success');
-          projectStatus.className = 'form-status is-visible is-success';
-          if (typeof gtag === 'function') {
-            gtag('event', 'project_inquiry_submit', { page_path: location.pathname });
-          }
-        })
-        .catch(function(error) {
-          console.error(error);
-          projectStatus.textContent = projectCopy('form.error');
-          projectStatus.className = 'form-status is-visible is-error';
-        })
-        .finally(function() {
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = projectCopy('form.submit');
-          }
-        });
-    });
-  })();
-
-  const currencyButtons = Array.from(document.querySelectorAll('.currency-btn'));
-  // Taux de change — valeurs de fallback (utilisées si l'API échoue)
-  const FALLBACK_RATES = {
-    EUR: 1 / 655.957,
-    USD: 1 / 610,
-    NGN: 2.65,
-    GHS: 0.024,
-    GBP: 0.00128,
-    CNY: 0.0124
   };
 
   const currencyConfig = {
-    FCFA: { rate: 1, code: 'XOF', locale: 'fr-FR' },
-    EUR:  { rate: FALLBACK_RATES.EUR, code: 'EUR', locale: 'fr-FR' },
-    USD:  { rate: FALLBACK_RATES.USD, code: 'USD', locale: 'en-US' },
-    NGN:  { rate: FALLBACK_RATES.NGN, code: 'NGN', locale: 'en-NG' },
-    GHS:  { rate: FALLBACK_RATES.GHS, code: 'GHS', locale: 'en-GH' },
-    GBP:  { rate: FALLBACK_RATES.GBP, code: 'GBP', locale: 'en-GB' },
-    CNY:  { rate: FALLBACK_RATES.CNY, code: 'CNY', locale: 'zh-CN' }
+    FCFA: { rate: 1, prefix: '', suffix: ' FCFA' },
+    EUR:  { rate: 1 / 655.957, prefix: '€', suffix: '' },
+    USD:  { rate: 1 / 610, prefix: '$', suffix: '' },
+    GBP:  { rate: 1 / 770, prefix: '£', suffix: '' }
   };
-  const supportedLiveCurrencies = ['EUR', 'USD', 'NGN', 'GHS', 'GBP', 'CNY'];
-
-  // Indicateur visuel du taux en direct
-  function showRateIndicator(source, rateEUR, rateUSD) {
-    var el = document.getElementById('liveRateIndicator');
-    if (!el) return;
-    var d = new Date();
-    var ts = d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-    var eurDisp = Math.round(1 / rateEUR).toLocaleString('fr-FR');
-    var usdDisp = Math.round(1 / rateUSD).toLocaleString('fr-FR');
-    el.textContent = (source === 'live' ? '🟢 ' : '🟡 ') +
-      '1 EUR = ' + eurDisp + ' FCFA · 1 USD = ' + usdDisp + ' FCFA' +
-      (source === 'live' ? ' · Taux du ' + ts : ' · Taux indicatif');
-    el.title = source === 'live' ? 'Source : exchangerate-api.com' : 'Taux de secours — API indisponible';
-  }
-
-  // Chargement des taux depuis l'API (avec cache localStorage 6h)
-  (function fetchLiveRates() {
-    var CACHE_KEY   = 'bewegt_fx_cache';
-    var CACHE_TTL   = 6 * 60 * 60 * 1000; // 6 heures en ms
-    var cached = null;
-    try { cached = JSON.parse(localStorage.getItem(CACHE_KEY)); } catch(e) {}
-
-    function applyRates(rates, source) {
-      supportedLiveCurrencies.forEach(function(code) {
-        if (Number(rates[code]) > 0) currencyConfig[code].rate = Number(rates[code]);
-      });
-      var activeCurrency = localStorage.getItem('bewegtCurrency') || 'FCFA';
-      updateCurrency(activeCurrency);
-      showRateIndicator(source, currencyConfig.EUR.rate, currencyConfig.USD.rate);
-    }
-
-    // Utiliser le cache s'il est encore valide
-    if (cached && cached.rates && cached.ts && (Date.now() - cached.ts) < CACHE_TTL &&
-        supportedLiveCurrencies.every(function(code) { return Number(cached.rates[code]) > 0; })) {
-      applyRates(cached.rates, 'live');
-      return;
-    }
-
-    // Appel API — gratuit, sans clé, CORS ouvert
-    fetch('https://open.er-api.com/v6/latest/XOF')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data && data.rates && supportedLiveCurrencies.every(function(code) { return Number(data.rates[code]) > 0; })) {
-          var liveRates = {};
-          supportedLiveCurrencies.forEach(function(code) { liveRates[code] = Number(data.rates[code]); });
-          try {
-            localStorage.setItem(CACHE_KEY, JSON.stringify({ rates: liveRates, ts: Date.now() }));
-          } catch(e) {}
-          applyRates(liveRates, 'live');
-        } else {
-          applyRates(FALLBACK_RATES, 'fallback');
-        }
-      })
-      .catch(function() {
-        applyRates(FALLBACK_RATES, 'fallback');
-      });
-  })();
 
   function compactFcfa(value){
     if(value >= 1000000) return `${Number((value / 1000000).toFixed(1))}M FCFA`;
@@ -560,40 +513,98 @@
 
   function compactCurrency(value, currency){
     if(currency === 'FCFA') return compactFcfa(value);
-    const converted = value * currencyConfig[currency].rate;
-    const rounded = converted >= 10000
-      ? Math.round(converted / 100) * 100
-      : converted >= 1000
-        ? Math.round(converted / 10) * 10
-        : Math.round(converted);
-    return new Intl.NumberFormat(currencyConfig[currency].locale, {
-      style: 'currency',
-      currency: currencyConfig[currency].code,
-      maximumFractionDigits: 0
-    }).format(rounded);
+    const cfg = currencyConfig[currency];
+    const converted = value * cfg.rate;
+    const rounded = converted >= 1000 ? Math.round(converted / 50) * 50 : Math.round(converted / 5) * 5;
+    return `${cfg.prefix}${rounded.toLocaleString('en-US')}${cfg.suffix}`;
   }
 
-  function updateCurrency(currency = localStorage.getItem('bewegtCurrency') || 'FCFA'){
-    const activeCurrency = currencyConfig[currency] ? currency : 'FCFA';
-    document.querySelectorAll('.price-value').forEach(el => {
-      const low = Number(el.dataset.priceLow || 0);
-      const high = Number(el.dataset.priceHigh || 0);
-      const isPlus = el.dataset.pricePlus === 'true';
-      if(!low) return;
-      el.textContent = isPlus
-        ? `${compactCurrency(low, activeCurrency)}+`
-        : `${compactCurrency(low, activeCurrency)} - ${compactCurrency(high, activeCurrency)}`;
+  (function initPricingEngine(){
+    const root = document.querySelector('[data-pricing-engine]');
+    if (!root) return;
+
+    const serviceButtons = Array.from(root.querySelectorAll('.pricing-service-btn'));
+    const tierCards = Array.from(root.querySelectorAll('[data-tier]'));
+    const marketLink = root.querySelector('[data-market-switch]');
+    const marketLabel = root.querySelector('[data-market-label]');
+    const currencyRow = root.querySelector('[data-currency-row]');
+    const currencyButtons = currencyRow ? Array.from(currencyRow.querySelectorAll('.currency-btn')) : [];
+
+    const singleService = root.getAttribute('data-pricing-engine') !== 'index';
+    let activeService = singleService ? root.getAttribute('data-pricing-engine') : (localStorage.getItem('bewegtService') || 'photo');
+    let activeMarket = localStorage.getItem('bewegtMarket');
+    let activeCurrency = localStorage.getItem('bewegtCurrency') || 'FCFA';
+
+    // Auto-detect market on first visit: EUR/GBP currency or DE language => europe
+    if (!activeMarket) {
+      const lang = document.documentElement.lang || 'en';
+      const savedCurrency = localStorage.getItem('bewegtCurrency');
+      activeMarket = (lang === 'de' || savedCurrency === 'EUR' || savedCurrency === 'GBP') ? 'europe' : 'africa';
+    }
+
+    function fmtFcfa(low, high){
+      if (high === null) return `${compactCurrency(low, activeCurrency).replace(' FCFA','')}+${activeCurrency==='FCFA' ? ' FCFA' : ''}`;
+      return `${compactCurrency(low, activeCurrency)} - ${compactCurrency(high, activeCurrency)}`;
+    }
+
+    function render(){
+      const data = PRICING_DATA[activeService];
+      if (!data) return;
+
+      serviceButtons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.service === activeService));
+
+      tierCards.forEach(card => {
+        const tier = card.getAttribute('data-tier');
+        const priceEl = card.querySelector('.tier-price');
+        if (!priceEl) return;
+        if (activeMarket === 'europe') {
+          priceEl.textContent = data.europe[tier];
+        } else {
+          const [low, high] = data.africa[tier];
+          priceEl.textContent = fmtFcfa(low, high);
+        }
+      });
+
+      if (marketLabel) marketLabel.textContent = activeMarket === 'europe'
+        ? (marketLabel.dataset.europe || 'Europe / International')
+        : (marketLabel.dataset.africa || 'Africa');
+      if (marketLink) marketLink.textContent = activeMarket === 'europe'
+        ? (marketLink.dataset.toAfrica || 'View Africa pricing')
+        : (marketLink.dataset.toEurope || 'View Europe pricing');
+
+      if (currencyRow) currencyRow.style.display = activeMarket === 'europe' ? 'none' : '';
+      currencyButtons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.currency === activeCurrency));
+
+      localStorage.setItem('bewegtMarket', activeMarket);
+      localStorage.setItem('bewegtService', activeService);
+      localStorage.setItem('bewegtCurrency', activeCurrency);
+    }
+
+    serviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeService = btn.dataset.service;
+        render();
+      });
     });
+
+    if (marketLink) {
+      marketLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        activeMarket = activeMarket === 'europe' ? 'africa' : 'europe';
+        render();
+      });
+    }
+
     currencyButtons.forEach(btn => {
-      const isActive = btn.dataset.currency === activeCurrency;
-      btn.classList.toggle('is-active', isActive);
-      btn.setAttribute('aria-pressed', String(isActive));
+      btn.addEventListener('click', () => {
+        activeCurrency = btn.dataset.currency;
+        render();
+      });
     });
-    localStorage.setItem('bewegtCurrency', activeCurrency);
-  }
 
-  currencyButtons.forEach(btn => btn.addEventListener('click', () => updateCurrency(btn.dataset.currency)));
-  updateCurrency();
+    render();
+  })();
+
 
   const soundToggle = document.getElementById('soundToggle');
   const soundPrev = document.getElementById('soundPrev');

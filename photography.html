@@ -32,7 +32,7 @@
   <link rel="alternate" hreflang="fr" href="https://bewegtcreative.com/photography.html">
   <link rel="alternate" hreflang="de" href="https://bewegtcreative.com/photography.html">
   <link rel="alternate" hreflang="x-default" href="https://bewegtcreative.com/photography.html">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20260630c">
 </head>
 <body>
 
@@ -101,55 +101,50 @@
 <article><h3 data-i18n='service.photography.item5.title'>Personal Branding</h3><p data-i18n='service.photography.item5.desc'>Professional personal branding for meaningful visual communication.</p></article>
   </section>
 
-  <section class="pricing-section service-pricing-section" id="pricing" aria-label="Service pricing">
+  <section class="pricing-section service-pricing-section" id="pricing" aria-label="Service pricing" data-pricing-engine="photo">
     <div class="section-head">
       <p class="eyebrow" data-i18n="pricing.eyebrow">Service Packages</p>
       <h2 data-i18n="pricing.heading">Clear starting points, tailored production.</h2>
-      <p data-i18n="pricing.sub">Indicative packages inspired by local realities in Togo, African markets, Europe and international brand standards.</p>
+      <p data-i18n="pricing.sub">Choose a service to see its three tiers.</p>
     </div>
-    <div class="currency-panel" aria-label="Currency display">
+
+    <p class="pricing-market-line">
+      <span data-market-label data-africa="Pricing shown for Africa" data-europe="Pricing shown for Europe / International">Pricing shown for Africa</span>
+      &nbsp;·&nbsp;
+      <a href="#" data-market-switch data-to-europe="Switch to Europe" data-to-africa="Switch to Africa">Switch to Europe</a>
+    </p>
+
+    <div class="pricing-currency-row" data-currency-row>
       <span data-i18n="pricing.currency.label">Display prices in</span>
-      <div class="currency-toggle" role="group" aria-label="Currency selector">
-        <button type="button" class="currency-btn is-active" data-currency="FCFA">FCFA</button>
-        <button type="button" class="currency-btn" data-currency="EUR">EUR</button>
-        <button type="button" class="currency-btn" data-currency="USD">USD</button>
-        <button type="button" class="currency-btn" data-currency="NGN" aria-label="Nigerian naira">NGN</button>
-        <button type="button" class="currency-btn" data-currency="GHS" aria-label="Ghanaian cedi">GHS</button>
-        <button type="button" class="currency-btn" data-currency="GBP" aria-label="British pound">GBP</button>
-        <button type="button" class="currency-btn" data-currency="CNY" aria-label="Chinese yuan">CNY</button>
-      </div>
-      <p data-i18n="pricing.currency.note">Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.</p>
+      <button type="button" class="currency-btn is-active" data-currency="FCFA">FCFA</button>
+      <button type="button" class="currency-btn" data-currency="EUR">EUR</button>
+      <button type="button" class="currency-btn" data-currency="USD">USD</button>
+      <button type="button" class="currency-btn" data-currency="GBP">GBP</button>
     </div>
-    <div class="pricing-grid service-pricing-grid">
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.local.kicker">Local Access</p>
-        <h3 data-i18n="pricing.local.title">Package</h3>
-        <p class="pricing-desc" data-i18n="pricing.local.desc">Production package details.</p>
-        <ul>
-          <li><span data-i18n="service.photography.title">Service</span><strong class="price-value" data-price-low="75000" data-price-high="150000">75k - 150k FCFA</strong></li>
-        </ul>
+
+    <div class="tier-grid">
+      <article class="tier-card" data-tier="basic">
+        <p class="tier-kicker" data-i18n="pricing.tier.basic">Basic</p>
+        <p class="tier-price">100k - 180k FCFA</p>
+        <p class="tier-desc" data-i18n="pricing.tier.basic.desc">Clean, professional production for individuals, creators and smaller events.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
-      <article class="pricing-card pricing-card-featured">
-        <p class="pricing-kicker" data-i18n="pricing.signature.kicker">Local Access</p>
-        <h3 data-i18n="pricing.signature.title">Package</h3>
-        <p class="pricing-desc" data-i18n="pricing.signature.desc">Production package details.</p>
-        <ul>
-          <li><span data-i18n="service.photography.title">Service</span><strong class="price-value" data-price-low="250000" data-price-high="500000">250k - 500k FCFA</strong></li>
-        </ul>
+      <article class="tier-card is-featured" data-tier="standard">
+        <span class="tier-badge" data-i18n="pricing.tier.standard.badge">Most popular</span>
+        <p class="tier-kicker" data-i18n="pricing.tier.standard">Standard</p>
+        <p class="tier-price">200k - 380k FCFA</p>
+        <p class="tier-desc" data-i18n="pricing.tier.standard.desc">Stronger direction, cleaner production and refined post-production for serious projects.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
-      <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.international.kicker">Local Access</p>
-        <h3 data-i18n="pricing.international.title">Package</h3>
-        <p class="pricing-desc" data-i18n="pricing.international.desc">Production package details.</p>
-        <ul>
-          <li><span data-i18n="service.photography.title">Service</span><strong class="price-value" data-price-low="800000" data-price-plus="true">800k FCFA+</strong></li>
-        </ul>
+      <article class="tier-card" data-tier="premium">
+        <p class="tier-kicker" data-i18n="pricing.tier.premium">Premium</p>
+        <p class="tier-price">500k FCFA+</p>
+        <p class="tier-desc" data-i18n="pricing.tier.premium.desc">Premium productions, brand campaigns and complete creative direction.</p>
+        <a class="tier-cta" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
       </article>
     </div>
+
     <p class="pricing-note" data-i18n="pricing.note">Every quote depends on duration, location, crew, production level, post-production and usage rights. Local and international formulas are available on request.</p>
-    <div class="pricing-actions">
-      <a class="btn btn-dark" href="#contact" data-i18n="pricing.cta">Request a tailored quote</a>
-    </div>
   </section>
 
   <section class="work-section service-work">
@@ -248,6 +243,6 @@
   <span class="whatsapp-pulse"></span>
   <span>WhatsApp</span>
 </a>
-<script src="script.js" defer></script>
+<script src="script.js?v=20260630d" defer></script>
 </body>
 </html>
