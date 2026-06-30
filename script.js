@@ -129,6 +129,8 @@
     setBackToTopLabel();
   }
   Object.assign(translations.en, {
+    "service.video-production.hero.line1": "Video-",
+    "service.video-production.hero.line2": "Production",
     "pricing.currency.label": "Display prices in",
     "pricing.currency.note": "Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.",
     "form.name": "Name",
@@ -147,6 +149,8 @@
     "sound.pause": "Pause"
   });
   Object.assign(translations.fr, {
+    "service.video-production.hero.line1": "Vidéo-",
+    "service.video-production.hero.line2": "production",
     "pricing.currency.label": "Afficher les prix en",
     "pricing.currency.note": "La conversion des devises est indicative. Les devis finaux sont confirm\u00e9s selon le p\u00e9rim\u00e8tre, le lieu et les besoins de production.",
     "form.name": "Nom",
@@ -165,6 +169,8 @@
     "sound.pause": "Pause"
   });
   Object.assign(translations.de, {
+    "service.video-production.hero.line1": "Video-",
+    "service.video-production.hero.line2": "produktion",
     "pricing.currency.label": "Preise anzeigen in",
     "pricing.currency.note": "Die W\u00e4hrungsumrechnung ist unverbindlich. Finale Angebote werden nach Projektumfang, Ort und Produktionsbedarf best\u00e4tigt.",
     "form.name": "Name",
