@@ -120,29 +120,62 @@
       </div>
       <p data-i18n="pricing.currency.note">Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.</p>
     </div>
-    <div class="pricing-grid service-pricing-grid">
+    <div class="market-panel" aria-label="Market selector">
+      <span data-i18n="pricing.market.label">Pricing for</span>
+      <div class="market-toggle" role="group" aria-label="Market selector">
+        <button type="button" class="market-btn is-active" data-market="africa" data-i18n="pricing.market.africa">Africa</button>
+        <button type="button" class="market-btn" data-market="europe" data-i18n="pricing.market.europe">Europe / International</button>
+      </div>
+    </div>
+    <div class="pricing-grid service-pricing-grid" data-market-grid="africa">
       <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.local.kicker">Local Access</p>
-        <h3 data-i18n="pricing.local.title">Package</h3>
-        <p class="pricing-desc" data-i18n="pricing.local.desc">Production package details.</p>
+        <p class="pricing-kicker" data-i18n="pricing.tier.basic">Basic</p>
+        <h3 data-i18n="pricing.tier.basic.title">Essential coverage</h3>
+        <p class="pricing-desc" data-i18n="pricing.tier.basic.desc">Clean, professional production for individuals, creators and smaller events.</p>
         <ul>
-          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value" data-price-low="150000" data-price-high="300000">150k - 300k FCFA</strong></li>
+          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value" data-price-low="200000" data-price-high="380000">200k - 380k FCFA</strong></li>
         </ul>
       </article>
       <article class="pricing-card pricing-card-featured">
-        <p class="pricing-kicker" data-i18n="pricing.signature.kicker">Local Access</p>
-        <h3 data-i18n="pricing.signature.title">Package</h3>
-        <p class="pricing-desc" data-i18n="pricing.signature.desc">Production package details.</p>
+        <p class="pricing-kicker" data-i18n="pricing.tier.standard">Standard</p>
+        <h3 data-i18n="pricing.tier.standard.title">Recommended BEWEGT package</h3>
+        <p class="pricing-desc" data-i18n="pricing.tier.standard.desc">Stronger direction, cleaner production and refined post-production for serious projects.</p>
         <ul>
-          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value" data-price-low="450000" data-price-high="900000">450k - 900k FCFA</strong></li>
+          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value" data-price-low="400000" data-price-high="750000">400k - 750k FCFA</strong></li>
         </ul>
       </article>
       <article class="pricing-card">
-        <p class="pricing-kicker" data-i18n="pricing.international.kicker">Local Access</p>
-        <h3 data-i18n="pricing.international.title">Package</h3>
-        <p class="pricing-desc" data-i18n="pricing.international.desc">Production package details.</p>
+        <p class="pricing-kicker" data-i18n="pricing.tier.premium">Premium</p>
+        <h3 data-i18n="pricing.tier.premium.title">Full creative direction</h3>
+        <p class="pricing-desc" data-i18n="pricing.tier.premium.desc">Premium productions, brand campaigns and complete creative direction.</p>
         <ul>
-          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value" data-price-low="1200000" data-price-plus="true">1.2M FCFA+</strong></li>
+          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value" data-price-low="1000000" data-price-plus="true">1M FCFA+</strong></li>
+        </ul>
+      </article>
+    </div>
+    <div class="pricing-grid service-pricing-grid" data-market-grid="europe" hidden>
+      <article class="pricing-card">
+        <p class="pricing-kicker" data-i18n="pricing.tier.basic">Basic</p>
+        <h3 data-i18n="pricing.tier.basic.title">Essential coverage</h3>
+        <p class="pricing-desc" data-i18n="pricing.tier.basic.desc">Clean, professional production for individuals, creators and smaller events.</p>
+        <ul>
+          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value-eur">€700 - €1,200</strong></li>
+        </ul>
+      </article>
+      <article class="pricing-card pricing-card-featured">
+        <p class="pricing-kicker" data-i18n="pricing.tier.standard">Standard</p>
+        <h3 data-i18n="pricing.tier.standard.title">Recommended BEWEGT package</h3>
+        <p class="pricing-desc" data-i18n="pricing.tier.standard.desc">Stronger direction, cleaner production and refined post-production for serious projects.</p>
+        <ul>
+          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value-eur">€1,300 - €2,200</strong></li>
+        </ul>
+      </article>
+      <article class="pricing-card">
+        <p class="pricing-kicker" data-i18n="pricing.tier.premium">Premium</p>
+        <h3 data-i18n="pricing.tier.premium.title">Full creative direction</h3>
+        <p class="pricing-desc" data-i18n="pricing.tier.premium.desc">Premium productions, brand campaigns and complete creative direction.</p>
+        <ul>
+          <li><span data-i18n="service.live-streaming.title">Service</span><strong class="price-value-eur">€3,000+</strong></li>
         </ul>
       </article>
     </div>

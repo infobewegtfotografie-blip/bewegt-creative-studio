@@ -120,9 +120,48 @@ body{background:var(--bg);color:var(--ink)}
   max-width:1280px;
   margin:0 auto;
 }
+.market-panel{
+  max-width:920px;
+  margin:0 auto 18px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#FFFEFA;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;
+}
+.market-panel>span{
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(42,33,27,.68);
+}
+.market-toggle{
+  display:flex;
+  gap:6px;
+}
+.market-btn{
+  border:1px solid var(--line);
+  background:#FFFEFA;
+  color:var(--ink);
+  border-radius:999px;
+  padding:10px 18px;
+  font:850 13px/1 var(--body);
+  cursor:pointer;
+  transition:.2s var(--ease);
+}
+.market-btn:hover,
+.market-btn.is-active{
+  background:var(--gold,#c9a84c);
+  color:#1a1a1a;
+  border-color:var(--gold,#c9a84c);
+}
 .currency-panel{
   max-width:920px;
-  margin:-24px auto 36px;
+  margin:0 auto 36px;
   padding:14px;
   border:1px solid var(--line);
   border-radius:10px;
@@ -159,6 +198,14 @@ body{background:var(--bg);color:var(--ink)}
   background:var(--ink);
   color:#FFFEFA;
   border-color:var(--ink);
+}
+.price-value-eur{
+  font:850 18px/1.2 var(--display,var(--body));
+  color:var(--ink);
+}
+.testimonials-actions{
+  text-align:center;
+  margin-top:32px;
 }
 .currency-panel p{
   color:rgba(42,33,27,.62);
