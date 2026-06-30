@@ -185,9 +185,9 @@
 
   Object.assign(translations.en, {
     "embed.video.eyebrow": "Watch our work",
-    "embed.video.heading": "Video Showreel",
-    "embed.video.cta": "Watch BEWEGT showreel",
-    "embed.video.note": "Opens YouTube — no tracking until you click play",
+    "embed.video.heading": "Featured Production",
+    "embed.video.cta": "Watch the BEWEGT production",
+    "embed.video.note": "Opens YouTube — no tracking until you click play", "embed.video.external": "Watch on YouTube",
     "embed.podcast.eyebrow": "Listen",
     "embed.podcast.heading": "Our Podcast",
     "embed.podcast.sub": "Produced by BEWEGT — conversations that matter.",
@@ -220,9 +220,9 @@
   });
   Object.assign(translations.fr, {
     "embed.video.eyebrow": "Voir nos réalisations",
-    "embed.video.heading": "Showreel vidéo",
-    "embed.video.cta": "Voir le showreel BEWEGT",
-    "embed.video.note": "Ouvre YouTube — aucun tracking avant que vous cliquiez",
+    "embed.video.heading": "Production à la une",
+    "embed.video.cta": "Voir la production BEWEGT",
+    "embed.video.note": "Ouvre YouTube — aucun tracking avant que vous cliquiez", "embed.video.external": "Voir sur YouTube",
     "embed.podcast.eyebrow": "Écouter",
     "embed.podcast.heading": "Notre Podcast",
     "embed.podcast.sub": "Produit par BEWEGT — des conversations qui comptent.",
@@ -255,9 +255,9 @@
   });
   Object.assign(translations.de, {
     "embed.video.eyebrow": "Unsere Arbeiten ansehen",
-    "embed.video.heading": "Video Showreel",
-    "embed.video.cta": "BEWEGT Showreel ansehen",
-    "embed.video.note": "Öffnet YouTube — kein Tracking bis zum Klick",
+    "embed.video.heading": "Ausgewählte Produktion",
+    "embed.video.cta": "BEWEGT Produktion ansehen",
+    "embed.video.note": "Öffnet YouTube — kein Tracking bis zum Klick", "embed.video.external": "Auf YouTube ansehen",
     "embed.podcast.eyebrow": "Zuhören",
     "embed.podcast.heading": "Unser Podcast",
     "embed.podcast.sub": "Produziert von BEWEGT — Gespräche, die zählen.",
@@ -354,15 +354,18 @@
       return;
     }
     var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&playsinline=1&modestbranding=1';
     iframe.width = '100%';
     iframe.height = '100%';
     iframe.frameBorder = '0';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
-    iframe.title = 'BEWEGT CREATIVE STUDIO — Video Showreel';
+    iframe.loading = 'eager';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.title = wrapper.getAttribute('data-video-title') || 'BEWEGT CREATIVE STUDIO — YouTube video';
     wrapper.innerHTML = '';
     wrapper.appendChild(iframe);
+    wrapper.classList.add('is-loaded');
     wrapper.style.aspectRatio = '16/9';
     if (typeof gtag === 'function') {
       gtag('event', 'video_play', { video_id: videoId, page_path: location.pathname });
@@ -375,7 +378,7 @@
   });
   document.querySelectorAll('.video-placeholder[data-video-id]').forEach(function(p) {
     p.addEventListener('click', function(e) {
-      if (!e.target.closest('.video-play-btn')) {
+      if (!e.target.closest('.video-play-btn') && !e.target.closest('a')) {
         var b = p.querySelector('.video-play-btn');
         if (b) loadYouTube(b);
       }
@@ -408,17 +411,83 @@
     });
   })();
 
-  // Form handled natively by Netlify — redirects to /thank-you after submission
+  /* ═══ PROJECT INQUIRY FORM (Netlify) ═══
+     Submit in place so a successful request never navigates to a stale route.
+     The HTML action remains as a no-JavaScript fallback. */
+  (function() {
+    var projectForm = document.getElementById('projectInquiryForm');
+    var projectStatus = document.getElementById('formStatus');
+    if (!projectForm || !projectStatus) return;
+
+    var submitButton = projectForm.querySelector('button[type="submit"]');
+
+    function projectCopy(key) {
+      var lang = localStorage.getItem('bewegtLang') || document.documentElement.lang || 'en';
+      var dict = translations[lang] || translations.en;
+      return dict[key] || translations.en[key] || '';
+    }
+
+    projectForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!projectForm.reportValidity()) return;
+
+      projectStatus.className = 'form-status';
+      projectStatus.textContent = '';
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = projectCopy('form.sending');
+      }
+
+      var data = new URLSearchParams(new FormData(projectForm));
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data.toString()
+      })
+        .then(function(response) {
+          if (!response.ok) throw new Error('Form submission failed: ' + response.status);
+          projectForm.reset();
+          projectStatus.textContent = projectCopy('form.success');
+          projectStatus.className = 'form-status is-visible is-success';
+          if (typeof gtag === 'function') {
+            gtag('event', 'project_inquiry_submit', { page_path: location.pathname });
+          }
+        })
+        .catch(function(error) {
+          console.error(error);
+          projectStatus.textContent = projectCopy('form.error');
+          projectStatus.className = 'form-status is-visible is-error';
+        })
+        .finally(function() {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = projectCopy('form.submit');
+          }
+        });
+    });
+  })();
 
   const currencyButtons = Array.from(document.querySelectorAll('.currency-btn'));
   // Taux de change — valeurs de fallback (utilisées si l'API échoue)
-  const FALLBACK_RATES = { EUR: 1 / 655.957, USD: 1 / 610 };
+  const FALLBACK_RATES = {
+    EUR: 1 / 655.957,
+    USD: 1 / 610,
+    NGN: 2.65,
+    GHS: 0.024,
+    GBP: 0.00128,
+    CNY: 0.0124
+  };
 
   const currencyConfig = {
-    FCFA: { rate: 1,               prefix: '',  suffix: ' FCFA' },
-    EUR:  { rate: FALLBACK_RATES.EUR, prefix: '€', suffix: '' },
-    USD:  { rate: FALLBACK_RATES.USD, prefix: '$', suffix: '' }
+    FCFA: { rate: 1, code: 'XOF', locale: 'fr-FR' },
+    EUR:  { rate: FALLBACK_RATES.EUR, code: 'EUR', locale: 'fr-FR' },
+    USD:  { rate: FALLBACK_RATES.USD, code: 'USD', locale: 'en-US' },
+    NGN:  { rate: FALLBACK_RATES.NGN, code: 'NGN', locale: 'en-NG' },
+    GHS:  { rate: FALLBACK_RATES.GHS, code: 'GHS', locale: 'en-GH' },
+    GBP:  { rate: FALLBACK_RATES.GBP, code: 'GBP', locale: 'en-GB' },
+    CNY:  { rate: FALLBACK_RATES.CNY, code: 'CNY', locale: 'zh-CN' }
   };
+  const supportedLiveCurrencies = ['EUR', 'USD', 'NGN', 'GHS', 'GBP', 'CNY'];
 
   // Indicateur visuel du taux en direct
   function showRateIndicator(source, rateEUR, rateUSD) {
@@ -441,17 +510,19 @@
     var cached = null;
     try { cached = JSON.parse(localStorage.getItem(CACHE_KEY)); } catch(e) {}
 
-    function applyRates(rEUR, rUSD, source) {
-      currencyConfig.EUR.rate = rEUR;
-      currencyConfig.USD.rate = rUSD;
+    function applyRates(rates, source) {
+      supportedLiveCurrencies.forEach(function(code) {
+        if (Number(rates[code]) > 0) currencyConfig[code].rate = Number(rates[code]);
+      });
       var activeCurrency = localStorage.getItem('bewegtCurrency') || 'FCFA';
-      if (document.querySelectorAll('[data-fcfa]').length) updateCurrency(activeCurrency);
-      showRateIndicator(source, rEUR, rUSD);
+      updateCurrency(activeCurrency);
+      showRateIndicator(source, currencyConfig.EUR.rate, currencyConfig.USD.rate);
     }
 
     // Utiliser le cache s'il est encore valide
-    if (cached && cached.ts && (Date.now() - cached.ts) < CACHE_TTL) {
-      applyRates(cached.EUR, cached.USD, 'live');
+    if (cached && cached.rates && cached.ts && (Date.now() - cached.ts) < CACHE_TTL &&
+        supportedLiveCurrencies.every(function(code) { return Number(cached.rates[code]) > 0; })) {
+      applyRates(cached.rates, 'live');
       return;
     }
 
@@ -459,19 +530,19 @@
     fetch('https://open.er-api.com/v6/latest/XOF')
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        if (data && data.rates && data.rates.EUR && data.rates.USD) {
-          var rEUR = data.rates.EUR;
-          var rUSD = data.rates.USD;
+        if (data && data.rates && supportedLiveCurrencies.every(function(code) { return Number(data.rates[code]) > 0; })) {
+          var liveRates = {};
+          supportedLiveCurrencies.forEach(function(code) { liveRates[code] = Number(data.rates[code]); });
           try {
-            localStorage.setItem(CACHE_KEY, JSON.stringify({ EUR: rEUR, USD: rUSD, ts: Date.now() }));
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ rates: liveRates, ts: Date.now() }));
           } catch(e) {}
-          applyRates(rEUR, rUSD, 'live');
+          applyRates(liveRates, 'live');
         } else {
-          applyRates(FALLBACK_RATES.EUR, FALLBACK_RATES.USD, 'fallback');
+          applyRates(FALLBACK_RATES, 'fallback');
         }
       })
       .catch(function() {
-        applyRates(FALLBACK_RATES.EUR, FALLBACK_RATES.USD, 'fallback');
+        applyRates(FALLBACK_RATES, 'fallback');
       });
   })();
 
@@ -484,8 +555,16 @@
   function compactCurrency(value, currency){
     if(currency === 'FCFA') return compactFcfa(value);
     const converted = value * currencyConfig[currency].rate;
-    const rounded = converted >= 1000 ? Math.round(converted / 50) * 50 : Math.round(converted / 5) * 5;
-    return `${currencyConfig[currency].prefix}${rounded.toLocaleString('en-US')}${currencyConfig[currency].suffix}`;
+    const rounded = converted >= 10000
+      ? Math.round(converted / 100) * 100
+      : converted >= 1000
+        ? Math.round(converted / 10) * 10
+        : Math.round(converted);
+    return new Intl.NumberFormat(currencyConfig[currency].locale, {
+      style: 'currency',
+      currency: currencyConfig[currency].code,
+      maximumFractionDigits: 0
+    }).format(rounded);
   }
 
   function updateCurrency(currency = localStorage.getItem('bewegtCurrency') || 'FCFA'){
@@ -499,7 +578,11 @@
         ? `${compactCurrency(low, activeCurrency)}+`
         : `${compactCurrency(low, activeCurrency)} - ${compactCurrency(high, activeCurrency)}`;
     });
-    currencyButtons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.currency === activeCurrency));
+    currencyButtons.forEach(btn => {
+      const isActive = btn.dataset.currency === activeCurrency;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
     localStorage.setItem('bewegtCurrency', activeCurrency);
   }
 

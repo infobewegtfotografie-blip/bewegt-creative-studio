@@ -1,9 +1,6 @@
 [build]
   publish = "."
 
-[[plugins]]
-  package = "./update-sitemap.js"
-
 [[redirects]]
   from = "/thank-you"
   to = "/thank-you.html"
@@ -72,32 +69,32 @@
 [[headers]]
   for = "/portfolio-designs/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400, must-revalidate"
 
 [[headers]]
   for = "/img/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400, must-revalidate"
 
 [[headers]]
   for = "/fonts/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=604800, must-revalidate"
 
 [[headers]]
   for = "/audio/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400, must-revalidate"
 
 [[headers]]
   for = "/*.css"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "no-cache, must-revalidate"
 
 [[headers]]
   for = "/*.js"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "no-cache, must-revalidate"
 
 
 # ═══ BOT TRAPS — chemins WordPress/CMS jamais présents sur ce site ═══
@@ -162,8 +159,3 @@
   from = "/.well-known/security.txt"
   to = "/security.txt"
   status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404

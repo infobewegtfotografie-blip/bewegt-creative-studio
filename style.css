@@ -141,6 +141,7 @@ body{background:var(--bg);color:var(--ink)}
 }
 .currency-toggle{
   display:flex;
+  flex-wrap:wrap;
   gap:6px;
 }
 .currency-btn{
@@ -1032,7 +1033,24 @@ details{border-color:rgba(42,33,27,.12)}
   background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
   cursor: pointer;
 }
+.video-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.68));
+  pointer-events: none;
+}
+.video-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .video-placeholder-inner {
+  position: relative;
+  z-index: 2;
   text-align: center;
   color: white;
   padding: 20px;
@@ -1046,6 +1064,11 @@ details{border-color:rgba(42,33,27,.12)}
   transition: transform .25s;
 }
 .video-play-btn:hover { transform: scale(1.08); }
+.video-play-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 5px;
+  border-radius: 50%;
+}
 .video-placeholder-label {
   font-size: clamp(16px,2.5vw,20px);
   font-weight: 500;
@@ -1054,6 +1077,14 @@ details{border-color:rgba(42,33,27,.12)}
 .video-placeholder-note {
   font-size: 13px;
   opacity: .55;
+}
+.video-youtube-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 750;
+  text-underline-offset: 4px;
 }
 
 /* ── Podcast Embed Section ── */

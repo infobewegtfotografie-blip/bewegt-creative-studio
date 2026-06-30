@@ -113,6 +113,10 @@
         <button type="button" class="currency-btn is-active" data-currency="FCFA">FCFA</button>
         <button type="button" class="currency-btn" data-currency="EUR">EUR</button>
         <button type="button" class="currency-btn" data-currency="USD">USD</button>
+        <button type="button" class="currency-btn" data-currency="NGN" aria-label="Nigerian naira">NGN</button>
+        <button type="button" class="currency-btn" data-currency="GHS" aria-label="Ghanaian cedi">GHS</button>
+        <button type="button" class="currency-btn" data-currency="GBP" aria-label="British pound">GBP</button>
+        <button type="button" class="currency-btn" data-currency="CNY" aria-label="Chinese yuan">CNY</button>
       </div>
       <p data-i18n="pricing.currency.note">Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.</p>
     </div>
@@ -148,34 +152,57 @@
     </div>
   </section>
 
+  <section class="video-embed-section" id="featured-live">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="embed.video.eyebrow">Watch our work</p>
+      <h2 data-i18n="embed.video.heading">Featured Production</h2>
+    </div>
+    <div class="video-embed-wrapper">
+      <div class="video-placeholder" id="youtubeEmbed" data-video-id="qted0u_10Fo" data-video-title="Coeur en Connexion — BEWEGT CREATIVE STUDIO">
+        <img class="video-cover" src="img/youtube-coeur-en-connexion.jpg" alt="Coeur en Connexion — BEWEGT live production" loading="lazy" decoding="async">
+        <div class="video-placeholder-inner">
+          <button class="video-play-btn" type="button" aria-label="Play Coeur en Connexion">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="32" cy="32" r="32" fill="rgba(255,255,255,0.18)"/>
+              <polygon points="26,20 50,32 26,44" fill="white"/>
+            </svg>
+          </button>
+          <p class="video-placeholder-label" data-i18n="embed.video.cta">Watch the BEWEGT production</p>
+          <p class="video-placeholder-note" data-i18n="embed.video.note">Opens YouTube — no tracking until you click play</p>
+          <a class="video-youtube-link" href="https://www.youtube.com/watch?v=qted0u_10Fo" target="_blank" rel="noopener" data-i18n="embed.video.external">Watch on YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="work-section service-work">
     <div class="section-head">
       <p class="eyebrow">Live Work</p>
       <h2>Selected live moments</h2>
     </div>
     <div class="design-grid">
-      <figure class="design-card" data-full="portfolio-designs/45-concert-live-streaming.png" data-caption="Concert Streaming">
-        <img src="portfolio-designs/45-concert-live-streaming.png" alt="Concert Streaming" loading="lazy">
+      <figure class="design-card" data-full="portfolio-designs/portfolio-designs/45-concert-live-streaming.webp" data-caption="Concert Streaming">
+        <img src="portfolio-designs/portfolio-designs/45-concert-live-streaming.webp" alt="Concert Streaming" loading="lazy">
         <figcaption>Concert Streaming</figcaption>
       </figure>
-      <figure class="design-card" data-full="portfolio-designs/36-production-equipment-grid.png" data-caption="Multicamera Control">
-        <img src="portfolio-designs/36-production-equipment-grid.png" alt="Multicamera Control" loading="lazy">
+      <figure class="design-card" data-full="portfolio-designs/portfolio-designs/36-production-equipment-grid.webp" data-caption="Multicamera Control">
+        <img src="portfolio-designs/portfolio-designs/36-production-equipment-grid.webp" alt="Multicamera Control" loading="lazy">
         <figcaption>Multicamera Control</figcaption>
       </figure>
-      <figure class="design-card" data-full="portfolio-designs/20-event-photographer-stage.png" data-caption="Live Event">
-        <img src="portfolio-designs/20-event-photographer-stage.png" alt="Live Event" loading="lazy">
+      <figure class="design-card" data-full="portfolio-designs/portfolio-designs/20-event-photographer-stage.webp" data-caption="Live Event">
+        <img src="portfolio-designs/portfolio-designs/20-event-photographer-stage.webp" alt="Live Event" loading="lazy">
         <figcaption>Live Event</figcaption>
       </figure>
-      <figure class="design-card" data-full="portfolio-designs/29-wedding-ceremony.png" data-caption="Ceremony Coverage">
-        <img src="portfolio-designs/29-wedding-ceremony.png" alt="Ceremony Coverage" loading="lazy">
+      <figure class="design-card" data-full="portfolio-designs/portfolio-designs/29-wedding-ceremony.webp" data-caption="Ceremony Coverage">
+        <img src="portfolio-designs/portfolio-designs/29-wedding-ceremony.webp" alt="Ceremony Coverage" loading="lazy">
         <figcaption>Ceremony Coverage</figcaption>
       </figure>
-      <figure class="design-card" data-full="portfolio-designs/44-african-wedding-ceremony.png" data-caption="Hybrid Ceremony">
-        <img src="portfolio-designs/44-african-wedding-ceremony.png" alt="Hybrid Ceremony" loading="lazy">
+      <figure class="design-card" data-full="portfolio-designs/portfolio-designs/44-african-wedding-ceremony.webp" data-caption="Hybrid Ceremony">
+        <img src="portfolio-designs/portfolio-designs/44-african-wedding-ceremony.webp" alt="Hybrid Ceremony" loading="lazy">
         <figcaption>Hybrid Ceremony</figcaption>
       </figure>
-      <figure class="design-card" data-full="portfolio-designs/30-video-production-set.png" data-caption="Broadcast Setup">
-        <img src="portfolio-designs/30-video-production-set.png" alt="Broadcast Setup" loading="lazy">
+      <figure class="design-card" data-full="portfolio-designs/portfolio-designs/30-video-production-set.webp" data-caption="Broadcast Setup">
+        <img src="portfolio-designs/portfolio-designs/30-video-production-set.webp" alt="Broadcast Setup" loading="lazy">
         <figcaption>Broadcast Setup</figcaption>
       </figure>
     </div>
@@ -202,7 +229,7 @@
       <p class="eyebrow" data-i18n="buttons.start">Start a Project</p>
       <h2 data-i18n="service.live-streaming.cta">Plan a Live Stream</h2>
       <p data-i18n="page.share">Share your idea, date, location and the kind of production you need.</p>
-      <a class="btn btn-light" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20Graphic%20Design%20project." target="_blank" rel="noopener">WhatsApp BEWEGT</a>
+      <a class="btn btn-light" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20Live%20Streaming%20project." target="_blank" rel="noopener">WhatsApp BEWEGT</a>
     </div>
   </section>
 </main>
