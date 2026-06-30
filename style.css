@@ -227,6 +227,14 @@ body{background:var(--bg);color:var(--ink)}
   padding:4px 12px;
   border-radius:999px;
   white-space:nowrap;
+  animation:badgePulse 2.2s ease-in-out infinite;
+}
+@keyframes badgePulse{
+  0%,100%{ transform:translateX(-50%) scale(1); box-shadow:0 0 0 0 rgba(17,16,14,.22); }
+  50%{ transform:translateX(-50%) scale(1.05); box-shadow:0 0 0 6px rgba(17,16,14,0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .tier-badge{ animation:none; }
 }
 .tier-kicker{
   font-size:11px;
@@ -464,6 +472,40 @@ body{background:var(--bg);color:var(--ink)}
   opacity:1;
   pointer-events:auto;
   transform:translateY(0);
+}
+.to-content{
+  position:fixed;
+  left:22px;
+  top:84px;
+  z-index:901;
+  width:46px;
+  height:46px;
+  border:1px solid rgba(255,254,250,.34);
+  border-radius:999px;
+  background:rgba(17,16,14,.78);
+  color:#FFFEFA;
+  display:grid;
+  place-items:center;
+  font:850 19px/1 var(--title);
+  box-shadow:0 16px 38px rgba(17,16,14,.18);
+  backdrop-filter:blur(14px);
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-10px);
+  transition:opacity .24s var(--ease),transform .24s var(--ease),background-color .24s var(--ease),border-color .24s var(--ease);
+}
+.to-content.is-visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+.to-content:hover,.to-content:focus-visible{
+  background:var(--gold);
+  border-color:rgba(17,16,14,.12);
+}
+@media (max-width:780px){
+  .to-content{ left:16px; top:72px; width:40px; height:40px; font-size:16px; }
 }
 .back-to-top:hover,.back-to-top:focus-visible{
   background:var(--gold);

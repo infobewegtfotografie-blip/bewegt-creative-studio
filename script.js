@@ -58,6 +58,58 @@
   setBackToTopLabel();
   updateBackToTop();
 
+  /* ═══ TO-CONTENT button (mirrors back-to-top, scrolls down) ═══ */
+  const toContent = document.createElement('button');
+  toContent.className = 'to-content';
+  toContent.type = 'button';
+  toContent.innerHTML = '<span aria-hidden="true">↓</span>';
+  document.body.appendChild(toContent);
+
+  function setToContentLabel(){
+    const labels = {
+      en: 'Scroll to content',
+      fr: 'Voir le contenu',
+      de: 'Zum Inhalt scrollen'
+    };
+    toContent.setAttribute('aria-label', labels[document.documentElement.lang] || labels.en);
+  }
+
+  function updateToContent(){
+    const nearTop = window.scrollY < Math.min(280, window.innerHeight * 0.35);
+    const pastHero = document.body.scrollHeight > window.innerHeight * 1.4;
+    toContent.classList.toggle('is-visible', nearTop && pastHero);
+  }
+
+  function scrollToContent(){
+    const target = Math.min(window.innerHeight * 0.92, document.body.scrollHeight - window.innerHeight);
+    const startY = window.scrollY;
+    const distance = target - startY;
+    const duration = Math.min(900, Math.max(420, Math.abs(distance) * 0.32));
+    const startTime = performance.now();
+
+    function easeOutCubic(t){
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function step(now){
+      const progress = Math.min((now - startTime) / duration, 1);
+      window.scrollTo(0, Math.round(startY + distance * easeOutCubic(progress)));
+      if(progress < 1){
+        requestAnimationFrame(step);
+      }else{
+        updateToContent();
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  toContent.addEventListener('click', scrollToContent);
+  window.addEventListener('scroll', updateToContent, {passive:true});
+  window.addEventListener('resize', updateToContent, {passive:true});
+  setToContentLabel();
+  updateToContent();
+
   if(menuToggle && navLinks){
     menuToggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('is-open');
@@ -127,6 +179,7 @@
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('is-active', btn.dataset.lang === lang));
     localStorage.setItem('bewegtLang', lang);
     setBackToTopLabel();
+    if (typeof setToContentLabel === 'function') setToContentLabel();
   }
   Object.assign(translations.en, {
     "pricing.currency.label": "Display prices in",
