@@ -185,7 +185,7 @@
     "service.video-production.hero.line1": "Video-",
     "service.video-production.hero.line2": "Production",
     "pricing.currency.label": "Display prices in",
-    "pricing.currency.note": "Indicative conversion based on the ECB reference rates of 1 July 2026. Final quotes depend on scope, location, crew, production and usage rights.",
+    "pricing.currency.note": "Starting prices, excluding applicable taxes and travel. Indicative conversion based on the ECB reference rates of 1 July 2026. Final quotes depend on scope, location, crew, production and usage rights.",
     "pricing.tier.basic": "Essential",
     "pricing.tier.standard": "Signature",
     "pricing.tier.premium": "Premium",
@@ -208,7 +208,7 @@
     "service.video-production.hero.line1": "Vidéo-",
     "service.video-production.hero.line2": "production",
     "pricing.currency.label": "Afficher les prix en",
-    "pricing.currency.note": "Conversion indicative selon les taux de r\u00e9f\u00e9rence de la BCE du 1er juillet 2026. Le devis final d\u00e9pend du p\u00e9rim\u00e8tre, du lieu, de l'\u00e9quipe, de la production et des droits d'utilisation.",
+    "pricing.currency.note": "Prix de d\u00e9part, hors taxes applicables et frais de d\u00e9placement. Conversion indicative selon les taux de r\u00e9f\u00e9rence de la BCE du 1er juillet 2026. Le devis final d\u00e9pend du p\u00e9rim\u00e8tre, du lieu, de l'\u00e9quipe, de la production et des droits d'utilisation.",
     "pricing.tier.basic": "Essentiel",
     "pricing.tier.standard": "Signature",
     "pricing.tier.premium": "Premium",
@@ -231,7 +231,7 @@
     "service.video-production.hero.line1": "Video-",
     "service.video-production.hero.line2": "produktion",
     "pricing.currency.label": "Preise anzeigen in",
-    "pricing.currency.note": "Unverbindliche Umrechnung nach den EZB-Referenzkursen vom 1. Juli 2026. Das finale Angebot h\u00e4ngt von Umfang, Ort, Team, Produktion und Nutzungsrechten ab.",
+    "pricing.currency.note": "Startpreise zuz\u00fcglich anwendbarer Steuern und Reisekosten. Unverbindliche Umrechnung nach den EZB-Referenzkursen vom 1. Juli 2026. Das finale Angebot h\u00e4ngt von Umfang, Ort, Team, Produktion und Nutzungsrechten ab.",
     "pricing.tier.basic": "Essential",
     "pricing.tier.standard": "Signature",
     "pricing.tier.premium": "Premium",
@@ -543,9 +543,10 @@
       ? localStorage.getItem('bewegtCurrency')
       : 'EUR';
 
-    function formatRange(low, high){
-      if (high === null) return `${compactCurrency(low, activeCurrency)}+`;
-      return `${compactCurrency(low, activeCurrency)} – ${compactCurrency(high, activeCurrency)}`;
+    function formatRange(low){
+      const lang = localStorage.getItem('bewegtLang') || 'en';
+      const prefix = lang === 'fr' ? '\u00c0 partir de' : lang === 'de' ? 'Ab' : 'From';
+      return `${prefix} ${compactCurrency(low, activeCurrency)}`;
     }
 
     function render(){
