@@ -422,6 +422,15 @@
     iframe.title = 'BEWEGT CREATIVE STUDIO — Video Showreel';
     wrapper.innerHTML = '';
     wrapper.appendChild(iframe);
+    var fallback = document.createElement('a');
+    fallback.className = 'video-iframe-fallback';
+    fallback.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId);
+    fallback.target = '_blank';
+    fallback.rel = 'noopener';
+    fallback.textContent = 'Watch directly on YouTube';
+    fallback.setAttribute('aria-label', 'Watch this production directly on YouTube');
+    wrapper.appendChild(fallback);
+    wrapper.style.position = 'relative';
     wrapper.style.aspectRatio = '16/9';
     if (typeof gtag === 'function') {
       gtag('event', 'video_play', { video_id: videoId, page_path: location.pathname });
