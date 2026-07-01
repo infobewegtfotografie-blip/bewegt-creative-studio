@@ -185,7 +185,10 @@
     "service.video-production.hero.line1": "Video-",
     "service.video-production.hero.line2": "Production",
     "pricing.currency.label": "Display prices in",
-    "pricing.currency.note": "Currency conversion is indicative. Final quotes are confirmed after project scope, location and production needs.",
+    "pricing.currency.note": "Indicative conversion based on the ECB reference rates of 1 July 2026. Final quotes depend on scope, location, crew, production and usage rights.",
+    "pricing.tier.basic": "Essential",
+    "pricing.tier.standard": "Signature",
+    "pricing.tier.premium": "Premium",
     "form.name": "Name",
     "form.email": "Email",
     "form.service": "Service needed",
@@ -205,7 +208,10 @@
     "service.video-production.hero.line1": "Vidéo-",
     "service.video-production.hero.line2": "production",
     "pricing.currency.label": "Afficher les prix en",
-    "pricing.currency.note": "La conversion des devises est indicative. Les devis finaux sont confirm\u00e9s selon le p\u00e9rim\u00e8tre, le lieu et les besoins de production.",
+    "pricing.currency.note": "Conversion indicative selon les taux de r\u00e9f\u00e9rence de la BCE du 1er juillet 2026. Le devis final d\u00e9pend du p\u00e9rim\u00e8tre, du lieu, de l'\u00e9quipe, de la production et des droits d'utilisation.",
+    "pricing.tier.basic": "Essentiel",
+    "pricing.tier.standard": "Signature",
+    "pricing.tier.premium": "Premium",
     "form.name": "Nom",
     "form.email": "E-mail",
     "form.service": "Service souhait\u00e9",
@@ -225,7 +231,10 @@
     "service.video-production.hero.line1": "Video-",
     "service.video-production.hero.line2": "produktion",
     "pricing.currency.label": "Preise anzeigen in",
-    "pricing.currency.note": "Die W\u00e4hrungsumrechnung ist unverbindlich. Finale Angebote werden nach Projektumfang, Ort und Produktionsbedarf best\u00e4tigt.",
+    "pricing.currency.note": "Unverbindliche Umrechnung nach den EZB-Referenzkursen vom 1. Juli 2026. Das finale Angebot h\u00e4ngt von Umfang, Ort, Team, Produktion und Nutzungsrechten ab.",
+    "pricing.tier.basic": "Essential",
+    "pricing.tier.standard": "Signature",
+    "pricing.tier.premium": "Premium",
     "form.name": "Name",
     "form.email": "E-Mail",
     "form.service": "Gew\u00fcnschte Leistung",
@@ -478,54 +487,45 @@
 
   // Form handled natively by Netlify — redirects to /thank-you after submission
 
-  /* ═══ PRICING ENGINE v2 — service-first selector, auto market detection ═══ */
+  /* ═══ PRICING ENGINE v3 — one international grid, EUR reference prices ═══ */
   const PRICING_DATA = {
     photo: {
       icon: 'ti-camera',
-      africa: { basic: [100000,180000,null], standard: [200000,380000,null], premium: [500000,null,null] },
-      europe: { basic: '€450 - €800', standard: '€900 - €1,600', premium: '€2,200+' }
+      prices: { basic: [650,1200], standard: [1400,2400], premium: [3500,null] }
     },
     video: {
       icon: 'ti-video',
-      africa: { basic: [180000,350000,null], standard: [350000,650000,null], premium: [900000,null,null] },
-      europe: { basic: '€800 - €1,400', standard: '€1,400 - €2,400', premium: '€3,500+' }
+      prices: { basic: [1800,3500], standard: [4500,8500], premium: [12000,null] }
     },
     live: {
       icon: 'ti-broadcast',
-      africa: { basic: [200000,380000,null], standard: [400000,750000,null], premium: [1000000,null,null] },
-      europe: { basic: '€700 - €1,200', standard: '€1,300 - €2,200', premium: '€3,000+' }
+      prices: { basic: [2000,4000], standard: [5000,9000], premium: [14000,null] }
     },
     design: {
       icon: 'ti-palette',
-      africa: { basic: [30000,70000,null], standard: [80000,180000,null], premium: [350000,null,null] },
-      europe: { basic: '€200 - €400', standard: '€450 - €800', premium: '€1,500+' }
+      prices: { basic: [400,800], standard: [1200,2500], premium: [4000,null] }
     },
     podcast: {
       icon: 'ti-microphone',
-      africa: { basic: [130000,250000,null], standard: [280000,500000,null], premium: [700000,null,null] },
-      europe: { basic: '€600 - €1,100', standard: '€1,200 - €2,000', premium: '€2,800+' }
+      prices: { basic: [700,1400], standard: [1800,3500], premium: [6000,null] }
     }
   };
 
   const currencyConfig = {
-    FCFA: { rate: 1, prefix: '', suffix: ' FCFA' },
-    EUR:  { rate: 1 / 655.957, prefix: '€', suffix: '' },
-    USD:  { rate: 1 / 610, prefix: '$', suffix: '' },
-    GBP:  { rate: 1 / 770, prefix: '£', suffix: '' }
+    EUR: { rate: 1, locale: 'de-DE', code: 'EUR' },
+    USD: { rate: 1.1383, locale: 'en-US', code: 'USD' },
+    GBP: { rate: 0.85973, locale: 'en-GB', code: 'GBP' },
+    CNY: { rate: 7.7342, locale: 'zh-CN', code: 'CNY' }
   };
 
-  function compactFcfa(value){
-    if(value >= 1000000) return `${Number((value / 1000000).toFixed(1))}M FCFA`;
-    if(value >= 1000) return `${Math.round(value / 1000)}k FCFA`;
-    return `${Math.round(value)} FCFA`;
-  }
-
   function compactCurrency(value, currency){
-    if(currency === 'FCFA') return compactFcfa(value);
     const cfg = currencyConfig[currency];
     const converted = value * cfg.rate;
-    const rounded = converted >= 1000 ? Math.round(converted / 50) * 50 : Math.round(converted / 5) * 5;
-    return `${cfg.prefix}${rounded.toLocaleString('en-US')}${cfg.suffix}`;
+    const step = converted >= 10000 ? 100 : converted >= 1000 ? 50 : 10;
+    const rounded = Math.round(converted / step) * step;
+    return new Intl.NumberFormat(cfg.locale, {
+      style: 'currency', currency: cfg.code, maximumFractionDigits: 0
+    }).format(rounded);
   }
 
   (function initPricingEngine(){
@@ -534,26 +534,18 @@
 
     const serviceButtons = Array.from(root.querySelectorAll('.pricing-service-btn'));
     const tierCards = Array.from(root.querySelectorAll('[data-tier]'));
-    const marketLink = root.querySelector('[data-market-switch]');
-    const marketLabel = root.querySelector('[data-market-label]');
     const currencyRow = root.querySelector('[data-currency-row]');
     const currencyButtons = currencyRow ? Array.from(currencyRow.querySelectorAll('.currency-btn')) : [];
 
     const singleService = root.getAttribute('data-pricing-engine') !== 'index';
     let activeService = singleService ? root.getAttribute('data-pricing-engine') : (localStorage.getItem('bewegtService') || 'photo');
-    let activeMarket = localStorage.getItem('bewegtMarket');
-    let activeCurrency = localStorage.getItem('bewegtCurrency') || 'FCFA';
+    let activeCurrency = currencyConfig[localStorage.getItem('bewegtCurrency')]
+      ? localStorage.getItem('bewegtCurrency')
+      : 'EUR';
 
-    // Auto-detect market on first visit: EUR/GBP currency or DE language => europe
-    if (!activeMarket) {
-      const lang = document.documentElement.lang || 'en';
-      const savedCurrency = localStorage.getItem('bewegtCurrency');
-      activeMarket = (lang === 'de' || savedCurrency === 'EUR' || savedCurrency === 'GBP') ? 'europe' : 'africa';
-    }
-
-    function fmtFcfa(low, high){
-      if (high === null) return `${compactCurrency(low, activeCurrency).replace(' FCFA','')}+${activeCurrency==='FCFA' ? ' FCFA' : ''}`;
-      return `${compactCurrency(low, activeCurrency)} - ${compactCurrency(high, activeCurrency)}`;
+    function formatRange(low, high){
+      if (high === null) return `${compactCurrency(low, activeCurrency)}+`;
+      return `${compactCurrency(low, activeCurrency)} – ${compactCurrency(high, activeCurrency)}`;
     }
 
     function render(){
@@ -566,25 +558,11 @@
         const tier = card.getAttribute('data-tier');
         const priceEl = card.querySelector('.tier-price');
         if (!priceEl) return;
-        if (activeMarket === 'europe') {
-          priceEl.textContent = data.europe[tier];
-        } else {
-          const [low, high] = data.africa[tier];
-          priceEl.textContent = fmtFcfa(low, high);
-        }
+        const [low, high] = data.prices[tier];
+        priceEl.textContent = formatRange(low, high);
       });
-
-      if (marketLabel) marketLabel.textContent = activeMarket === 'europe'
-        ? (marketLabel.dataset.europe || 'Europe / International')
-        : (marketLabel.dataset.africa || 'Africa');
-      if (marketLink) marketLink.textContent = activeMarket === 'europe'
-        ? (marketLink.dataset.toAfrica || 'View Africa pricing')
-        : (marketLink.dataset.toEurope || 'View Europe pricing');
-
-      if (currencyRow) currencyRow.style.display = activeMarket === 'europe' ? 'none' : '';
       currencyButtons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.currency === activeCurrency));
 
-      localStorage.setItem('bewegtMarket', activeMarket);
       localStorage.setItem('bewegtService', activeService);
       localStorage.setItem('bewegtCurrency', activeCurrency);
     }
@@ -595,14 +573,6 @@
         render();
       });
     });
-
-    if (marketLink) {
-      marketLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        activeMarket = activeMarket === 'europe' ? 'africa' : 'europe';
-        render();
-      });
-    }
 
     currencyButtons.forEach(btn => {
       btn.addEventListener('click', () => {
