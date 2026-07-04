@@ -1,6 +1,37 @@
 [build]
   publish = "."
 
+# Keep one canonical URL for every service page.
+[[redirects]]
+  from = "/photography"
+  to = "/photography.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/video-production"
+  to = "/video-production.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/live-streaming"
+  to = "/live-streaming.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/graphic-design"
+  to = "/graphic-design.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/podcast-production"
+  to = "/podcast-production.html"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/thank-you"
   to = "/thank-you.html"

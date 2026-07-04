@@ -1536,3 +1536,27 @@ details{border-color:rgba(42,33,27,.12)}
   .consent-actions { display: grid; grid-template-columns: 1fr; }
   .consent-actions .btn { width: 100%; }
 }
+.tier-inclusions {
+  display: grid;
+  gap: .55rem;
+  margin: 1rem 0 1.35rem;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.tier-inclusions li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  font-size: .86rem;
+  line-height: 1.45;
+}
+
+.tier-inclusions li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
