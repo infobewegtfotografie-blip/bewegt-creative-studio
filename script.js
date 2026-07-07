@@ -184,8 +184,10 @@
   Object.assign(translations.en, {
     "service.video-production.hero.line1": "Video-",
     "service.video-production.hero.line2": "Production",
-    "pricing.currency.label": "Display prices in",
-    "pricing.currency.note": "Starting prices, excluding applicable taxes and travel. Indicative conversion based on the ECB reference rates of 1 July 2026. Final quotes depend on scope, location, crew, production and usage rights.",
+    "pricing.heading": "Flexible packages, tailored production.",
+    "pricing.sub": "Choose a service and request a personalized quote.",
+    "pricing.currency.note": "Every project is quoted individually according to scope, location, crew, production and usage rights.",
+    "pricing.quote": "On request",
     "pricing.tier.basic": "Essential",
     "pricing.tier.standard": "Signature",
     "pricing.tier.premium": "Premium",
@@ -207,8 +209,10 @@
   Object.assign(translations.fr, {
     "service.video-production.hero.line1": "Vidéo-",
     "service.video-production.hero.line2": "production",
-    "pricing.currency.label": "Afficher les prix en",
-    "pricing.currency.note": "Prix de d\u00e9part, hors taxes applicables et frais de d\u00e9placement. Conversion indicative selon les taux de r\u00e9f\u00e9rence de la BCE du 1er juillet 2026. Le devis final d\u00e9pend du p\u00e9rim\u00e8tre, du lieu, de l'\u00e9quipe, de la production et des droits d'utilisation.",
+    "pricing.heading": "Des formules flexibles, une production sur mesure.",
+    "pricing.sub": "Choisissez un service et demandez votre devis personnalisé.",
+    "pricing.currency.note": "Chaque projet fait l'objet d'un devis personnalis\u00e9 selon le p\u00e9rim\u00e8tre, le lieu, l'\u00e9quipe, la production et les droits d'utilisation.",
+    "pricing.quote": "Sur devis",
     "pricing.tier.basic": "Essentiel",
     "pricing.tier.standard": "Signature",
     "pricing.tier.premium": "Premium",
@@ -230,8 +234,10 @@
   Object.assign(translations.de, {
     "service.video-production.hero.line1": "Video-",
     "service.video-production.hero.line2": "produktion",
-    "pricing.currency.label": "Preise anzeigen in",
-    "pricing.currency.note": "Startpreise zuz\u00fcglich anwendbarer Steuern und Reisekosten. Unverbindliche Umrechnung nach den EZB-Referenzkursen vom 1. Juli 2026. Das finale Angebot h\u00e4ngt von Umfang, Ort, Team, Produktion und Nutzungsrechten ab.",
+    "pricing.heading": "Flexible Pakete, maßgeschneiderte Produktion.",
+    "pricing.sub": "Wählen Sie eine Leistung und fragen Sie Ihr individuelles Angebot an.",
+    "pricing.currency.note": "Jedes Projekt erh\u00e4lt ein individuelles Angebot nach Umfang, Ort, Team, Produktion und Nutzungsrechten.",
+    "pricing.quote": "Auf Anfrage",
     "pricing.tier.basic": "Essential",
     "pricing.tier.standard": "Signature",
     "pricing.tier.premium": "Premium",
@@ -488,28 +494,9 @@
 
   // Form handled natively by Netlify — redirects to /thank-you after submission
 
-  /* ═══ PRICING ENGINE v3 — one international grid, EUR reference prices ═══ */
+  /* ═══ PACKAGE ENGINE — service-specific inclusions, prices on request ═══ */
   const PRICING_DATA = {
-    photo: {
-      icon: 'ti-camera',
-      prices: { basic: [650,1200], standard: [1400,2400], premium: [3500,null] }
-    },
-    video: {
-      icon: 'ti-video',
-      prices: { basic: [1800,3500], standard: [4500,8500], premium: [12000,null] }
-    },
-    live: {
-      icon: 'ti-broadcast',
-      prices: { basic: [2000,4000], standard: [5000,9000], premium: [14000,null] }
-    },
-    design: {
-      icon: 'ti-palette',
-      prices: { basic: [400,800], standard: [1200,2500], premium: [4000,null] }
-    },
-    podcast: {
-      icon: 'ti-microphone',
-      prices: { basic: [700,1400], standard: [1800,3500], premium: [6000,null] }
-    }
+    photo: {}, video: {}, live: {}, design: {}, podcast: {}
   };
 
   const PRICING_INCLUSIONS = {
@@ -596,42 +583,18 @@
     }
   };
 
-  const currencyConfig = {
-    EUR: { rate: 1, locale: 'de-DE', code: 'EUR' },
-    USD: { rate: 1.1383, locale: 'en-US', code: 'USD' },
-    GBP: { rate: 0.85973, locale: 'en-GB', code: 'GBP' },
-    CNY: { rate: 7.7342, locale: 'zh-CN', code: 'CNY' }
-  };
-
-  function compactCurrency(value, currency){
-    const cfg = currencyConfig[currency];
-    const converted = value * cfg.rate;
-    const step = converted >= 10000 ? 100 : converted >= 1000 ? 50 : 10;
-    const rounded = Math.round(converted / step) * step;
-    return new Intl.NumberFormat(cfg.locale, {
-      style: 'currency', currency: cfg.code, maximumFractionDigits: 0
-    }).format(rounded);
-  }
-
   (function initPricingEngine(){
     const root = document.querySelector('[data-pricing-engine]');
     if (!root) return;
 
     const serviceButtons = Array.from(root.querySelectorAll('.pricing-service-btn'));
     const tierCards = Array.from(root.querySelectorAll('[data-tier]'));
-    const currencyRow = root.querySelector('[data-currency-row]');
-    const currencyButtons = currencyRow ? Array.from(currencyRow.querySelectorAll('.currency-btn')) : [];
-
     const singleService = root.getAttribute('data-pricing-engine') !== 'index';
     let activeService = singleService ? root.getAttribute('data-pricing-engine') : (localStorage.getItem('bewegtService') || 'photo');
-    let activeCurrency = currencyConfig[localStorage.getItem('bewegtCurrency')]
-      ? localStorage.getItem('bewegtCurrency')
-      : 'EUR';
 
-    function formatRange(low){
+    function quoteLabel(){
       const lang = localStorage.getItem('bewegtLang') || 'en';
-      const prefix = lang === 'fr' ? '\u00c0 partir de' : lang === 'de' ? 'Ab' : 'From';
-      return `${prefix} ${compactCurrency(low, activeCurrency)}`;
+      return translations[lang]?.['pricing.quote'] || translations.en['pricing.quote'];
     }
 
     function render(){
@@ -644,8 +607,7 @@
         const tier = card.getAttribute('data-tier');
         const priceEl = card.querySelector('.tier-price');
         if (!priceEl) return;
-        const [low, high] = data.prices[tier];
-        priceEl.textContent = formatRange(low, high);
+        priceEl.textContent = quoteLabel();
         const list = card.querySelector('.tier-inclusions');
         if (list) {
           const lang = PRICING_INCLUSIONS[localStorage.getItem('bewegtLang')]
@@ -660,22 +622,12 @@
           list.setAttribute('aria-label', lang === 'fr' ? 'Inclus dans la formule' : lang === 'de' ? 'Im Paket enthalten' : 'Package includes');
         }
       });
-      currencyButtons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.currency === activeCurrency));
-
       localStorage.setItem('bewegtService', activeService);
-      localStorage.setItem('bewegtCurrency', activeCurrency);
     }
 
     serviceButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         activeService = btn.dataset.service;
-        render();
-      });
-    });
-
-    currencyButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeCurrency = btn.dataset.currency;
         render();
       });
     });
