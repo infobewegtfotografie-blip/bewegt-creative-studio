@@ -58,6 +58,7 @@ function parsePost(filename, raw) {
     cover: data.cover || FALLBACK_COVER,
     coverAlt: data.coverAlt || title,
     draft: data.draft === true,
+    lang: ['en', 'fr', 'de'].includes(data.lang) ? data.lang : 'en',
     video: data.video || '',
     // Écrits par des lecteurs : jamais interprétés comme du Markdown ou du HTML.
     comments: (Array.isArray(data.comments) ? data.comments : [])
@@ -197,7 +198,7 @@ function renderIndex(posts) {
   const cards = posts.length
     ? posts
         .map(
-          (p) => `      <a class="blog-card" href="${esc(p.url)}">
+          (p) => `      <a class="blog-card" data-lang="${esc(p.lang)}" lang="${esc(p.lang)}" href="${esc(p.url)}">
         <img src="${esc(p.cover)}" alt="${esc(p.coverAlt)}" width="1200" height="800" loading="lazy">
         <div class="blog-card-body">
           <time datetime="${esc(p.date)}">${esc(humanDate(p.date))}</time>
@@ -207,7 +208,7 @@ function renderIndex(posts) {
       </a>`
         )
         .join('\n')
-    : '      <p class="blog-empty" data-i18n="blog.empty">No stories published yet. Come back soon.</p>';
+    : '';
 
   return shell({
     title: 'Journal',
@@ -228,6 +229,7 @@ function renderIndex(posts) {
     <div class="blog-grid">
 ${cards}
     </div>
+    <p class="blog-empty" data-i18n="blog.empty"${posts.length ? ' hidden' : ''}>No stories published yet. Come back soon.</p>
   </section>`,
   });
 }
@@ -278,12 +280,12 @@ function renderPost(post) {
     <div class="hero-overlay"></div>
     <div class="page-hero-content">
       <p class="eyebrow"><time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time></p>
-      <h1>${esc(post.title)}</h1>
-      ${post.summary ? `<p>${esc(post.summary)}</p>` : ''}
+      <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
+      ${post.summary ? `<p lang="${esc(post.lang)}">${esc(post.summary)}</p>` : ''}
     </div>
   </section>
 
-  <article class="post-body">
+  <article class="post-body" lang="${esc(post.lang)}">
 ${videoEmbed(post.video, post.title)}${post.body}
   </article>
 
@@ -321,7 +323,7 @@ function renderLegal(page) {
     <h1>${esc(page.title)}</h1>
   </section>
 
-  <article class="post-body">
+  <article class="post-body" lang="de">
 ${page.body}
   </article>`,
   });

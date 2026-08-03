@@ -45,6 +45,16 @@ fs.writeFileSync(path.join(dir, '2026-09-01-brouillon.md'), '---\ntitle: Draft\n
 const posts = readPosts(dir);
 assert.deepStrictEqual(posts.map((p) => p.title), ['Recent', 'Vieux']);
 
+// La langue de l'article : repli sur l'anglais, valeurs fantaisistes refusées.
+assert.strictEqual(parsePost('a.md', '---\ntitle: T\n---\n').lang, 'en');
+assert.strictEqual(parsePost('a.md', '---\ntitle: T\nlang: fr\n---\n').lang, 'fr');
+assert.strictEqual(parsePost('a.md', '---\ntitle: T\nlang: klingon\n---\n').lang, 'en');
+
+// La carte doit porter sa langue, sinon le filtrage du sélecteur ne peut pas fonctionner.
+const idxFr = renderIndex([parsePost('b.md', '---\ntitle: Lomé\nlang: fr\n---\nTexte.\n')]);
+assert.ok(idxFr.includes('data-lang="fr"'), 'la carte ne porte pas sa langue');
+assert.ok(idxFr.includes('class="blog-empty" data-i18n="blog.empty" hidden'), 'message vide absent ou visible à tort');
+
 // Un blog vide doit produire une page valide, pas planter.
 assert.ok(renderIndex([]).includes('No stories published yet'));
 

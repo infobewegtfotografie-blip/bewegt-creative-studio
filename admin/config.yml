@@ -33,6 +33,18 @@ collections:
           time_format: false,
           format: 'YYYY-MM-DD',
         }
+      - {
+          name: lang,
+          label: Langue de l'article,
+          widget: select,
+          default: en,
+          options:
+            [
+              { label: English, value: en },
+              { label: Français, value: fr },
+              { label: Deutsch, value: de },
+            ],
+        }
       - { name: summary, label: Résumé (liste + Google), widget: text, required: false }
       - { name: cover, label: Photo de couverture, widget: image, required: false }
       - { name: coverAlt, label: Description de la photo, widget: string, required: false }

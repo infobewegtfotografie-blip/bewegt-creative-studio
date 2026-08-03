@@ -176,6 +176,18 @@
         el.textContent = dict[key];
       }
     });
+    // Blog : n'afficher que les articles écrits dans la langue choisie.
+    const blogCards = document.querySelectorAll('.blog-card[data-lang]');
+    if (blogCards.length) {
+      let visibles = 0;
+      blogCards.forEach(card => {
+        const match = card.dataset.lang === lang;
+        card.hidden = !match;
+        if (match) visibles++;
+      });
+      const vide = document.querySelector('.blog-empty');
+      if (vide) vide.hidden = visibles > 0;
+    }
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('is-active', btn.dataset.lang === lang));
     localStorage.setItem('bewegtLang', lang);
     setBackToTopLabel();

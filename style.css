@@ -1615,3 +1615,4 @@ details{border-color:rgba(42,33,27,.12)}
 .legal-page .brand-mark-light{opacity:0}
 .legal-page .brand-mark-dark{opacity:1}
 @media(max-width:780px){.legal-page .nav-links a,.legal-page .nav-dropdown button{color:white!important}}
+.blog-card[hidden],.blog-empty[hidden]{display:none}
