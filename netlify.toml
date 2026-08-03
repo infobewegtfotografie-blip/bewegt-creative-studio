@@ -1,5 +1,7 @@
 [build]
   publish = "."
+  # Génère /blog depuis content/blog/*.md à chaque déploiement.
+  command = "npm run build"
 
 # Keep one canonical URL for every service page.
 [[redirects]]
@@ -94,6 +96,11 @@
 
 [[headers]]
   for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
+
+[[headers]]
+  for = "/blog/*"
   [headers.values]
     Cache-Control = "no-cache, must-revalidate"
 

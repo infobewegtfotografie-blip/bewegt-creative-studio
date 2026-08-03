@@ -1,0 +1,44 @@
+# Configuration de l'éditeur Pages CMS (app.pagescms.org).
+# Rien n'est installé sur le site : l'éditeur écrit directement dans ce dépôt.
+media:
+  input: img/blog
+  output: /img/blog
+
+content:
+  - name: posts
+    label: Journal
+    type: collection
+    path: content/blog
+    view:
+      fields: [title, date, draft]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: date
+        label: Date de publication
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: summary
+        label: Résumé (affiché sur la liste et dans Google)
+        type: text
+      - name: cover
+        label: Photo de couverture
+        type: image
+      - name: coverAlt
+        label: Description de la photo (accessibilité)
+        type: string
+      - name: draft
+        label: Brouillon (ne pas publier)
+        type: boolean
+        default: false
+      - name: body
+        label: Article
+        type: rich-text

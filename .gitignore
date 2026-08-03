@@ -1,0 +1,5 @@
+node_modules/
+# Généré par build-blog.js à chaque déploiement Netlify (les sources sont dans content/blog)
+/blog/
+.DS_Store
+.claude/

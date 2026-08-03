@@ -1549,3 +1549,28 @@ details{border-color:rgba(42,33,27,.12)}
   color: var(--gold);
   font-weight: 700;
 }
+
+/* ═══ BLOG / JOURNAL ═══ */
+.blog-section{padding:100px clamp(24px,6vw,80px) 120px}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1280px;margin:auto}
+.blog-card{background:var(--soft);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.3s var(--ease)}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.08)}
+.blog-card img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.blog-card-body{padding:26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.blog-card time{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.blog-card h2{font-family:var(--title);font-size:28px;font-weight:400;line-height:1.1}
+.blog-card p{color:var(--muted);font-size:15px;line-height:1.65}
+.blog-empty{color:var(--muted);text-align:center;font-size:18px}
+.post-body{max-width:760px;margin:auto;padding:100px clamp(24px,6vw,80px)}
+.post-body>*+*{margin-top:24px}
+.post-body p,.post-body li{font-size:17.5px;line-height:1.8;color:rgba(17,16,14,.82)}
+.post-body h2{font-family:var(--title);font-size:clamp(30px,4vw,44px);font-weight:400;line-height:1.12;margin-top:60px}
+.post-body h3{font-family:var(--title);font-size:26px;font-weight:400;margin-top:44px}
+.post-body ul,.post-body ol{padding-left:22px}
+.post-body li+li{margin-top:8px}
+.post-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.post-body img{width:100%;height:auto;border-radius:10px;margin:44px 0}
+.post-body blockquote{border-left:2px solid var(--blue);padding-left:24px;font-size:22px;font-weight:300;line-height:1.5;color:var(--muted)}
+.post-body hr{border:0;border-top:1px solid var(--line);margin:56px 0}
+@media(max-width:1100px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:780px){.blog-grid{grid-template-columns:1fr}.blog-section{padding-top:64px;padding-bottom:82px}.post-body{padding-top:64px;padding-bottom:64px}}

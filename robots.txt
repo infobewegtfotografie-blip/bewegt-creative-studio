@@ -3,3 +3,5 @@ Allow: /
 Disallow: /thank-you.html
 
 Sitemap: https://bewegtcreative.com/sitemap.xml
+
+Sitemap: https://bewegtcreative.com/blog/sitemap.xml
