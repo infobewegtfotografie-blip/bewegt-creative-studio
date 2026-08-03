@@ -3,7 +3,23 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { readPosts, parsePost, renderPost, renderIndex, isoDate } = require('./build-blog');
+const { readPosts, parsePost, renderPost, renderIndex, videoEmbed, isoDate } = require('./build-blog');
+
+// SÉCURITÉ — le champ vidéo devient une iframe : uniquement vers YouTube et Vimeo.
+assert.ok(videoEmbed('https://www.youtube.com/watch?v=dQw4w9WgXcQ', 't').includes('youtube-nocookie.com/embed/dQw4w9WgXcQ'));
+assert.ok(videoEmbed('https://youtu.be/dQw4w9WgXcQ', 't').includes('youtube-nocookie.com/embed/'));
+assert.ok(videoEmbed('https://vimeo.com/123456789', 't').includes('player.vimeo.com/video/123456789'));
+for (const bad of [
+  'https://evil.example/video',
+  'javascript:alert(1)',
+  'data:text/html,<script>alert(1)</script>',
+  'https://youtube.com.evil.example/watch?v=abcdef',
+  '"><script>alert(1)</script>',
+  '',
+  undefined,
+]) {
+  assert.strictEqual(videoEmbed(bad, 't'), '', `adresse vidéo acceptée à tort : ${bad}`);
+}
 
 // gray-matter rend un objet Date pour `date: 2026-08-03` — on doit retomber sur YYYY-MM-DD.
 assert.strictEqual(isoDate(new Date('2026-08-03T00:00:00Z'), 'x'), '2026-08-03');

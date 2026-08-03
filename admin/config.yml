@@ -1,0 +1,65 @@
+# Back-office BEWEGT — écrit directement dans le dépôt GitHub.
+# L'authentification passe par les fonctions /oauth/auth et /oauth/callback.
+backend:
+  name: github
+  repo: infobewegtfotografie-blip/bewegt-creative-studio
+  branch: main
+  base_url: https://bewegtcreative.com
+  auth_endpoint: oauth/auth
+
+locale: fr
+publish_mode: simple
+media_folder: img/blog
+public_folder: /img/blog
+
+collections:
+  - name: posts
+    label: Journal
+    label_singular: Article
+    folder: content/blog
+    create: true
+    delete: true
+    extension: md
+    slug: '{{slug}}'
+    summary: '{{title}} — {{date}}'
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - {
+          name: date,
+          label: Date de publication,
+          widget: datetime,
+          date_format: 'YYYY-MM-DD',
+          time_format: false,
+          format: 'YYYY-MM-DD',
+        }
+      - { name: summary, label: Résumé (liste + Google), widget: text, required: false }
+      - { name: cover, label: Photo de couverture, widget: image, required: false }
+      - { name: coverAlt, label: Description de la photo, widget: string, required: false }
+      - {
+          name: video,
+          label: Vidéo (lien YouTube ou Vimeo),
+          widget: string,
+          required: false,
+          hint: 'Colle l''adresse de la vidéo. Seuls YouTube et Vimeo sont acceptés.',
+        }
+      - { name: draft, label: Brouillon (invisible sur le site), widget: boolean, default: false }
+      - { name: body, label: Article, widget: markdown }
+      - name: comments
+        label: Commentaires publiés
+        widget: list
+        required: false
+        label_singular: Commentaire
+        summary: '{{fields.name}} — {{fields.date}}'
+        fields:
+          - { name: name, label: Nom du lecteur, widget: string }
+          - {
+              name: date,
+              label: Date,
+              widget: datetime,
+              date_format: 'YYYY-MM-DD',
+              time_format: false,
+              format: 'YYYY-MM-DD',
+              required: false,
+            }
+          - { name: message, label: Commentaire, widget: text }

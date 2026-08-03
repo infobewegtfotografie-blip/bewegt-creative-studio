@@ -1,7 +1,10 @@
 [build]
   publish = "."
-  # Génère /blog depuis content/blog/*.md à chaque déploiement.
+  # Génère /blog depuis content/blog/*.md et copie l'éditeur dans /admin/cms.
   command = "npm run build"
+
+[functions]
+  directory = "netlify/functions"
 
 # Keep one canonical URL for every service page.
 [[redirects]]
@@ -174,11 +177,6 @@
   status = 404
 
 [[redirects]]
-  from = "/admin/*"
-  to = "/404.html"
-  status = 404
-
-[[redirects]]
   from = "/phpmyadmin/*"
   to = "/404.html"
   status = 404
@@ -197,3 +195,41 @@
   from = "/.well-known/security.txt"
   to = "/security.txt"
   status = 200
+
+# ═══ BACK-OFFICE /admin ═══
+# CSP propre au back-office : le site public garde la sienne, plus stricte.
+# L'éditeur est servi depuis 'self' (copié par build-admin.js), jamais depuis un CDN.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache, must-revalidate"
+    Content-Security-Policy = """default-src 'self';
+  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: blob:
+    https://avatars.githubusercontent.com
+    https://raw.githubusercontent.com;
+  font-src 'self' data:;
+  connect-src 'self'
+    https://api.github.com
+    https://github.com;
+  frame-src 'self' blob:;
+  media-src 'self' blob: data:;
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+  frame-ancestors 'none'"""
+
+# Fichiers de l'éditeur : noms versionnés, donc cachables longtemps.
+[[headers]]
+  for = "/admin/cms/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+# Les fonctions d'authentification ne doivent jamais être mises en cache.
+[[headers]]
+  for = "/oauth/*"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Robots-Tag = "noindex, nofollow"

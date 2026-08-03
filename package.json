@@ -4,10 +4,11 @@
   "private": true,
   "description": "Site BEWEGT CREATIVE STUDIO — generateur de blog statique",
   "scripts": {
-    "build": "node build-blog.js",
+    "build": "node build-blog.js && node build-admin.js",
     "test": "node build-blog.test.js"
   },
   "dependencies": {
+    "decap-cms": "^3.15.1",
     "gray-matter": "^4.0.3",
     "marked": "^18.0.7"
   }

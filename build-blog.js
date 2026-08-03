@@ -24,6 +24,20 @@ function isoDate(value, fallback) {
   return /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : fallback;
 }
 
+// Seuls YouTube et Vimeo sont acceptés : une adresse quelconque ne produit aucune iframe.
+function videoEmbed(url, title) {
+  const raw = String(url ?? '').trim();
+  const yt = raw.match(/^https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|live\/)|youtu\.be\/)([\w-]{6,20})/);
+  const vimeo = raw.match(/^https?:\/\/(?:www\.)?vimeo\.com\/(?:video\/)?(\d{6,12})/);
+  const src = yt
+    ? `https://www.youtube-nocookie.com/embed/${yt[1]}`
+    : vimeo
+      ? `https://player.vimeo.com/video/${vimeo[1]}`
+      : '';
+  if (!src) return '';
+  return `  <div class="post-video"><iframe src="${esc(src)}" title="${esc(title)}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>\n`;
+}
+
 const humanDate = (iso) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
@@ -42,6 +56,7 @@ function parsePost(filename, raw) {
     cover: data.cover || FALLBACK_COVER,
     coverAlt: data.coverAlt || title,
     draft: data.draft === true,
+    video: data.video || '',
     // Écrits par des lecteurs : jamais interprétés comme du Markdown ou du HTML.
     comments: (Array.isArray(data.comments) ? data.comments : [])
       .filter((c) => c && c.message)
@@ -266,7 +281,7 @@ function renderPost(post) {
   </section>
 
   <article class="post-body">
-${post.body}
+${videoEmbed(post.video, post.title)}${post.body}
   </article>
 
 ${renderComments(post)}
@@ -304,4 +319,4 @@ function build() {
 
 if (require.main === module) build();
 
-module.exports = { build, readPosts, parsePost, renderIndex, renderPost, renderComments, isoDate, esc };
+module.exports = { build, readPosts, parsePost, renderIndex, renderPost, renderComments, videoEmbed, isoDate, esc };
