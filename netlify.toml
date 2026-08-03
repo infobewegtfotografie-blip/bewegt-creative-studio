@@ -238,3 +238,16 @@
   [headers.values]
     Cache-Control = "no-store"
     X-Robots-Tag = "noindex, nofollow"
+
+# Adresses courtes pour les pages légales.
+[[redirects]]
+  from = "/impressum"
+  to = "/legal/impressum.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/datenschutz"
+  to = "/legal/datenschutz.html"
+  status = 301
+  force = true

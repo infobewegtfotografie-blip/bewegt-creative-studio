@@ -1596,3 +1596,22 @@ details{border-color:rgba(42,33,27,.12)}
 .comment-form .btn{align-self:flex-start;margin:22px 0 0}
 .comment-note{font-size:12.5px;color:var(--muted);margin-top:14px}
 .comment-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ═══ PAGES LÉGALES ═══ */
+.legal-head{padding:150px clamp(24px,6vw,80px) 0;max-width:820px;margin:auto;text-align:center}
+.legal-head h1{font-family:var(--title);font-size:clamp(38px,6vw,68px);font-weight:300;line-height:1.05;margin-top:12px}
+.legal-links{display:flex;gap:18px;justify-content:center;margin-top:26px;font-size:13px}
+.legal-links a{color:rgba(255,255,255,.62);display:inline}
+.legal-links a:hover{color:white}
+.post-body h2:first-child{margin-top:0}
+/* Pages sans grande image sombre : le menu doit rester lisible dès le haut. */
+.legal-page .nav{background:rgba(250,250,247,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.legal-page .nav .brand{color:var(--ink)}
+.legal-page .nav-links a,.legal-page .nav-dropdown button{color:var(--ink)}
+.legal-page .nav-cta{border-color:var(--ink)}
+.legal-page .menu-toggle span{background:var(--ink)}
+.legal-page .lang-switcher{border-left-color:var(--line)}
+.legal-page .lang-btn{color:rgba(21,21,21,.55)}
+.legal-page .brand-mark-light{opacity:0}
+.legal-page .brand-mark-dark{opacity:1}
+@media(max-width:780px){.legal-page .nav-links a,.legal-page .nav-dropdown button{color:white!important}}

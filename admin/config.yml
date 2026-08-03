@@ -63,3 +63,16 @@ collections:
               required: false,
             }
           - { name: message, label: Commentaire, widget: text }
+
+  - name: legal
+    label: Pages légales
+    label_singular: Page
+    folder: content/legal
+    create: false
+    delete: false
+    extension: md
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - { name: eyebrow, label: Surtitre, widget: string, required: false }
+      - { name: summary, label: Résumé, widget: text, required: false }
+      - { name: body, label: Contenu, widget: markdown }

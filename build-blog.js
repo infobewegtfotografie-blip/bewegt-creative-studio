@@ -11,6 +11,8 @@ const { marked } = require('marked');
 const ROOT = __dirname;
 const SRC = path.join(ROOT, 'content', 'blog');
 const OUT = path.join(ROOT, 'blog');
+const LEGAL_SRC = path.join(ROOT, 'content', 'legal');
+const LEGAL_OUT = path.join(ROOT, 'legal');
 const SITE = 'https://bewegtcreative.com';
 const FALLBACK_COVER = '/img/hero.jpg';
 
@@ -140,6 +142,7 @@ const FOOTER = `
       <a href="https://www.youtube.com/@bewegtcreativestudio" target="_blank" rel="noopener">YouTube</a>
     </div>
   </div>
+  <p class="legal-links"><a href="/legal/impressum.html">Impressum</a><a href="/legal/datenschutz.html">Datenschutz</a></p>
   <p class="copyright" data-i18n="footer.legal">© 2026 BEWEGT CREATIVE STUDIO. All Rights Reserved.</p>
 </footer>
 
@@ -150,7 +153,7 @@ const FOOTER = `
 <script src="/consent.js" defer></script>
 <script src="/script.js" defer></script>`;
 
-function shell({ title, description, url, image, main }) {
+function shell({ title, description, url, image, main, bodyClass = '' }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,7 +181,7 @@ function shell({ title, description, url, image, main }) {
   <meta name="twitter:image" content="${esc(SITE + image)}">
 <link rel="stylesheet" href="/style.css">
 </head>
-<body>
+<body${bodyClass ? ` class="${bodyClass}"` : ''}>
 ${NAV}
 
 <main>
@@ -305,6 +308,48 @@ ${urls
 `;
 }
 
+// Pages légales : même gabarit que le reste du site, éditables dans le back-office.
+function renderLegal(page) {
+  return shell({
+    title: page.title,
+    description: page.summary,
+    url: `/legal/${page.slug}.html`,
+    image: '/img/og-image.jpg',
+    bodyClass: 'legal-page',
+    main: `  <section class="legal-head">
+    <p class="eyebrow">${esc(page.eyebrow || 'Rechtliches')}</p>
+    <h1>${esc(page.title)}</h1>
+  </section>
+
+  <article class="post-body">
+${page.body}
+  </article>`,
+  });
+}
+
+function buildLegal() {
+  if (!fs.existsSync(LEGAL_SRC)) return [];
+  const pages = fs
+    .readdirSync(LEGAL_SRC)
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => {
+      const { data, content } = matter(fs.readFileSync(path.join(LEGAL_SRC, f), 'utf8'));
+      return {
+        slug: f.replace(/\.md$/, ''),
+        title: data.title || f,
+        summary: data.summary || '',
+        eyebrow: data.eyebrow || '',
+        body: marked.parse(content),
+      };
+    });
+
+  fs.mkdirSync(LEGAL_OUT, { recursive: true });
+  for (const page of pages) {
+    fs.writeFileSync(path.join(LEGAL_OUT, `${page.slug}.html`), renderLegal(page));
+  }
+  return pages;
+}
+
 function build() {
   const posts = readPosts();
   fs.mkdirSync(OUT, { recursive: true });
@@ -313,7 +358,9 @@ function build() {
   for (const post of posts) {
     fs.writeFileSync(path.join(OUT, `${post.slug}.html`), renderPost(post));
   }
+  const legal = buildLegal();
   console.log(`blog: ${posts.length} article(s) généré(s) dans /blog`);
+  console.log(`legal: ${legal.length} page(s) générée(s) dans /legal`);
   return posts;
 }
 
