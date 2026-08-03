@@ -15,7 +15,9 @@ export default async (req) => {
   const authorize = new URL('https://github.com/login/oauth/authorize');
   authorize.searchParams.set('client_id', clientId);
   authorize.searchParams.set('redirect_uri', `${origin}/oauth/callback`);
-  authorize.searchParams.set('scope', 'repo,user');
+  // 'public_repo' et non 'repo' : le dépôt du site est public, donc un jeton
+  // qui fuiterait ne donnerait aucun accès aux dépôts privés du compte.
+  authorize.searchParams.set('scope', 'public_repo');
   authorize.searchParams.set('state', state);
 
   return new Response(null, {
