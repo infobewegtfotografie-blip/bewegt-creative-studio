@@ -113,7 +113,7 @@ const NAV = `
       </div>
     </div>
     <a href="/index.html#work" data-i18n="nav.work">Work</a>
-    <a href="/blog/">Blog</a>
+    <a href="/blog/" data-i18n="nav.blog">Blog</a>
     <a href="/index.html#faq" data-i18n="nav.faq">FAQ</a>
     <a class="nav-cta" href="/index.html#contact" data-i18n="nav.start">Start a Project</a>
   </nav>
@@ -207,7 +207,7 @@ function renderIndex(posts) {
       </a>`
         )
         .join('\n')
-    : '      <p class="blog-empty">No stories published yet. Come back soon.</p>';
+    : '      <p class="blog-empty" data-i18n="blog.empty">No stories published yet. Come back soon.</p>';
 
   return shell({
     title: 'Journal',
@@ -218,9 +218,9 @@ function renderIndex(posts) {
     <picture><source srcset="/img/behind.webp" type="image/webp"><img src="/img/behind.jpg" width="1600" height="1067" alt="BEWEGT behind the scenes"></picture>
     <div class="hero-overlay"></div>
     <div class="page-hero-content">
-      <p class="eyebrow">Journal</p>
-      <h1>Stories</h1>
-      <p>Behind the scenes, projects and thoughts from the studio.</p>
+      <p class="eyebrow" data-i18n="blog.eyebrow">Journal</p>
+      <h1 data-i18n="blog.title">Stories</h1>
+      <p data-i18n="blog.sub">Behind the scenes, projects and thoughts from the studio.</p>
     </div>
   </section>
 
@@ -245,23 +245,23 @@ function renderComments(post) {
 
   return `  <section class="comments" id="comments">
     <div class="comments-inner">
-      <p class="eyebrow">Comments</p>
-      <h2>${post.comments.length ? 'What readers said' : 'Be the first to comment'}</h2>
+      <p class="eyebrow" data-i18n="comments.eyebrow">Comments</p>
+      <h2 data-i18n="${post.comments.length ? 'comments.some' : 'comments.none'}">${post.comments.length ? 'What readers said' : 'Be the first to comment'}</h2>
 ${post.comments.length ? `      <ul class="comment-list">\n${list}\n      </ul>` : ''}
 
       <form class="comment-form" name="comment" method="POST" action="/comment-received.html" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="comment">
         <input type="hidden" name="post" value="${esc(post.slug)}">
         <p class="comment-hp"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-        <label for="c-name">Your name</label>
+        <label for="c-name" data-i18n="comments.name">Your name</label>
         <input id="c-name" name="name" type="text" required maxlength="80" autocomplete="name">
-        <label for="c-email">Your email <span>— not published, only so we can reply</span></label>
+        <label for="c-email"><span data-i18n="comments.email">Your email</span> <span class="note" data-i18n="comments.emailNote">— not published, only so we can reply</span></label>
         <input id="c-email" name="email" type="email" maxlength="120" autocomplete="email">
-        <label for="c-message">Your comment</label>
+        <label for="c-message" data-i18n="comments.message">Your comment</label>
         <textarea id="c-message" name="message" rows="5" required maxlength="2000"></textarea>
-        <label class="comment-consent"><input type="checkbox" name="consent" required> I agree that my name and comment may be published on this page.</label>
-        <button class="btn btn-dark" type="submit">Send comment</button>
-        <p class="comment-note">Comments are reviewed before they appear. We never publish your email address.</p>
+        <label class="comment-consent"><input type="checkbox" name="consent" required> <span data-i18n="comments.consent">I agree that my name and comment may be published on this page.</span></label>
+        <button class="btn btn-dark" type="submit" data-i18n="comments.send">Send comment</button>
+        <p class="comment-note" data-i18n="comments.note">Comments are reviewed before they appear. We never publish your email address.</p>
       </form>
     </div>
   </section>`;
@@ -290,8 +290,8 @@ ${videoEmbed(post.video, post.title)}${post.body}
 ${renderComments(post)}
 
   <section class="next-services">
-    <p class="eyebrow">Journal</p>
-    <div><a href="/blog/">All stories</a><a href="/index.html#contact">Start a Project</a></div>
+    <p class="eyebrow" data-i18n="blog.eyebrow">Journal</p>
+    <div><a href="/blog/" data-i18n="blog.all">All stories</a><a href="/index.html#contact">Start a Project</a></div>
   </section>`,
   });
 }
