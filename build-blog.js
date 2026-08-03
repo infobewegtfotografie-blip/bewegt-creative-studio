@@ -345,6 +345,7 @@ function buildLegal() {
       };
     });
 
+  fs.rmSync(LEGAL_OUT, { recursive: true, force: true });
   fs.mkdirSync(LEGAL_OUT, { recursive: true });
   for (const page of pages) {
     fs.writeFileSync(path.join(LEGAL_OUT, `${page.slug}.html`), renderLegal(page));
@@ -354,6 +355,8 @@ function buildLegal() {
 
 function build() {
   const posts = readPosts();
+  // On repart d'un dossier vide : un article supprimé ne doit pas laisser sa page.
+  fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'index.html'), renderIndex(posts));
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'), renderSitemap(posts));
