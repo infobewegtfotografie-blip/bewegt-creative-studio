@@ -5,6 +5,7 @@ lang: de
 summary: Das BEWEGT-Journal ist offen — hinter den Kulissen, Projekte und das Denken hinter den Bildern.
 cover: /img/behind.jpg
 coverAlt: BEWEGT CREATIVE STUDIO hinter den Kulissen
+group: ouverture
 draft: false
 ---
 

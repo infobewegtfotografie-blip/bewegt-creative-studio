@@ -4,6 +4,7 @@ date: 2026-08-03
 summary: The BEWEGT journal is open — behind the scenes, projects and the thinking behind the images.
 cover: /img/behind.jpg
 coverAlt: BEWEGT CREATIVE STUDIO behind the scenes
+group: ouverture
 draft: false
 ---
 

@@ -377,7 +377,18 @@
 
   const savedLang = localStorage.getItem('bewegtLang') || 'en';
   applyLang(savedLang);
+  // Sur un article traduit, changer de drapeau mène à la version correspondante.
+  const articleVersions = (() => {
+    const el = document.querySelector('[data-translations]');
+    if (!el) return null;
+    try { return JSON.parse(el.dataset.translations); } catch (e) { return null; }
+  })();
+
   document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => {
+    if (articleVersions) {
+      const cible = articleVersions[btn.dataset.lang];
+      if (cible && cible !== location.pathname) { localStorage.setItem('bewegtLang', btn.dataset.lang); location.href = cible; return; }
+    }
     applyLang(btn.dataset.lang);
     document.dispatchEvent(new CustomEvent('bewegt:languagechange'));
     setSoundLabel();

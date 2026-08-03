@@ -59,6 +59,8 @@ function parsePost(filename, raw) {
     coverAlt: data.coverAlt || title,
     draft: data.draft === true,
     lang: ['en', 'fr', 'de'].includes(data.lang) ? data.lang : 'en',
+    // Relie les versions d'un même article entre elles.
+    group: data.group || '',
     video: data.video || '',
     // Écrits par des lecteurs : jamais interprétés comme du Markdown ou du HTML.
     comments: (Array.isArray(data.comments) ? data.comments : [])
@@ -269,7 +271,7 @@ ${post.comments.length ? `      <ul class="comment-list">\n${list}\n      </ul>`
   </section>`;
 }
 
-function renderPost(post) {
+function renderPost(post, versions = {}) {
   return shell({
     title: post.title,
     description: post.summary,
@@ -285,7 +287,9 @@ function renderPost(post) {
     </div>
   </section>
 
-  <article class="post-body" lang="${esc(post.lang)}">
+  <article class="post-body" lang="${esc(post.lang)}"${
+      Object.keys(versions).length ? ` data-translations="${esc(JSON.stringify(versions))}"` : ''
+    }>
 ${videoEmbed(post.video, post.title)}${post.body}
   </article>
 
@@ -360,8 +364,13 @@ function build() {
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'index.html'), renderIndex(posts));
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'), renderSitemap(posts));
+  const byGroup = {};
   for (const post of posts) {
-    fs.writeFileSync(path.join(OUT, `${post.slug}.html`), renderPost(post));
+    if (!post.group) continue;
+    (byGroup[post.group] = byGroup[post.group] || {})[post.lang] = post.url;
+  }
+  for (const post of posts) {
+    fs.writeFileSync(path.join(OUT, `${post.slug}.html`), renderPost(post, byGroup[post.group] || {}));
   }
   const legal = buildLegal();
   console.log(`blog: ${posts.length} article(s) généré(s) dans /blog`);

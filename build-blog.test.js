@@ -55,6 +55,15 @@ const idxFr = renderIndex([parsePost('b.md', '---\ntitle: Lomé\nlang: fr\n---\n
 assert.ok(idxFr.includes('data-lang="fr"'), 'la carte ne porte pas sa langue');
 assert.ok(idxFr.includes('class="blog-empty" data-i18n="blog.empty" hidden'), 'message vide absent ou visible à tort');
 
+// Les versions d'un même article ne sont reliées que par un groupe commun.
+const enPost = parsePost('en.md', '---\ntitle: Hello\nlang: en\ngroup: ouverture\n---\nA\n');
+const liee = renderPost(enPost, { fr: '/blog/bonjour.html', de: '/blog/hallo.html' });
+assert.ok(liee.includes('data-translations='), 'table de traduction absente');
+assert.ok(liee.includes('bonjour.html'), 'version française non reliée');
+// Sans groupe, aucune table : le drapeau ne doit mener nulle part.
+assert.ok(!renderPost(enPost, {}).includes('data-translations='), 'table présente à tort');
+assert.strictEqual(parsePost('x.md', '---\ntitle: T\n---\n').group, '');
+
 // Un blog vide doit produire une page valide, pas planter.
 assert.ok(renderIndex([]).includes('No stories published yet'));
 

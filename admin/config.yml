@@ -45,6 +45,13 @@ collections:
               { label: Deutsch, value: de },
             ],
         }
+      - {
+          name: group,
+          label: Groupe de traduction,
+          widget: string,
+          required: false,
+          hint: 'Même mot sur les versions FR, DE et EN d''un même article — le drapeau mènera alors à la bonne version. Laisse vide si l''article n''existe que dans une langue.',
+        }
       - { name: summary, label: Résumé (liste + Google), widget: text, required: false }
       - { name: cover, label: Photo de couverture, widget: image, required: false }
       - { name: coverAlt, label: Description de la photo, widget: string, required: false }

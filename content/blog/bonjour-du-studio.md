@@ -5,6 +5,7 @@ lang: fr
 summary: Le journal de BEWEGT est ouvert — les coulisses, les projets, et ce qu'il y a derrière les images.
 cover: /img/behind.jpg
 coverAlt: BEWEGT CREATIVE STUDIO en coulisses
+group: ouverture
 draft: false
 ---
 
