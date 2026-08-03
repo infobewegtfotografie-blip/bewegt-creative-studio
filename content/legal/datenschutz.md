@@ -8,9 +8,10 @@ summary: Wie BEWEGT CREATIVE STUDIO personenbezogene Daten auf dieser Website ve
 
 Verantwortlich für die Datenverarbeitung auf dieser Website ist:
 
-**〖RECHTSFORM UND FIRMENNAME〗**
-〖VOR- UND NACHNAME〗
-〖STRASSE, PLZ UND ORT〗
+**BEWEGT CREATIVE STUDIO** — Einzelunternehmen
+Inhaber: Kwamivi Dogbo
+Schubertweg 16, 52249 Eschweiler, Deutschland
+Telefon: +49 176 70064700
 E-Mail: contact@bewegtcreative.com
 
 Ein Datenschutzbeauftragter ist gesetzlich nicht bestellt.
@@ -112,10 +113,11 @@ Wenden Sie sich dazu formlos an contact@bewegtcreative.com.
 
 ## 12. Beschwerderecht
 
-Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Zuständig
-ist die Aufsichtsbehörde des Bundeslandes 〖BUNDESLAND DES FIRMENSITZES〗.
+Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Für unseren
+Sitz zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit
+Nordrhein-Westfalen, Kavalleriestraße 2–4, 40213 Düsseldorf.
 
 ## 13. Stand
 
-Diese Datenschutzerklärung hat den Stand 〖DATUM〗. Wir passen sie an, sobald sich die
+Diese Datenschutzerklärung hat den Stand 3. August 2026. Wir passen sie an, sobald sich die
 eingesetzten Dienste ändern.

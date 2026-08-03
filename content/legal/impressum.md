@@ -6,31 +6,27 @@ summary: Angaben gemäß § 5 DDG für BEWEGT CREATIVE STUDIO.
 
 ## Angaben gemäß § 5 DDG
 
-**〖RECHTSFORM UND FIRMENNAME〗**
-〖VOR- UND NACHNAME DES INHABERS〗
-〖STRASSE UND HAUSNUMMER〗
-〖PLZ UND ORT〗
+**BEWEGT CREATIVE STUDIO**
+Einzelunternehmen
+Inhaber: Kwamivi Dogbo
+Schubertweg 16
+52249 Eschweiler
 Deutschland
 
 ## Kontakt
 
-Telefon: 〖TELEFONNUMMER〗
+Telefon: +49 176 70064700
 E-Mail: contact@bewegtcreative.com
 
 ## Umsatzsteuer
 
-〖ENTWEDER: Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE〖NUMMER〗
-ODER: Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.〗
-
-## Registereintrag
-
-〖NUR BEI GmbH / UG / GbR MIT EINTRAG — SONST DIESEN ABSCHNITT LÖSCHEN:
-Registergericht: 〖AMTSGERICHT〗 · Registernummer: 〖HRB-NUMMER〗〗
+Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
-〖VOR- UND NACHNAME〗
-〖STRASSE, PLZ UND ORT〗
+Kwamivi Dogbo
+Schubertweg 16
+52249 Eschweiler
 
 ## Verbraucherstreitbeilegung
 
