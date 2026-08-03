@@ -251,3 +251,16 @@
   to = "/legal/datenschutz.html"
   status = 301
   force = true
+
+# L'article d'ouverture est né du billet de test : on garde l'ancienne adresse vivante.
+[[redirects]]
+  from = "/blog/cvezucgob"
+  to = "/blog/huit-heures-de-soleil-sur-un-toit-de-bourgogne.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/cvezucgob.html"
+  to = "/blog/huit-heures-de-soleil-sur-un-toit-de-bourgogne.html"
+  status = 301
+  force = true
