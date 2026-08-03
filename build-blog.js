@@ -40,6 +40,25 @@ function videoEmbed(url, title) {
   return `  <div class="post-video"><iframe src="${esc(src)}" title="${esc(title)}" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>\n`;
 }
 
+
+// Netlify redimensionne et convertit en WebP à la volée : rien à installer,
+// rien à stocker, et l'original reste intact dans le dépôt.
+const cdn = (src, w) =>
+  /^\/(img|portfolio-designs)\//.test(String(src))
+    ? `/.netlify/images?url=${encodeURIComponent(src)}&w=${w}&fm=webp&q=80`
+    : src;
+
+const srcset = (src, widths) => widths.map((w) => `${cdn(src, w)} ${w}w`).join(', ');
+
+// Les photos insérées dans le texte passent aussi par le CDN.
+function optimiseImages(html) {
+  return html.replace(/<img([^>]*?)src="(\/img\/[^"]+)"([^>]*?)>/g, (balise, avant, src, apres) => {
+    if (/srcset=/.test(balise)) return balise;
+    const lazy = /loading=/.test(balise) ? '' : ' loading="lazy"';
+    return `<img${avant}src="${esc(cdn(src, 1200))}" srcset="${esc(srcset(src, [480, 800, 1200]))}" sizes="(max-width: 780px) 90vw, 760px"${lazy}${apres}>`;
+  });
+}
+
 const humanDate = (iso) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
@@ -70,7 +89,7 @@ function parsePost(filename, raw) {
         date: isoDate(c.date, ''),
         message: String(c.message),
       })),
-    body: marked.parse(content),
+    body: optimiseImages(marked.parse(content)),
   };
 }
 
@@ -201,7 +220,7 @@ function renderIndex(posts) {
     ? posts
         .map(
           (p) => `      <a class="blog-card" data-lang="${esc(p.lang)}" lang="${esc(p.lang)}" href="${esc(p.url)}">
-        <img src="${esc(p.cover)}" alt="${esc(p.coverAlt)}" width="1200" height="800" loading="lazy">
+        <img src="${esc(cdn(p.cover, 800))}" srcset="${esc(srcset(p.cover, [480, 800, 1200]))}" sizes="(max-width: 780px) 90vw, (max-width: 1100px) 46vw, 30vw" alt="${esc(p.coverAlt)}" width="1200" height="800" loading="lazy">
         <div class="blog-card-body">
           <time datetime="${esc(p.date)}">${esc(humanDate(p.date))}</time>
           <h2>${esc(p.title)}</h2>
@@ -278,7 +297,7 @@ function renderPost(post, versions = {}) {
     url: post.url,
     image: post.cover,
     main: `  <section class="page-hero">
-    <img src="${esc(post.cover)}" width="1600" height="1067" alt="${esc(post.coverAlt)}">
+    <img src="${esc(cdn(post.cover, 1600))}" srcset="${esc(srcset(post.cover, [800, 1200, 1600, 2000]))}" sizes="100vw" width="1600" height="1067" alt="${esc(post.coverAlt)}">
     <div class="hero-overlay"></div>
     <div class="page-hero-content">
       <p class="eyebrow"><time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time></p>

@@ -64,6 +64,13 @@ assert.ok(liee.includes('bonjour.html'), 'version française non reliée');
 assert.ok(!renderPost(enPost, {}).includes('data-translations='), 'table présente à tort');
 assert.strictEqual(parsePost('x.md', '---\ntitle: T\n---\n').group, '');
 
+// Les images locales passent par le CDN Netlify, les adresses externes non.
+const avecImages = parsePost('i.md', '---\ntitle: T\ncover: https://exemple.org/p.jpg\n---\n![a](/img/blog/photo.png)\n');
+assert.strictEqual(avecImages.cover, 'https://exemple.org/p.jpg', 'adresse externe réécrite à tort');
+assert.ok(avecImages.body.includes('/.netlify/images'), 'image locale non optimisée');
+assert.ok(avecImages.body.includes('srcset='), 'srcset absent');
+assert.ok(avecImages.body.includes('loading="lazy"'), 'chargement différé absent');
+
 // Un blog vide doit produire une page valide, pas planter.
 assert.ok(renderIndex([]).includes('No stories published yet'));
 
