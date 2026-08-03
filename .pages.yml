@@ -42,3 +42,20 @@ content:
       - name: body
         label: Article
         type: rich-text
+      # Commentaires validés par toi : ce qui est ici s'affiche, le reste n'existe pas.
+      - name: comments
+        label: Commentaires publiés
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Nom du lecteur
+            type: string
+          - name: date
+            label: Date
+            type: date
+            options:
+              format: yyyy-MM-dd
+          - name: message
+            label: Commentaire
+            type: text

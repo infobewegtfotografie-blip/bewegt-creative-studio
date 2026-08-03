@@ -42,6 +42,14 @@ function parsePost(filename, raw) {
     cover: data.cover || FALLBACK_COVER,
     coverAlt: data.coverAlt || title,
     draft: data.draft === true,
+    // Écrits par des lecteurs : jamais interprétés comme du Markdown ou du HTML.
+    comments: (Array.isArray(data.comments) ? data.comments : [])
+      .filter((c) => c && c.message)
+      .map((c) => ({
+        name: String(c.name || 'Anonymous'),
+        date: isoDate(c.date, ''),
+        message: String(c.message),
+      })),
     body: marked.parse(content),
   };
 }
@@ -206,6 +214,41 @@ ${cards}
   });
 }
 
+// Les commentaires sont du texte brut échappé : ni Markdown, ni HTML, ni lien cliquable.
+function renderComments(post) {
+  const list = post.comments
+    .map(
+      (c) => `      <li class="comment">
+        <p class="comment-head"><strong>${esc(c.name)}</strong>${c.date ? ` <time datetime="${esc(c.date)}">${esc(humanDate(c.date))}</time>` : ''}</p>
+        <p class="comment-text">${esc(c.message).replace(/\r?\n/g, '<br>')}</p>
+      </li>`
+    )
+    .join('\n');
+
+  return `  <section class="comments" id="comments">
+    <div class="comments-inner">
+      <p class="eyebrow">Comments</p>
+      <h2>${post.comments.length ? 'What readers said' : 'Be the first to comment'}</h2>
+${post.comments.length ? `      <ul class="comment-list">\n${list}\n      </ul>` : ''}
+
+      <form class="comment-form" name="comment" method="POST" action="/comment-received.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="comment">
+        <input type="hidden" name="post" value="${esc(post.slug)}">
+        <p class="comment-hp"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <label for="c-name">Your name</label>
+        <input id="c-name" name="name" type="text" required maxlength="80" autocomplete="name">
+        <label for="c-email">Your email <span>— not published, only so we can reply</span></label>
+        <input id="c-email" name="email" type="email" maxlength="120" autocomplete="email">
+        <label for="c-message">Your comment</label>
+        <textarea id="c-message" name="message" rows="5" required maxlength="2000"></textarea>
+        <label class="comment-consent"><input type="checkbox" name="consent" required> I agree that my name and comment may be published on this page.</label>
+        <button class="btn btn-dark" type="submit">Send comment</button>
+        <p class="comment-note">Comments are reviewed before they appear. We never publish your email address.</p>
+      </form>
+    </div>
+  </section>`;
+}
+
 function renderPost(post) {
   return shell({
     title: post.title,
@@ -225,6 +268,8 @@ function renderPost(post) {
   <article class="post-body">
 ${post.body}
   </article>
+
+${renderComments(post)}
 
   <section class="next-services">
     <p class="eyebrow">Journal</p>
@@ -259,4 +304,4 @@ function build() {
 
 if (require.main === module) build();
 
-module.exports = { build, readPosts, parsePost, renderIndex, renderPost, isoDate, esc };
+module.exports = { build, readPosts, parsePost, renderIndex, renderPost, renderComments, isoDate, esc };

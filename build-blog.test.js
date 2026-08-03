@@ -32,5 +32,34 @@ assert.deepStrictEqual(posts.map((p) => p.title), ['Recent', 'Vieux']);
 // Un blog vide doit produire une page valide, pas planter.
 assert.ok(renderIndex([]).includes('No stories published yet'));
 
+// SÉCURITÉ — un commentaire est écrit par un inconnu : il ne doit JAMAIS devenir du HTML.
+const attack = parsePost(
+  '2026-08-04-avis.md',
+  `---
+title: Avis
+comments:
+  - name: '<img src=x onerror=alert(1)>'
+    date: 2026-08-04
+    message: "Bravo !\\n<script>alert('xss')</script>"
+---
+
+Corps.
+`
+);
+const page = renderPost(attack);
+assert.strictEqual(attack.comments.length, 1);
+assert.ok(!page.includes('<script>alert'), 'script injecté via un commentaire');
+assert.ok(!page.includes('<img src=x'), 'balise img injectée via un nom');
+assert.ok(page.includes('&lt;script&gt;'), 'le commentaire doit être affiché échappé');
+assert.ok(page.includes('Bravo !<br>'), 'les retours à la ligne deviennent des <br>');
+
+// Le formulaire doit rester lié au bon article et garder son piège à robots.
+assert.ok(page.includes('name="post" value="2026-08-04-avis"'), 'slug absent du formulaire');
+assert.ok(page.includes('netlify-honeypot="bot-field"'), 'honeypot absent');
+
+// Un commentaire sans message est ignoré ; sans nom il devient Anonymous.
+const partial = parsePost('x.md', '---\ntitle: T\ncomments:\n  - name: A\n  - message: Coucou\n---\n');
+assert.deepStrictEqual(partial.comments, [{ name: 'Anonymous', date: '', message: 'Coucou' }]);
+
 fs.rmSync(dir, { recursive: true, force: true });
 console.log('build-blog: OK');
