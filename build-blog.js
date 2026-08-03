@@ -296,7 +296,7 @@ function renderPost(post, versions = {}) {
     description: post.summary,
     url: post.url,
     image: post.cover,
-    main: `  <section class="page-hero">
+    main: `  <section class="page-hero post-hero">
     <img src="${esc(cdn(post.cover, 1600))}" srcset="${esc(srcset(post.cover, [800, 1200, 1600, 2000]))}" sizes="100vw" width="1600" height="1067" alt="${esc(post.coverAlt)}">
     <div class="hero-overlay"></div>
     <div class="page-hero-content">

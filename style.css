@@ -1616,3 +1616,7 @@ details{border-color:rgba(42,33,27,.12)}
 .legal-page .brand-mark-dark{opacity:1}
 @media(max-width:780px){.legal-page .nav-links a,.legal-page .nav-dropdown button{color:white!important}}
 .blog-card[hidden],.blog-empty[hidden]{display:none}
+/* Un titre d'article est une phrase, pas un mot : échelle éditoriale, pas d'affiche. */
+.post-hero h1{font-size:clamp(30px,4.6vw,60px);font-weight:300;line-height:1.14;letter-spacing:-.01em;max-width:19ch;margin:0 auto;text-wrap:balance}
+.post-hero .page-hero-content>p:last-child{max-width:60ch;margin-left:auto;margin-right:auto;font-size:clamp(15px,1.6vw,19px)}
+@media(max-width:780px){.post-hero h1{max-width:100%}}
