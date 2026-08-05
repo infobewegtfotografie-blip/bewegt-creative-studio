@@ -63,4 +63,6 @@ Ce qui devrait, au passage, rendre un peu plus tranquille quiconque photographie
 
 **Dans le prochain article :** comment un appareil qui tenait dans une poche a changé ce que les photographes regardaient — et pourquoi la rue n’est devenue un sujet qu’à partir du moment où on a pu y marcher sans trépied.
 
---- *Note sur l’image : Point de vue du Gras est conservé au Harry Ransom Center de l’université du Texas à Austin. La reproduction qui circule le plus largement est une version retouchée réalisée en 1952 pour rendre la plaque lisible — la plaque originale, photographiée telle quelle, est encore plus difficile à déchiffrer. Ce qui, tout bien considéré, est une ironie assez juste pour une image dont le sujet est la fabrication.*
+---
+
+*Note sur l’image : Point de vue du Gras est conservé au Harry Ransom Center de l’université du Texas à Austin. La reproduction qui circule le plus largement est une version retouchée réalisée en 1952 pour rendre la plaque lisible — la plaque originale, photographiée telle quelle, est encore plus difficile à déchiffrer. Ce qui, tout bien considéré, est une ironie assez juste pour une image dont le sujet est la fabrication.*
