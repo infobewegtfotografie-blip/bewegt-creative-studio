@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
+const sanitizeHtml = require('sanitize-html');
 
 const ROOT = __dirname;
 const SRC = path.join(ROOT, 'content', 'blog');
@@ -59,6 +60,34 @@ function optimiseImages(html) {
   });
 }
 
+// Le CMS autorise le Markdown, pas du code exécutable. `marked` accepte aussi
+// le HTML brut ; on impose donc une frontière de contenu avant publication.
+const MARKDOWN_SANITIZE_OPTIONS = {
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'figure', 'figcaption']),
+  allowedAttributes: {
+    a: ['href', 'name', 'target', 'rel', 'title'],
+    img: ['src', 'srcset', 'sizes', 'alt', 'title', 'width', 'height', 'loading', 'decoding'],
+  },
+  allowedSchemes: ['http', 'https', 'mailto'],
+  allowedSchemesAppliedToAttributes: ['href', 'src', 'cite'],
+  allowProtocolRelative: false,
+};
+
+const renderMarkdown = (markdown) =>
+  optimiseImages(sanitizeHtml(marked.parse(String(markdown ?? '')), MARKDOWN_SANITIZE_OPTIONS));
+
+const safeMediaPath = (value, extensions) => {
+  const raw = String(value ?? '').trim();
+  if (!raw.startsWith('/img/blog/') || raw.includes('..') || !extensions.test(raw.split(/[?#]/)[0])) return '';
+  return raw;
+};
+
+const safeLink = (value) => {
+  const raw = String(value ?? '').trim();
+  if (/^\/(?!\/)/.test(raw) || /^https:\/\//i.test(raw) || /^mailto:/i.test(raw)) return raw;
+  return '';
+};
+
 const humanDate = (iso) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
@@ -81,6 +110,29 @@ function parsePost(filename, raw) {
     // Relie les versions d'un même article entre elles.
     group: data.group || '',
     video: data.video || '',
+    author: String(data.author || 'BEWEGT CREATIVE STUDIO'),
+    category: String(data.category || ''),
+    gallery: (Array.isArray(data.gallery) ? data.gallery : [])
+      .map((item) => ({
+        image: safeMediaPath(item?.image, /\.(?:avif|gif|jpe?g|png|webp)$/i),
+        alt: String(item?.alt || ''),
+        caption: String(item?.caption || ''),
+      }))
+      .filter((item) => item.image),
+    localVideo: safeMediaPath(data.localVideo, /\.(?:mp4|webm)$/i),
+    videoPoster: safeMediaPath(data.videoPoster, /\.(?:avif|jpe?g|png|webp)$/i),
+    localAudio: safeMediaPath(data.localAudio, /\.(?:m4a|mp3|ogg|wav)$/i),
+    mediaTitle: String(data.mediaTitle || ''),
+    documents: (Array.isArray(data.documents) ? data.documents : [])
+      .map((item) => ({
+        file: safeMediaPath(item?.file, /\.pdf$/i),
+        title: String(item?.title || 'Document PDF'),
+        description: String(item?.description || ''),
+      }))
+      .filter((item) => item.file),
+    cta: data.cta && typeof data.cta === 'object'
+      ? { label: String(data.cta.label || ''), url: safeLink(data.cta.url) }
+      : { label: '', url: '' },
     // Écrits par des lecteurs : jamais interprétés comme du Markdown ou du HTML.
     comments: (Array.isArray(data.comments) ? data.comments : [])
       .filter((c) => c && c.message)
@@ -89,7 +141,7 @@ function parsePost(filename, raw) {
         date: isoDate(c.date, ''),
         message: String(c.message),
       })),
-    body: optimiseImages(marked.parse(content)),
+    body: renderMarkdown(content),
   };
 }
 
@@ -290,6 +342,27 @@ ${post.comments.length ? `      <ul class="comment-list">\n${list}\n      </ul>`
   </section>`;
 }
 
+function renderEditorialMedia(post) {
+  const gallery = post.gallery.length
+    ? `<section class="post-gallery" aria-label="Galerie photo">${post.gallery.map((item) => `
+      <figure><img src="${esc(cdn(item.image, 1200))}" alt="${esc(item.alt)}" loading="lazy" decoding="async">${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}
+    </section>`
+    : '';
+  const localVideo = post.localVideo
+    ? `<figure class="post-media post-media-video">${post.mediaTitle ? `<figcaption>${esc(post.mediaTitle)}</figcaption>` : ''}<video controls preload="metadata" playsinline${post.videoPoster ? ` poster="${esc(cdn(post.videoPoster, 1200))}"` : ''}><source src="${esc(post.localVideo)}">Votre navigateur ne peut pas lire cette vidéo.</video><a class="media-download" href="${esc(post.localVideo)}" download>Télécharger la vidéo</a></figure>`
+    : '';
+  const audio = post.localAudio
+    ? `<figure class="post-media post-media-audio"><figcaption>${esc(post.mediaTitle || 'Écouter')}</figcaption><audio controls preload="metadata" src="${esc(post.localAudio)}">Votre navigateur ne peut pas lire cet audio.</audio></figure>`
+    : '';
+  const documents = post.documents.length
+    ? `<section class="post-documents" aria-label="Documents à télécharger"><h2>Documents</h2>${post.documents.map((document) => `<a class="post-document" href="${esc(document.file)}" download><span aria-hidden="true">PDF</span><strong>${esc(document.title)}</strong>${document.description ? `<small>${esc(document.description)}</small>` : ''}<b aria-hidden="true">↓</b></a>`).join('')}</section>`
+    : '';
+  const cta = post.cta.label && post.cta.url
+    ? `<aside class="post-cta"><p>${esc(post.cta.label)}</p><a href="${esc(post.cta.url)}"${post.cta.url.startsWith('https://') ? ' target="_blank" rel="noopener"' : ''}>Découvrir <span aria-hidden="true">→</span></a></aside>`
+    : '';
+  return gallery + localVideo + audio + documents + cta;
+}
+
 function renderPost(post, versions = {}) {
   return shell({
     title: post.title,
@@ -300,7 +373,7 @@ function renderPost(post, versions = {}) {
     <img src="${esc(cdn(post.cover, 1600))}" srcset="${esc(srcset(post.cover, [800, 1200, 1600, 2000]))}" sizes="100vw" width="1600" height="1067" alt="${esc(post.coverAlt)}">
     <div class="hero-overlay"></div>
     <div class="page-hero-content">
-      <p class="eyebrow"><time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time></p>
+      <p class="eyebrow">${post.category ? `${esc(post.category)} · ` : ''}<time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time> · ${esc(post.author)}</p>
       <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
       ${post.summary ? `<p lang="${esc(post.lang)}">${esc(post.summary)}</p>` : ''}
     </div>
@@ -309,7 +382,7 @@ function renderPost(post, versions = {}) {
   <article class="post-body" lang="${esc(post.lang)}"${
       Object.keys(versions).length ? ` data-translations="${esc(JSON.stringify(versions))}"` : ''
     }>
-${videoEmbed(post.video, post.title)}${post.body}
+${videoEmbed(post.video, post.title)}${post.body}${renderEditorialMedia(post)}
   </article>
 
 ${renderComments(post)}
@@ -364,7 +437,7 @@ function buildLegal() {
         title: data.title || f,
         summary: data.summary || '',
         eyebrow: data.eyebrow || '',
-        body: marked.parse(content),
+        body: renderMarkdown(content),
       };
     });
 
@@ -399,4 +472,4 @@ function build() {
 
 if (require.main === module) build();
 
-module.exports = { build, readPosts, parsePost, renderIndex, renderPost, renderComments, videoEmbed, isoDate, esc };
+module.exports = { build, readPosts, parsePost, renderIndex, renderPost, renderComments, renderMarkdown, renderEditorialMedia, videoEmbed, isoDate, esc };

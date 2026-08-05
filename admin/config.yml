@@ -53,6 +53,8 @@ collections:
           hint: 'Même mot sur les versions FR, DE et EN d''un même article — le drapeau mènera alors à la bonne version. Laisse vide si l''article n''existe que dans une langue.',
         }
       - { name: summary, label: Résumé (liste + Google), widget: text, required: false }
+      - { name: author, label: Auteur, widget: string, default: BEWEGT CREATIVE STUDIO }
+      - { name: category, label: Catégorie, widget: string, required: false, hint: 'Ex. Coulisses, Photographie, Film, Conseils' }
       - { name: cover, label: Photo de couverture, widget: image, required: false }
       - { name: coverAlt, label: Description de la photo, widget: string, required: false }
       - {
@@ -63,7 +65,44 @@ collections:
           hint: 'Colle l''adresse de la vidéo. Seuls YouTube et Vimeo sont acceptés.',
         }
       - { name: draft, label: Brouillon (invisible sur le site), widget: boolean, default: false }
-      - { name: body, label: Article, widget: markdown }
+      - {
+          name: body,
+          label: Article,
+          widget: markdown,
+          hint: 'Utilise les titres, gras, italique, liens, listes, citations et images. Les emojis peuvent être collés directement : ✨ 📷 🎬 ❤️',
+        }
+      - name: gallery
+        label: Galerie photo
+        label_singular: Photo
+        widget: list
+        required: false
+        summary: '{{fields.caption}}'
+        fields:
+          - { name: image, label: Image, widget: image }
+          - { name: alt, label: Description accessible, widget: string, hint: 'Décris ce que montre la photo.' }
+          - { name: caption, label: Légende, widget: string, required: false }
+      - { name: localVideo, label: Fichier vidéo (MP4 ou WebM), widget: file, required: false, hint: 'Pour les gros fichiers, préfère YouTube ou Vimeo afin de garder le site rapide.' }
+      - { name: videoPoster, label: Affiche de la vidéo, widget: image, required: false }
+      - { name: localAudio, label: Fichier audio (MP3, M4A, OGG ou WAV), widget: file, required: false }
+      - { name: mediaTitle, label: Titre du média, widget: string, required: false }
+      - name: documents
+        label: Documents PDF
+        label_singular: PDF
+        widget: list
+        required: false
+        summary: '{{fields.title}}'
+        fields:
+          - { name: title, label: Titre du document, widget: string }
+          - { name: description, label: Description, widget: string, required: false }
+          - { name: file, label: Fichier PDF, widget: file }
+      - name: cta
+        label: Appel à l'action
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: label, label: Message, widget: string, required: false, hint: 'Ex. Vous avez un projet en tête ?' }
+          - { name: url, label: Lien, widget: string, required: false, hint: 'Adresse HTTPS ou lien interne commençant par /' }
       - name: comments
         label: Commentaires publiés
         widget: list

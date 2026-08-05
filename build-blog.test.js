@@ -3,7 +3,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { readPosts, parsePost, renderPost, renderIndex, videoEmbed, isoDate } = require('./build-blog');
+const { readPosts, parsePost, renderPost, renderIndex, renderMarkdown, renderEditorialMedia, videoEmbed, isoDate } = require('./build-blog');
 
 // SÉCURITÉ — le champ vidéo devient une iframe : uniquement vers YouTube et Vimeo.
 assert.ok(videoEmbed('https://www.youtube.com/watch?v=dQw4w9WgXcQ', 't').includes('youtube-nocookie.com/embed/dQw4w9WgXcQ'));
@@ -36,6 +36,68 @@ assert.ok(html.includes('Fuji &quot;X&quot; &amp; &lt;b&gt;co&lt;/b&gt;'), 'titr
 assert.ok(!html.includes('content="a"b"'), 'guillemet non échappé dans une meta');
 assert.ok(html.includes('<p>Bonjour.</p>'), 'le corps Markdown doit rester du HTML rendu');
 assert.strictEqual(nasty.url, '/blog/2026-08-03-test.html');
+
+// SÉCURITÉ — le Markdown du CMS est du contenu, jamais du code exécutable.
+const hostileMarkdown = renderMarkdown(`
+# Titre sûr
+
+<script>alert('script')</script>
+<img src="/img/blog/photo.png" alt="Photo" onerror="alert('event')">
+[Lien piégé](javascript:alert('url'))
+<svg onload="alert('svg')"><circle></circle></svg>
+
+[Lien légitime](https://bewegtcreative.com/blog/)
+`);
+assert.ok(hostileMarkdown.includes('<h1>Titre sûr</h1>'), 'titre Markdown supprimé');
+assert.ok(hostileMarkdown.includes('href="https://bewegtcreative.com/blog/"'), 'lien HTTPS légitime supprimé');
+assert.ok(hostileMarkdown.includes('alt="Photo"'), 'attribut alt légitime supprimé');
+assert.ok(hostileMarkdown.includes('/.netlify/images'), 'optimisation des images locales perdue');
+assert.ok(!hostileMarkdown.includes('<script'), 'balise script conservée');
+assert.ok(!hostileMarkdown.includes('onerror'), 'gestionnaire événementiel conservé');
+assert.ok(!/href=["']\s*javascript:/i.test(hostileMarkdown), 'lien javascript actif conservé');
+assert.ok(!hostileMarkdown.includes('<svg'), 'SVG actif conservé');
+
+// Les médias éditoriaux sont guidés et limités aux fichiers téléversés dans le blog.
+const richPost = parsePost('media.md', `---
+title: Article riche
+gallery:
+  - image: /img/blog/photo.webp
+    alt: Équipe en tournage
+    caption: Coulisses
+localVideo: /img/blog/showreel.mp4
+videoPoster: /img/blog/poster.jpg
+localAudio: /img/blog/interview.mp3
+mediaTitle: Dans les coulisses
+documents:
+  - title: Dossier de presse
+    file: /img/blog/presse.pdf
+cta:
+  label: Parlons de votre projet
+  url: /index.html#contact
+---
+Texte ✨
+`);
+const richMedia = renderEditorialMedia(richPost);
+assert.ok(richMedia.includes('class="post-gallery"'), 'galerie absente');
+assert.ok(richMedia.includes('<video controls'), 'vidéo locale absente');
+assert.ok(richMedia.includes('<audio controls'), 'audio local absent');
+assert.ok(richMedia.includes('presse.pdf'), 'PDF absent');
+assert.ok(richMedia.includes('/index.html#contact'), 'CTA interne absent');
+assert.ok(richPost.body.includes('✨'), 'emoji supprimé');
+assert.ok(renderPost(richPost).includes('BEWEGT CREATIVE STUDIO'), 'auteur par défaut absent');
+const rejectedMedia = parsePost('bad.md', `---
+title: Mauvais média
+localVideo: https://evil.example/payload.mp4
+documents:
+  - title: Piège
+    file: /img/blog/../secret.pdf
+cta:
+  label: Piège
+  url: javascript:alert(1)
+---
+Texte
+`);
+assert.strictEqual(renderEditorialMedia(rejectedMedia), '', 'média ou lien non fiable accepté');
 
 // Les brouillons sont exclus, le reste est trié du plus récent au plus ancien.
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-'));
