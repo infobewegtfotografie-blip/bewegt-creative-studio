@@ -179,7 +179,15 @@ function parsePost(filename, raw) {
     next: String(data.next || ''),
     readMore: (Array.isArray(data.readMore) ? data.readMore : []).map((r) => String(r || '')).filter(Boolean),
     tempsLecture: tempsLecture(content),
-    ...(() => { const r = renderMarkdown(content); return { body: r.html, notes: r.notes }; })(),
+    ...(() => {
+      const r = renderMarkdown(content);
+      const premiere = (r.html.match(/<img[^>]+src="\/\.netlify\/images\?url=([^&"]+)/) || [])[1];
+      return {
+        body: r.html,
+        notes: r.notes,
+        partage: data.cover || (premiere ? decodeURIComponent(premiere) : FALLBACK_COVER),
+      };
+    })(),
   };
 }
 
@@ -471,7 +479,7 @@ function renderPost(post, versions = {}) {
     title: post.title,
     description: post.summary,
     url: post.url,
-    image: post.cover,
+    image: post.partage,
     bodyClass: post.aCouverture ? '' : 'article-sobre',
     main: `${enTete}
 
