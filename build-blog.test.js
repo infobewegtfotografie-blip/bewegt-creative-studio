@@ -133,6 +133,31 @@ assert.ok(avecImages.body.includes('/.netlify/images'), 'image locale non optimi
 assert.ok(avecImages.body.includes('srcset='), 'srcset absent');
 assert.ok(avecImages.body.includes('loading="lazy"'), 'chargement différé absent');
 
+// La galerie doit être branchée sur la visionneuse du site, sinon les photos ne s'agrandissent pas.
+const avecGalerie = parsePost('g.md', [
+  '---', 'title: G',
+  'gallery:',
+  '  - image: /img/blog/a.jpg',
+  '    alt: Alt seul',
+  '  - image: /img/blog/b.jpg',
+  '    caption: Avec légende',
+  '  - image: /evil/ailleurs.jpg',
+  '    alt: Hors dossier autorisé',
+  '---', '',
+].join('\n'));
+const media = renderEditorialMedia(avecGalerie);
+assert.strictEqual(avecGalerie.gallery.length, 2, 'image hors /img/blog non rejetée');
+assert.strictEqual((media.match(/design-card/g) || []).length, 2, 'photos non cliquables');
+assert.ok(media.includes('id="lightbox"'), 'conteneur de visionneuse absent');
+assert.ok(media.includes('data-caption="Alt seul"'), 'repli sur le texte alternatif absent');
+// Sans galerie, pas de conteneur inutile sur la page.
+assert.ok(!renderEditorialMedia(parsePost('v.md', '---\ntitle: V\n---\n')).includes('id="lightbox"'));
+
+// Les emojis doivent traverser la chaîne sans être abîmés (teintes, drapeaux, familles).
+const emoji = parsePost('e.md', '---\ntitle: Été 🌞\n---\nSalut 👋🏾 ❤️ 🇹🇬 👨‍👩‍👧‍👦\n');
+assert.strictEqual(emoji.title, 'Été 🌞');
+for (const e of ['👋🏾', '❤️', '🇹🇬', '👨‍👩‍👧‍👦']) assert.ok(emoji.body.includes(e), `emoji abîmé : ${e}`);
+
 // Un blog vide doit produire une page valide, pas planter.
 assert.ok(renderIndex([]).includes('No stories published yet'));
 

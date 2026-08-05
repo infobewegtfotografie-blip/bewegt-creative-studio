@@ -345,7 +345,7 @@ ${post.comments.length ? `      <ul class="comment-list">\n${list}\n      </ul>`
 function renderEditorialMedia(post) {
   const gallery = post.gallery.length
     ? `<section class="post-gallery" aria-label="Galerie photo">${post.gallery.map((item) => `
-      <figure><img src="${esc(cdn(item.image, 1200))}" alt="${esc(item.alt)}" loading="lazy" decoding="async">${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}
+      <figure class="design-card" data-full="${esc(cdn(item.image, 2000))}" data-caption="${esc(item.caption || item.alt)}"><img src="${esc(cdn(item.image, 1200))}" srcset="${esc(srcset(item.image, [480, 800, 1200]))}" sizes="(max-width: 780px) 90vw, 46vw" alt="${esc(item.alt)}" loading="lazy" decoding="async">${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}
     </section>`
     : '';
   const localVideo = post.localVideo
@@ -360,7 +360,17 @@ function renderEditorialMedia(post) {
   const cta = post.cta.label && post.cta.url
     ? `<aside class="post-cta"><p>${esc(post.cta.label)}</p><a href="${esc(post.cta.url)}"${post.cta.url.startsWith('https://') ? ' target="_blank" rel="noopener"' : ''}>Découvrir <span aria-hidden="true">→</span></a></aside>`
     : '';
-  return gallery + localVideo + audio + documents + cta;
+  // La visionneuse du site s'accroche à .design-card ; son conteneur doit être sur la page.
+  const lightbox = post.gallery.length
+    ? `<div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Fermer">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Photo précédente">&#10094;</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Photo suivante">&#10095;</button>
+    <p id="lightboxCaption"></p>
+  </div>`
+    : '';
+  return gallery + localVideo + audio + documents + cta + lightbox;
 }
 
 function renderPost(post, versions = {}) {
