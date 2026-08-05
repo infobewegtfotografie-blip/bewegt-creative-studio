@@ -73,8 +73,41 @@ const MARKDOWN_SANITIZE_OPTIONS = {
   allowProtocolRelative: false,
 };
 
-const renderMarkdown = (markdown) =>
-  optimiseImages(sanitizeHtml(marked.parse(String(markdown ?? '')), MARKDOWN_SANITIZE_OPTIONS));
+// Les notes et encarts sont transformés APRÈS le nettoyage : le balisage qu'ils
+// produisent est le nôtre, il n'a pas à passer devant le filtre destiné au texte.
+// Écrit `[^1]` dans le texte, `[^1]: la source` en fin d'article.
+function extraireNotes(html) {
+  const notes = [];
+  html = html.replace(/<p>\s*\[\^(\d+)\]:\s*([\s\S]*?)<\/p>/g, (_, numero, contenu) => {
+    notes.push({ numero: Number(numero), contenu: contenu.trim() });
+    return '';
+  });
+  html = html.replace(/\[\^(\d+)\]/g, (appel, numero) => {
+    const note = notes.find((n) => n.numero === Number(numero));
+    if (!note) return appel;
+    const bulle = note.contenu.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    return `<a class="note" href="#note-${numero}" id="appel-${numero}">${numero}<span class="bulle">${esc(bulle)}</span></a>`;
+  });
+  notes.sort((a, b) => a.numero - b.numero);
+  return { html, notes };
+}
+
+// Encart : `:::encart Titre` … `:::` sur des lignes seules.
+const extraireEncarts = (html) =>
+  html.replace(
+    /<p>:::encart\s*([\s\S]*?)<\/p>([\s\S]*?)<p>:::<\/p>/g,
+    (_, titre, contenu) => `<aside class="encart">${titre.trim() ? `<h3>${titre.trim()}</h3>` : ''}${contenu}</aside>`
+  );
+
+const tempsLecture = (markdown) =>
+  Math.max(1, Math.round(String(markdown ?? '').split(/\s+/).filter(Boolean).length / 200));
+
+// Renvoie { html, notes } : les notes servent à construire la section Sources.
+function renderMarkdown(markdown) {
+  const propre = sanitizeHtml(marked.parse(String(markdown ?? '')), MARKDOWN_SANITIZE_OPTIONS);
+  const { html, notes } = extraireNotes(extraireEncarts(propre));
+  return { html: optimiseImages(html), notes };
+}
 
 const safeMediaPath = (value, extensions) => {
   const raw = String(value ?? '').trim();
@@ -104,6 +137,7 @@ function parsePost(filename, raw) {
     date: isoDate(data.date, filename.slice(0, 10)),
     summary: data.summary || '',
     cover: data.cover || FALLBACK_COVER,
+    aCouverture: Boolean(data.cover),
     coverAlt: data.coverAlt || title,
     draft: data.draft === true,
     lang: ['en', 'fr', 'de'].includes(data.lang) ? data.lang : 'en',
@@ -141,7 +175,11 @@ function parsePost(filename, raw) {
         date: isoDate(c.date, ''),
         message: String(c.message),
       })),
-    body: renderMarkdown(content),
+    // Surtitre de série, encadré de suite, bibliographie.
+    next: String(data.next || ''),
+    readMore: (Array.isArray(data.readMore) ? data.readMore : []).map((r) => String(r || '')).filter(Boolean),
+    tempsLecture: tempsLecture(content),
+    ...(() => { const r = renderMarkdown(content); return { body: r.html, notes: r.notes }; })(),
   };
 }
 
@@ -373,26 +411,74 @@ function renderEditorialMedia(post) {
   return gallery + localVideo + audio + documents + cta + lightbox;
 }
 
+// Les mentions de l'en-tête suivent la langue de l'ARTICLE, pas celle du visiteur :
+// un texte français garde « Par … · Lecture 7 min » même si le site est en allemand.
+const MENTIONS = {
+  fr: { par: 'Par', lecture: (n) => `Lecture ${n} min`, sources: 'Sources', plusLoin: 'Pour aller plus loin', suite: 'Dans le prochain article' },
+  en: { par: 'By', lecture: (n) => `${n} min read`, sources: 'Sources', plusLoin: 'Further reading', suite: 'In the next article' },
+  de: { par: 'Von', lecture: (n) => `${n} Min. Lesezeit`, sources: 'Quellen', plusLoin: 'Zum Weiterlesen', suite: 'Im nächsten Beitrag' },
+};
+
+function renderAppareil(post, mots) {
+  const sources = post.notes.length
+    ? `    <h2>${esc(mots.sources)}</h2>
+    <ol class="article-sources">
+${post.notes.map((n) => `      <li id="note-${n.numero}">${n.contenu} <a class="retour" href="#appel-${n.numero}" aria-label="Revenir au texte">↩</a></li>`).join('\n')}
+    </ol>`
+    : '';
+  const plusLoin = post.readMore.length
+    ? `    <h2>${esc(mots.plusLoin)}</h2>
+    <ul class="article-bibliographie">
+${post.readMore.map((r) => `      <li>${renderMarkdown(r).html.replace(/^<p>|<\/p>\s*$/g, '')}</li>`).join('\n')}
+    </ul>`
+    : '';
+  return sources || plusLoin
+    ? `\n  <section class="article-appareil">\n${sources}${sources && plusLoin ? '\n' : ''}${plusLoin}\n  </section>`
+    : '';
+}
+
 function renderPost(post, versions = {}) {
-  return shell({
-    title: post.title,
-    description: post.summary,
-    url: post.url,
-    image: post.cover,
-    main: `  <section class="page-hero post-hero">
+  const mots = MENTIONS[post.lang] || MENTIONS.en;
+  const meta = `<p class="article-meta">${esc(mots.par)} ${esc(post.author)} · <time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time> · ${esc(mots.lecture(post.tempsLecture))}</p>`;
+  const surtitre = post.category ? `<p class="eyebrow">${esc(post.category)}</p>` : '';
+
+  // Avec une photo de couverture : article porté par l'image.
+  // Sans : ouverture sobre, le texte commence tout de suite.
+  const enTete = post.aCouverture
+    ? `  <section class="page-hero post-hero">
     <img src="${esc(cdn(post.cover, 1600))}" srcset="${esc(srcset(post.cover, [800, 1200, 1600, 2000]))}" sizes="100vw" width="1600" height="1067" alt="${esc(post.coverAlt)}">
     <div class="hero-overlay"></div>
     <div class="page-hero-content">
-      <p class="eyebrow">${post.category ? `${esc(post.category)} · ` : ''}<time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time> · ${esc(post.author)}</p>
+      ${surtitre}
       <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
       ${post.summary ? `<p lang="${esc(post.lang)}">${esc(post.summary)}</p>` : ''}
     </div>
   </section>
 
-  <article class="post-body" lang="${esc(post.lang)}"${
+  <div class="article-tete article-tete-sous-image">${meta}</div>`
+    : `  <header class="article-tete article-tete-sobre">
+    ${surtitre}
+    <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
+    ${post.summary ? `<p class="article-chapo" lang="${esc(post.lang)}">${esc(post.summary)}</p>` : ''}
+    ${meta}
+  </header>`;
+
+  const suite = post.next
+    ? `\n  <aside class="article-suite"><b>${esc(mots.suite)}</b>${esc(post.next)}</aside>`
+    : '';
+
+  return shell({
+    title: post.title,
+    description: post.summary,
+    url: post.url,
+    image: post.cover,
+    bodyClass: post.aCouverture ? '' : 'article-sobre',
+    main: `${enTete}
+
+  <article class="post-body article-texte" lang="${esc(post.lang)}"${
       Object.keys(versions).length ? ` data-translations="${esc(JSON.stringify(versions))}"` : ''
     }>
-${videoEmbed(post.video, post.title)}${post.body}${renderEditorialMedia(post)}
+${videoEmbed(post.video, post.title)}${post.body}${renderEditorialMedia(post)}${suite}${renderAppareil(post, mots)}
   </article>
 
 ${renderComments(post)}
@@ -447,7 +533,7 @@ function buildLegal() {
         title: data.title || f,
         summary: data.summary || '',
         eyebrow: data.eyebrow || '',
-        body: renderMarkdown(content),
+        body: renderMarkdown(content).html,
       };
     });
 

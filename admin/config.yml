@@ -69,8 +69,22 @@ collections:
           name: body,
           label: Article,
           widget: markdown,
-          hint: 'Utilise les titres, gras, italique, liens, listes, citations et images. Les emojis peuvent être collés directement : ✨ 📷 🎬 ❤️',
+          hint: 'Titres, gras, italique, liens, listes, images, emojis. — Note de source : écris [^1] dans le texte et, en fin d''article, [^1]: la référence ; la section Sources se construit toute seule. — Encart : une ligne :::encart Titre, ton texte, puis une ligne :::',
         }
+      - {
+          name: next,
+          label: Dans le prochain article,
+          widget: text,
+          required: false,
+          hint: 'Encadré de fin. Laisse vide s''il n''y a pas de suite annoncée.',
+        }
+      - name: readMore
+        label: Pour aller plus loin
+        label_singular: Référence
+        widget: list
+        required: false
+        hint: 'Une ligne par ouvrage. Le gras et l''italique fonctionnent : **Auteur**, *Titre*, éditeur, année.'
+        field: { name: item, label: Référence, widget: string }
       - name: gallery
         label: Galerie photo
         label_singular: Photo

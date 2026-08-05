@@ -47,7 +47,7 @@ const hostileMarkdown = renderMarkdown(`
 <svg onload="alert('svg')"><circle></circle></svg>
 
 [Lien légitime](https://bewegtcreative.com/blog/)
-`);
+`).html;
 assert.ok(hostileMarkdown.includes('<h1>Titre sûr</h1>'), 'titre Markdown supprimé');
 assert.ok(hostileMarkdown.includes('href="https://bewegtcreative.com/blog/"'), 'lien HTTPS légitime supprimé');
 assert.ok(hostileMarkdown.includes('alt="Photo"'), 'attribut alt légitime supprimé');
@@ -157,6 +157,42 @@ assert.ok(!renderEditorialMedia(parsePost('v.md', '---\ntitle: V\n---\n')).inclu
 const emoji = parsePost('e.md', '---\ntitle: Été 🌞\n---\nSalut 👋🏾 ❤️ 🇹🇬 👨‍👩‍👧‍👦\n');
 assert.strictEqual(emoji.title, 'Été 🌞');
 for (const e of ['👋🏾', '❤️', '🇹🇬', '👨‍👩‍👧‍👦']) assert.ok(emoji.body.includes(e), `emoji abîmé : ${e}`);
+
+// MISE EN PAGE ÉDITORIALE — notes de source, encart, en-tête adaptatif.
+const editorial = parsePost('e.md', [
+  '---', 'title: Niepce', 'lang: fr', 'category: Série — 1',
+  'next: La suite arrive.',
+  'readMore:', '  - "**Batchen**, *Burning with Desire*"',
+  '---', '',
+  'Conservée à Austin.[^1]', '',
+  ':::encart Analyse de 2002', '', 'Des microgouttelettes.', '', ':::', '',
+  'Fin du texte.', '',
+  '[^1]: Harry Ransom Center, notice. [hrc](https://hrc.utexas.edu/)',
+].join('\n'));
+assert.strictEqual(editorial.notes.length, 1, 'note non extraite');
+assert.ok(editorial.body.includes('class="note" href="#note-1" id="appel-1"'), 'appel de note absent');
+assert.ok(editorial.body.includes('class="bulle"'), 'bulle de survol absente');
+assert.ok(!editorial.body.includes('[^1]:'), 'la définition de note reste dans le texte');
+assert.ok(editorial.body.includes('<aside class="encart">'), 'encart non transformé');
+assert.ok(editorial.body.includes('<h3>Analyse de 2002</h3>'), 'titre d encart absent');
+assert.ok(editorial.tempsLecture >= 1, 'temps de lecture non calculé');
+
+const pageEditoriale = renderPost(editorial);
+assert.ok(pageEditoriale.includes('<li id="note-1">'), 'source non listée');
+assert.ok(pageEditoriale.includes('href="#appel-1"'), 'retour au texte absent');
+assert.ok(pageEditoriale.includes('Série — 1'), 'surtitre absent');
+assert.ok(pageEditoriale.includes('Lecture'), 'mention de lecture absente en français');
+assert.ok(pageEditoriale.includes('article-suite'), 'encadré de suite absent');
+assert.ok(pageEditoriale.includes('article-bibliographie'), 'bibliographie absente');
+
+// Sans couverture : ouverture sobre. Avec : grande image.
+assert.ok(pageEditoriale.includes('article-tete-sobre'), 'ouverture sobre attendue sans couverture');
+assert.ok(!pageEditoriale.includes('post-hero'), 'grande image affichée alors qu il n y a pas de couverture');
+const avecCouv = renderPost(parsePost('c.md', '---\ntitle: T\ncover: /img/blog/a.jpg\n---\nTexte.\n'));
+assert.ok(avecCouv.includes('post-hero'), 'grande image attendue avec une couverture');
+
+// La langue de l'article commande ses mentions, pas celle du visiteur.
+assert.ok(renderPost(parsePost('d.md', '---\ntitle: T\nlang: de\n---\nText.\n')).includes('Lesezeit'), 'mentions allemandes absentes');
 
 // Un blog vide doit produire une page valide, pas planter.
 assert.ok(renderIndex([]).includes('No stories published yet'));
