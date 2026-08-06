@@ -3,16 +3,38 @@ title: Huit heures de soleil sur un toit de Bourgogne
 date: 2026-08-03
 lang: fr
 group: niepce
+summary: Comment la première photographie a inventé un problème que nous n'avons
+  toujours pas résolu
+author: BEWEGT CREATIVE STUDIO
 category: L'art de la photographie — 1
-summary: Comment la première photographie a inventé un problème que nous n'avons toujours pas résolu
-coverAlt: "Point de vue du Gras, la plus ancienne photographie connue, Nicéphore Niépce, 1827"
+coverAlt: Point de vue du Gras, la plus ancienne photographie connue, Nicéphore
+  Niépce, 1827
 draft: false
-next: Comment un appareil qui tenait dans une poche a changé ce que les photographes regardaient — et pourquoi la rue n'est devenue un sujet qu'à partir du moment où on a pu y marcher sans trépied.
+next: Comment un appareil qui tenait dans une poche a changé ce que les
+  photographes regardaient — et pourquoi la rue n'est devenue un sujet qu'à
+  partir du moment où on a pu y marcher sans trépied.
 readMore:
-  - '**Geoffrey Batchen**, *Burning with Desire: The Conception of Photography*, MIT Press, 1997. Pourquoi l''idée de photographie surgit simultanément chez plusieurs inventeurs vers 1800.'
-  - '**Helmut et Alison Gernsheim**, *The History of Photography*, Oxford University Press, 1955 (éd. révisée 1969). L''ouvrage fondateur, par celui-là même qui a retrouvé la plaque.'
-  - '**Michel Frizot** (dir.), *Nouvelle histoire de la photographie*, Bordas/Adam Biro, 1994. La grande synthèse francophone.'
-  - '**Musée Nicéphore Niépce**, Chalon-sur-Saône. Le fonds français de référence sur l''inventeur.'
+  - "**Geoffrey Batchen**, *Burning with Desire: The Conception of Photography*,
+    MIT Press, 1997. Pourquoi l'idée de photographie surgit simultanément chez
+    plusieurs inventeurs vers 1800."
+  - "**Helmut et Alison Gernsheim**, *The History of Photography*, Oxford
+    University Press, 1955 (éd. révisée 1969). L'ouvrage fondateur, par celui-là
+    même qui a retrouvé la plaque."
+  - "**Michel Frizot** (dir.), *Nouvelle histoire de la photographie*,
+    Bordas/Adam Biro, 1994. La grande synthèse francophone."
+  - "**Musée Nicéphore Niépce**, Chalon-sur-Saône. Le fonds français de
+    référence sur l'inventeur."
+comments:
+  - message: Merci pour cet excellent article qui nous plonge dans l’univers de la
+      photographie depuis sa genèse.
+    name: Franck
+    date: 2026-08-06
+  - message: >+
+      Un excellent article. Merci pour le travail que vous faite pour nous
+      informer
+
+    name: Kwamivi
+    date: 2026-08-02
 ---
 
 Il faut d'abord dire à quoi ça ressemble, parce que c'est décevant.
