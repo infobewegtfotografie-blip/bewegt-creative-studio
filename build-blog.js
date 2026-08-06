@@ -102,6 +102,8 @@ const extraireEncarts = (html) =>
 const tempsLecture = (markdown) =>
   Math.max(1, Math.round(String(markdown ?? '').split(/\s+/).filter(Boolean).length / 200));
 
+const nombreMots = (markdown) => String(markdown ?? '').split(/\s+/).filter(Boolean).length;
+
 // Renvoie { html, notes } : les notes servent à construire la section Sources.
 function renderMarkdown(markdown) {
   const propre = sanitizeHtml(marked.parse(String(markdown ?? '')), MARKDOWN_SANITIZE_OPTIONS);
@@ -179,6 +181,7 @@ function parsePost(filename, raw) {
     next: String(data.next || ''),
     readMore: (Array.isArray(data.readMore) ? data.readMore : []).map((r) => String(r || '')).filter(Boolean),
     tempsLecture: tempsLecture(content),
+    nombreMots: nombreMots(content),
     ...(() => {
       const r = renderMarkdown(content);
       const premiere = (r.html.match(/<img[^>]+src="\/\.netlify\/images\?url=([^&"]+)/) || [])[1];
@@ -273,9 +276,16 @@ const FOOTER = `
 <script src="/consent.js" defer></script>
 <script src="/script.js" defer></script>`;
 
-function shell({ title, description, url, image, main, bodyClass = '' }) {
+function shell({ title, description, url, image, main, bodyClass = '', lang = 'en', alternates = {}, structuredData = null }) {
+  const locale = { fr: 'fr_FR', de: 'de_DE', en: 'en_US' }[lang] || 'en_US';
+  const alternateLinks = Object.entries(alternates)
+    .map(([code, href]) => `  <link rel="alternate" hreflang="${esc(code)}" href="${esc(SITE + href)}">`)
+    .join('\n');
+  const jsonLd = structuredData
+    ? `\n  <script type="application/ld+json">${JSON.stringify(structuredData).replace(/</g, '\\u003c')}</script>`
+    : '';
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${esc(lang)}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -288,17 +298,19 @@ function shell({ title, description, url, image, main, bodyClass = '' }) {
 <meta name="description" content="${esc(description)}">
   <meta name="author" content="BEWEGT CREATIVE STUDIO">
   <link rel="canonical" href="${esc(SITE + url)}">
+${alternateLinks}
   <meta property="og:type" content="article">
   <meta property="og:title" content="${esc(title)} — BEWEGT CREATIVE STUDIO">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${esc(SITE + url)}">
   <meta property="og:site_name" content="BEWEGT CREATIVE STUDIO">
   <meta property="og:image" content="${esc(SITE + image)}">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="${locale}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)} — BEWEGT CREATIVE STUDIO">
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${esc(SITE + image)}">
+${jsonLd}
 <link rel="stylesheet" href="/style.css">
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
@@ -481,6 +493,26 @@ function renderPost(post, versions = {}) {
     url: post.url,
     image: post.partage,
     bodyClass: post.aCouverture ? '' : 'article-sobre',
+    lang: post.lang,
+    alternates: versions,
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.summary,
+      image: [SITE + post.partage],
+      datePublished: post.date,
+      dateModified: post.date,
+      inLanguage: post.lang,
+      articleSection: post.category || 'Journal',
+      wordCount: post.nombreMots,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': SITE + post.url },
+      author: { '@type': 'Organization', name: post.author, url: SITE },
+      publisher: {
+        '@type': 'Organization', name: 'BEWEGT CREATIVE STUDIO', url: SITE,
+        logo: { '@type': 'ImageObject', url: SITE + '/img/brand/bewegt-logo-horizontal-black.png' },
+      },
+    },
     main: `${enTete}
 
   <article class="post-body article-texte" lang="${esc(post.lang)}"${
