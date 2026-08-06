@@ -19,6 +19,16 @@ Am 19. August 1839 stellt der Astronom und Physiker François Arago in einem üb
 
 Arago selbst hatte Ägypten als das eigentliche Bewährungsfeld dieser neuen Technik bezeichnet und öffentlich bedauert, dass es die Daguerreotypie nicht schon zur Zeit von Bonapartes Ägyptenexpedition gegeben habe: „Jeder wird sich die außerordentlichen Vorteile vorstellen können, die man während der Ägyptenexpedition aus einem so genauen und so schnellen Vervielfältigungsmittel hätte ziehen können“, erklärte er vor der Akademie.[^1] Die zwischen 1809 und 1829 erschienenen vierundzwanzig Bände der *Description de l'Égypte* — aus den Arbeiten der Gelehrten hervorgegangen, die Bonaparte begleitet hatten — hatten in Frankreich bereits eine dauerhafte Faszination für das Niltal genährt. Es überrascht daher kaum, dass afrikanischer Boden das Licht der Daguerreotypie vor fast jedem anderen Kontinent außerhalb Europas empfing.
 
+<figure>
+<img src="/img/blog/chambre-daguerreotype-susse-freres-1839.jpg" alt="Fotokamera von Susse Frères aus dem Jahr 1839 mit Holzkasten und Messingobjektiv">
+<figcaption>Fotokamera <em>Susse Frères</em>, 1839. Wikimedia Commons — gemeinfrei. Dieser Typ Holzkamera mit Messingobjektiv wurde von den ersten Daguerreotypisten verwendet.</figcaption>
+</figure>
+
+<figure>
+<img src="/img/blog/portrait-louis-daguerre-1844.jpg" alt="Daguerreotypie-Porträt von Louis-Jacques-Mandé Daguerre um 1844">
+<figcaption>Anonym, <em>Louis-Jacques-Mandé Daguerre</em>, Daguerreotypie, um 1844. The Metropolitan Museum of Art, New York — gemeinfrei, Open Access.</figcaption>
+</figure>
+
 ## Der Auftrag von Lerebours und die Abreise nach Alexandria
 
 Der Pariser Optiker Noël-Marie Paymal Lerebours, der die erste große fotografische Sammlung der Denkmäler der Welt zusammenstellen wollte, stattet mehrere reisende Amateure mit Kameras und Chemikalien aus. Er beauftragt den Orientmaler Horace Vernet, damals Direktor der Académie de France in Rom, sowie dessen Neffen Frédéric Goupil-Fesquet (1817-1878), der Ansichten anfertigen soll, die die Skizzen seines Onkels ergänzen.[^1][^2] Die beiden Männer verlassen Marseille am 21. Oktober 1839 — kaum zwei Monate nach Aragos Vorstellung —, machen Zwischenstationen in Italien, auf Malta und in Griechenland, bevor sie am 4. November 1839 in Alexandria anlegen.
@@ -70,6 +80,11 @@ Anders als die Platten von Vernet, Goupil-Fesquet und Joly de Lotbinière ist ei
 </figure>
 
 ## Nach Süden: die Daguerreotypie erreicht die Kapkolonie
+
+<figure>
+<img src="/img/blog/felouque-jules-itier-nil-1845.jpg" alt="Daguerreotypie der Feluke von Jules Itier auf dem Nil um 1845-1846">
+<figcaption>Jules Itier, <em>Monsieur Itier's Cange Under Sail on the Nile</em>, Daguerreotypie, 1845-1846. The Metropolitan Museum of Art, New York — gemeinfrei, Open Access.</figcaption>
+</figure>
 
 Es dauert noch sieben Jahre, bis die Daguerreotypie den afrikanischen Äquator überquert. Nach Angaben der Historikerin Patricia Hayes (University of the Western Cape) „reist das Verfahren rasch über diese flüssige Grenze“, die von den kolonialen Seehandelsrouten gebildet wird, und erreicht im September 1846 über Mauritius Durban.[^4][^5] Anders als Talbots englische Kalotypie war das französische Patent durch kein Monopol geschützt und verbreitete sich nach 1839 ungehindert in den französischsprachigen Kolonien und ihren Handelseinflusszonen.
 

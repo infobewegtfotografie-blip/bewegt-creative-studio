@@ -19,6 +19,16 @@ Le 19 août 1839, dans une salle bondée de l'Institut de France, l'astronome et
 
 Arago lui-même avait désigné l'Égypte comme le terrain d'élection de cette nouvelle technique, regrettant publiquement que la daguerréotypie n'ait pas existé au temps de l'expédition de Bonaparte : « Chacun se représentera les avantages extraordinaires que l'on aurait pu tirer, dans l'expédition d'Égypte, d'un moyen de reproduction aussi exact et aussi rapide », déclarait-il devant l'Académie.[^1] La publication, entre 1809 et 1829, des vingt-quatre volumes de la *Description de l'Égypte* — issue des travaux des savants ayant accompagné Bonaparte — avait déjà nourri en France une fascination durable pour la vallée du Nil. Il n'est donc pas surprenant que le sol africain ait reçu la lumière du daguerréotype avant presque tout autre continent hors d'Europe.
 
+<figure>
+<img src="/img/blog/chambre-daguerreotype-susse-freres-1839.jpg" alt="Chambre photographique Susse Frères de 1839, boîte de bois et objectif en laiton">
+<figcaption>Chambre photographique <em>Susse Frères</em>, 1839. Wikimedia Commons — domaine public. Ce type d'appareil, une boîte de bois munie d'un objectif en laiton, fut utilisé par les premiers daguerréotypistes.</figcaption>
+</figure>
+
+<figure>
+<img src="/img/blog/portrait-louis-daguerre-1844.jpg" alt="Daguerréotype représentant Louis-Jacques-Mandé Daguerre vers 1844">
+<figcaption>Anonyme, <em>Louis-Jacques-Mandé Daguerre</em>, daguerréotype, vers 1844. The Metropolitan Museum of Art, New York — domaine public, Open Access.</figcaption>
+</figure>
+
 ## La commande de Lerebours et le départ pour Alexandrie
 
 L'opticien parisien Noël-Marie Paymal Lerebours, désireux de constituer le premier grand recueil photographique des monuments du monde, équipe plusieurs voyageurs amateurs d'appareils et de produits chimiques. Il confie une mission au peintre orientaliste Horace Vernet, alors directeur de l'Académie de France à Rome, et à son neveu Frédéric Goupil-Fesquet (1817-1878), chargé de réaliser des vues destinées à compléter les esquisses de son oncle.[^1][^2] Les deux hommes quittent Marseille le 21 octobre 1839 — soit à peine deux mois après la présentation d'Arago —, font escale en Italie, à Malte puis en Grèce, avant d'accoster à Alexandrie le 4 novembre 1839.
@@ -70,6 +80,11 @@ Contrairement aux plaques de Vernet, Goupil-Fesquet et Joly de Lotbinière, une 
 </figure>
 
 ## Vers le sud : l'arrivée du daguerréotype dans la colonie du Cap
+
+<figure>
+<img src="/img/blog/felouque-jules-itier-nil-1845.jpg" alt="Daguerréotype de la felouque de Jules Itier voguant sur le Nil vers 1845-1846">
+<figcaption>Jules Itier, <em>Monsieur Itier's Cange Under Sail on the Nile</em>, daguerréotype, 1845-1846. The Metropolitan Museum of Art, New York — domaine public, Open Access.</figcaption>
+</figure>
 
 Il faudra encore sept années pour que la daguerréotypie franchisse l'équateur africain. Selon l'historienne Patricia Hayes (Université du Cap occidental), le procédé « voyage rapidement à travers cette frontière liquide » que constituent les routes maritimes coloniales, atteignant Durban via l'île Maurice en septembre 1846.[^4][^5] Le brevet français, contrairement au calotype anglais de Talbot, n'étant protégé par aucun monopole, il se diffuse sans entrave après 1839 dans l'ensemble des colonies francophones et de leurs zones d'influence commerciale.
 
