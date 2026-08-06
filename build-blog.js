@@ -472,10 +472,9 @@ function renderPost(post, versions = {}) {
       ${surtitre}
       <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
       ${post.summary ? `<p lang="${esc(post.lang)}">${esc(post.summary)}</p>` : ''}
+      ${meta}
     </div>
-  </section>
-
-  <div class="article-tete article-tete-sous-image">${meta}</div>`
+  </section>`
     : `  <header class="article-tete article-tete-sobre">
     ${surtitre}
     <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
