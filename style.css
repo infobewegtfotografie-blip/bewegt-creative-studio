@@ -55,7 +55,7 @@
 .case-download:hover{color:var(--gold);padding-left:8px;padding-right:8px}
 .case-download span{font-weight:800}
 .case-download small{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-align:right}
-.case-production-media video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#081d35;border-radius:10px;box-shadow:0 28px 70px rgba(42,33,27,.14)}
+.case-production-media video{display:block;width:min(100%,576px);height:auto;aspect-ratio:6/5;object-fit:contain;margin-inline:auto;background:#081d35;border-radius:10px;box-shadow:0 28px 70px rgba(42,33,27,.14)}
 .case-production-media p{margin-top:14px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .case-cta{padding:clamp(90px,12vw,170px) 24px;text-align:center}
 .case-cta h2{font:850 clamp(42px,7vw,92px)/1 var(--title);max-width:920px;margin:0 auto 28px}
