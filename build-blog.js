@@ -102,6 +102,8 @@ const extraireEncarts = (html) =>
 const tempsLecture = (markdown) =>
   Math.max(1, Math.round(String(markdown ?? '').split(/\s+/).filter(Boolean).length / 200));
 
+const nombreMots = (markdown) => String(markdown ?? '').split(/\s+/).filter(Boolean).length;
+
 // Renvoie { html, notes } : les notes servent à construire la section Sources.
 function renderMarkdown(markdown) {
   const propre = sanitizeHtml(marked.parse(String(markdown ?? '')), MARKDOWN_SANITIZE_OPTIONS);
@@ -179,6 +181,7 @@ function parsePost(filename, raw) {
     next: String(data.next || ''),
     readMore: (Array.isArray(data.readMore) ? data.readMore : []).map((r) => String(r || '')).filter(Boolean),
     tempsLecture: tempsLecture(content),
+    nombreMots: nombreMots(content),
     ...(() => {
       const r = renderMarkdown(content);
       const premiere = (r.html.match(/<img[^>]+src="\/\.netlify\/images\?url=([^&"]+)/) || [])[1];
@@ -273,17 +276,16 @@ const FOOTER = `
 <script src="/consent.js" defer></script>
 <script src="/script.js" defer></script>`;
 
-function shell({ title, description, url, image, main, bodyClass = '', lang = 'en', author = '', publishDate = '', modifyDate = '', versions = {} }) {
-  const ogLocaleMap = { fr: 'fr_FR', de: 'de_DE', en: 'en_US' };
-  const ogLocale = ogLocaleMap[lang] || 'en_US';
-  const hreflangAlternates = Object.entries(versions).length
-    ? Object.entries(versions).map(([l, u]) => `  <link rel="alternate" hreflang="${l}" href="${esc(SITE + u)}">`).join('\n') + '\n'
-    : '';
-  const schemaLD = author && publishDate
-    ? `\n<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${esc(title)}","description":"${esc(description)}","image":"${esc(SITE + image)}","author":{"@type":"Organization","name":"${esc(author)}"},"datePublished":"${esc(publishDate)}"${modifyDate ? `,"dateModified":"${esc(modifyDate)}"` : ''},"publisher":{"@type":"Organization","name":"BEWEGT CREATIVE STUDIO","logo":{"@type":"ImageObject","url":"${esc(SITE + '/img/brand/bewegt-logo-horizontal-ivory.png')}"}}}</script>`
+function shell({ title, description, url, image, main, bodyClass = '', lang = 'en', alternates = {}, structuredData = null }) {
+  const locale = { fr: 'fr_FR', de: 'de_DE', en: 'en_US' }[lang] || 'en_US';
+  const alternateLinks = Object.entries(alternates)
+    .map(([code, href]) => `  <link rel="alternate" hreflang="${esc(code)}" href="${esc(SITE + href)}">`)
+    .join('\n');
+  const jsonLd = structuredData
+    ? `\n  <script type="application/ld+json">${JSON.stringify(structuredData).replace(/</g, '\\u003c')}</script>`
     : '';
   return `<!DOCTYPE html>
-<html lang="${lang}">
+<html lang="${esc(lang)}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -296,18 +298,19 @@ function shell({ title, description, url, image, main, bodyClass = '', lang = 'e
 <meta name="description" content="${esc(description)}">
   <meta name="author" content="BEWEGT CREATIVE STUDIO">
   <link rel="canonical" href="${esc(SITE + url)}">
-${hreflangAlternates}  <meta property="og:type" content="article">
+${alternateLinks}
+  <meta property="og:type" content="article">
   <meta property="og:title" content="${esc(title)} — BEWEGT CREATIVE STUDIO">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${esc(SITE + url)}">
   <meta property="og:site_name" content="BEWEGT CREATIVE STUDIO">
   <meta property="og:image" content="${esc(SITE + image)}">
-  <meta property="og:locale" content="${ogLocale}">
+  <meta property="og:locale" content="${locale}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)} — BEWEGT CREATIVE STUDIO">
   <meta name="twitter:description" content="${esc(description)}">
-${schemaLD}
   <meta name="twitter:image" content="${esc(SITE + image)}">
+${jsonLd}
 <link rel="stylesheet" href="/style.css">
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
@@ -469,10 +472,9 @@ function renderPost(post, versions = {}) {
       ${surtitre}
       <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
       ${post.summary ? `<p lang="${esc(post.lang)}">${esc(post.summary)}</p>` : ''}
+      ${meta}
     </div>
-  </section>
-
-  <div class="article-tete article-tete-sous-image">${meta}</div>`
+  </section>`
     : `  <header class="article-tete article-tete-sobre">
     ${surtitre}
     <h1 lang="${esc(post.lang)}">${esc(post.title)}</h1>
@@ -491,9 +493,25 @@ function renderPost(post, versions = {}) {
     image: post.partage,
     bodyClass: post.aCouverture ? '' : 'article-sobre',
     lang: post.lang,
-    author: post.author,
-    publishDate: post.date,
-    versions,
+    alternates: versions,
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.summary,
+      image: [SITE + post.partage],
+      datePublished: post.date,
+      dateModified: post.date,
+      inLanguage: post.lang,
+      articleSection: post.category || 'Journal',
+      wordCount: post.nombreMots,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': SITE + post.url },
+      author: { '@type': 'Organization', name: post.author, url: SITE },
+      publisher: {
+        '@type': 'Organization', name: 'BEWEGT CREATIVE STUDIO', url: SITE,
+        logo: { '@type': 'ImageObject', url: SITE + '/img/brand/bewegt-logo-horizontal-black.png' },
+      },
+    },
     main: `${enTete}
 
   <article class="post-body article-texte" lang="${esc(post.lang)}"${
