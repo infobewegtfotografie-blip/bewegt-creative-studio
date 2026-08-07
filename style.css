@@ -1717,6 +1717,18 @@ details{border-color:rgba(42,33,27,.12)}
 .article-texte h2{clear:both;counter-increment:article-section;position:relative;font-family:var(--quote);font-size:clamp(28px,3vw,40px);font-weight:560;font-style:italic;line-height:1.08;letter-spacing:-.015em;text-transform:none;margin-top:42px;padding-top:18px;text-wrap:balance;border-top:1px solid rgba(17,16,14,.14)}
 .article-texte h2::before{content:counter(article-section) ". ";display:inline;color:var(--ink)}
 .article-texte figure{float:right;clear:right;width:320px;margin:10px 0 30px 46px;transform:none}
+/* Une figure flotte pour laisser du texte s'enrouler autour d'elle. Sans texte de
+   part et d'autre (deux photos à la suite, une photo collée à un titre ou à un
+   encart), la colonne de gauche reste vide pendant que l'image occupe la droite —
+   d'où un grand vide visuel. Dans ces cas, la figure repasse pleine largeur. */
+.article-texte figure+figure,
+.article-texte figure:has(+figure),
+.article-texte figure:has(+h2),
+.article-texte h2+figure,
+.article-texte figure:has(+aside.encart),
+.article-texte aside.encart+figure{
+  float:none;clear:both;width:100%;max-width:520px;margin:24px auto 32px;
+}
 /* Les diagrammes SVG sont pleine largeur : jamais coincés à côté d'une figure flottante. */
 .article-texte>svg{clear:both;width:100%;display:block}
 .article-texte figure img{margin:0;border-radius:0;max-height:520px;object-fit:contain;background:#f0ede7}
