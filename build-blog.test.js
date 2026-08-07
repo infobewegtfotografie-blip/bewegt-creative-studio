@@ -44,7 +44,7 @@ const hostileMarkdown = renderMarkdown(`
 <script>alert('script')</script>
 <img src="/img/blog/photo.png" alt="Photo" onerror="alert('event')">
 [Lien piégé](javascript:alert('url'))
-<svg onload="alert('svg')"><circle></circle></svg>
+<svg onload="alert('svg')"><circle cx="5" cy="5" r="4" fill="red"></circle><script>alert('svg-script')</script><foreignObject><body onload="alert(1)"></body></foreignObject><a href="javascript:alert(1)">clic</a></svg>
 
 [Lien légitime](https://bewegtcreative.com/blog/)
 `).html;
@@ -55,7 +55,13 @@ assert.ok(hostileMarkdown.includes('/.netlify/images'), 'optimisation des images
 assert.ok(!hostileMarkdown.includes('<script'), 'balise script conservée');
 assert.ok(!hostileMarkdown.includes('onerror'), 'gestionnaire événementiel conservé');
 assert.ok(!/href=["']\s*javascript:/i.test(hostileMarkdown), 'lien javascript actif conservé');
-assert.ok(!hostileMarkdown.includes('<svg'), 'SVG actif conservé');
+// Les schémas SVG sont un contenu éditorial voulu (diagrammes du procédé) : la balise
+// elle-même est autorisée, mais seulement pour des primitives géométriques inertes.
+assert.ok(hostileMarkdown.includes('<circle'), 'primitive SVG légitime supprimée');
+assert.ok(!hostileMarkdown.includes('onload'), 'gestionnaire événementiel SVG conservé');
+assert.ok(!hostileMarkdown.includes('<foreignObject') && !hostileMarkdown.includes('<foreignobject'), 'foreignObject conservé dans un SVG');
+// Le SVG contient aussi <a href="javascript:...">clic</a> : schéma déjà couvert par
+// l'assertion générale contre les liens javascript: ci-dessus.
 
 // Les médias éditoriaux sont guidés et limités aux fichiers téléversés dans le blog.
 const richPost = parsePost('media.md', `---

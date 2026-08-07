@@ -62,11 +62,25 @@ function optimiseImages(html) {
 
 // Le CMS autorise le Markdown, pas du code exécutable. `marked` accepte aussi
 // le HTML brut ; on impose donc une frontière de contenu avant publication.
+// SVG : primitives géométriques uniquement (pas de <script>, <foreignObject>,
+// ni d'attributs événementiels) — de quoi dessiner des schémas, jamais exécuter du code.
+const SVG_TAGS = ['svg', 'defs', 'marker', 'g', 'path', 'line', 'circle', 'rect', 'text'];
+const SVG_GEOMETRY_ATTRS = ['fill', 'stroke', 'stroke-width', 'stroke-dasharray', 'opacity', 'transform'];
+
 const MARKDOWN_SANITIZE_OPTIONS = {
-  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'figure', 'figcaption']),
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'figure', 'figcaption'], SVG_TAGS),
   allowedAttributes: {
     a: ['href', 'name', 'target', 'rel', 'title'],
     img: ['src', 'srcset', 'sizes', 'alt', 'title', 'width', 'height', 'loading', 'decoding'],
+    svg: ['viewbox', 'xmlns', 'width', 'height', 'role', 'aria-label', ...SVG_GEOMETRY_ATTRS],
+    defs: [],
+    marker: ['id', 'viewbox', 'refx', 'refy', 'markerwidth', 'markerheight', 'orient', ...SVG_GEOMETRY_ATTRS],
+    g: ['transform'],
+    path: ['d', ...SVG_GEOMETRY_ATTRS],
+    line: ['x1', 'y1', 'x2', 'y2', 'marker-end', 'marker-start', ...SVG_GEOMETRY_ATTRS],
+    circle: ['cx', 'cy', 'r', ...SVG_GEOMETRY_ATTRS],
+    rect: ['x', 'y', 'width', 'height', 'rx', 'ry', ...SVG_GEOMETRY_ATTRS],
+    text: ['x', 'y', 'text-anchor', 'font-family', 'font-size', 'font-weight', 'font-style', ...SVG_GEOMETRY_ATTRS],
   },
   allowedSchemes: ['http', 'https', 'mailto'],
   allowedSchemesAppliedToAttributes: ['href', 'src', 'cite'],
