@@ -177,7 +177,10 @@
       }
     });
     // Blog : n'afficher que les articles écrits dans la langue choisie.
-    const blogCards = document.querySelectorAll('.blog-card[data-lang]');
+    // Scopé à .blog-section : les cartes d'un bloc « Dans cette série » sont déjà
+    // toutes dans la langue de l'article et ne doivent jamais être masquées par le
+    // dernier choix de langue du visiteur ailleurs sur le site.
+    const blogCards = document.querySelectorAll('.blog-section .blog-card[data-lang]');
     if (blogCards.length) {
       let visibles = 0;
       blogCards.forEach(card => {

@@ -55,6 +55,14 @@ collections:
       - { name: summary, label: Résumé (liste + Google), widget: text, required: false }
       - { name: author, label: Auteur, widget: string, default: BEWEGT CREATIVE STUDIO }
       - { name: category, label: Catégorie, widget: string, required: false, hint: 'Ex. Coulisses, Photographie, Film, Conseils' }
+      - {
+          name: cluster,
+          label: Série (cluster thématique),
+          widget: string,
+          required: false,
+          hint: 'Même mot sur tous les articles d''une même série, dans la MÊME langue (ex. photographie-histoire) — ils se listeront alors entre eux automatiquement. N''a rien à voir avec « Groupe de traduction » ci-dessus.',
+        }
+      - { name: pillar, label: Page pilier de la série, widget: boolean, default: false, hint: 'Un seul article par série doit être coché : c''est la page d''entrée vers laquelle les autres renvoient.' }
       - { name: cover, label: Photo de couverture, widget: image, required: false }
       - { name: coverAlt, label: Description de la photo, widget: string, required: false }
       - {

@@ -159,6 +159,11 @@ function parsePost(filename, raw) {
     lang: ['en', 'fr', 'de'].includes(data.lang) ? data.lang : 'en',
     // Relie les versions d'un même article entre elles.
     group: data.group || '',
+    // Relie entre eux des articles DIFFÉRENTS sur un même thème (contrairement à
+    // `group`, qui relie les langues d'UN SEUL article). `pillar` désigne, parmi les
+    // articles d'un même cluster, celui qui sert de page d'entrée sur le sujet.
+    cluster: data.cluster || '',
+    pillar: data.pillar === true,
     video: data.video || '',
     author: String(data.author || 'BEWEGT CREATIVE STUDIO'),
     category: String(data.category || ''),
@@ -339,21 +344,18 @@ ${FOOTER}
 `;
 }
 
-function renderIndex(posts) {
-  const cards = posts.length
-    ? posts
-        .map(
-          (p) => `      <a class="blog-card" data-lang="${esc(p.lang)}" lang="${esc(p.lang)}" href="${esc(p.url)}">
+// Carte utilisée dans l'index du blog et dans les blocs « Dans cette série ».
+const renderBlogCard = (p) => `      <a class="blog-card" data-lang="${esc(p.lang)}" lang="${esc(p.lang)}" href="${esc(p.url)}">
         <img src="${esc(cdn(p.cover, 800))}" srcset="${esc(srcset(p.cover, [480, 800, 1200]))}" sizes="(max-width: 780px) 90vw, (max-width: 1100px) 46vw, 30vw" alt="${esc(p.coverAlt)}" width="1200" height="800" loading="lazy">
         <div class="blog-card-body">
           <time datetime="${esc(p.date)}">${esc(humanDate(p.date))}</time>
           <h2>${esc(p.title)}</h2>
           <p>${esc(p.summary)}</p>
         </div>
-      </a>`
-        )
-        .join('\n')
-    : '';
+      </a>`;
+
+function renderIndex(posts) {
+  const cards = posts.length ? posts.map(renderBlogCard).join('\n') : '';
 
   return shell({
     title: 'Journal',
@@ -448,10 +450,37 @@ function renderEditorialMedia(post) {
 // Les mentions de l'en-tête suivent la langue de l'ARTICLE, pas celle du visiteur :
 // un texte français garde « Par … · Lecture 7 min » même si le site est en allemand.
 const MENTIONS = {
-  fr: { par: 'Par', lecture: (n) => `Lecture ${n} min`, sources: 'Sources', plusLoin: 'Pour aller plus loin', suite: 'Dans le prochain article' },
-  en: { par: 'By', lecture: (n) => `${n} min read`, sources: 'Sources', plusLoin: 'Further reading', suite: 'In the next article' },
-  de: { par: 'Von', lecture: (n) => `${n} Min. Lesezeit`, sources: 'Quellen', plusLoin: 'Zum Weiterlesen', suite: 'Im nächsten Beitrag' },
+  fr: {
+    par: 'Par', lecture: (n) => `Lecture ${n} min`, sources: 'Sources', plusLoin: 'Pour aller plus loin', suite: 'Dans le prochain article',
+    serie: 'Dans cette série', versLePilier: 'Voir toute la série —',
+  },
+  en: {
+    par: 'By', lecture: (n) => `${n} min read`, sources: 'Sources', plusLoin: 'Further reading', suite: 'In the next article',
+    serie: 'In this series', versLePilier: 'See the full series —',
+  },
+  de: {
+    par: 'Von', lecture: (n) => `${n} Min. Lesezeit`, sources: 'Quellen', plusLoin: 'Zum Weiterlesen', suite: 'Im nächsten Beitrag',
+    serie: 'In dieser Serie', versLePilier: 'Zur ganzen Serie —',
+  },
 };
+
+// Articles d'un même cluster, dans la même langue, hors l'article courant.
+// Le pilier n'apparaît qu'en tant que lien de retour, pas dans la grille (sauf sur
+// lui-même : il n'a alors ni lien de retour, et la grille EST son sommaire).
+function renderCluster(post, mots, clusterPosts) {
+  const autres = clusterPosts.filter((p) => p.url !== post.url);
+  if (!post.cluster || !autres.length) return '';
+  const pilier = !post.pillar && clusterPosts.find((p) => p.pillar);
+  const lien = pilier
+    ? `\n    <a class="cluster-pillar-link" href="${esc(pilier.url)}">${esc(mots.versLePilier)} ${esc(pilier.title)}</a>`
+    : '';
+  return `\n  <section class="article-cluster">
+    <p class="eyebrow">${esc(mots.serie)}</p>${lien}
+    <div class="blog-grid cluster-grid">
+${autres.map(renderBlogCard).join('\n')}
+    </div>
+  </section>`;
+}
 
 function renderAppareil(post, mots) {
   const sources = post.notes.length
@@ -471,7 +500,7 @@ ${post.readMore.map((r) => `      <li>${renderMarkdown(r).html.replace(/^<p>|<\/
     : '';
 }
 
-function renderPost(post, versions = {}) {
+function renderPost(post, versions = {}, clusterPosts = []) {
   const mots = MENTIONS[post.lang] || MENTIONS.en;
   const meta = `<p class="article-meta">${esc(mots.par)} ${esc(post.author)} · <time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time> · ${esc(mots.lecture(post.tempsLecture))}</p>`;
   const surtitre = post.category ? `<p class="eyebrow">${esc(post.category)}</p>` : '';
@@ -533,6 +562,7 @@ function renderPost(post, versions = {}) {
     }>
 ${videoEmbed(post.video, post.title)}${post.body}${renderEditorialMedia(post)}${suite}${renderAppareil(post, mots)}
   </article>
+${renderCluster(post, mots, clusterPosts)}
 
 ${renderComments(post)}
 
@@ -610,8 +640,17 @@ function build() {
     if (!post.group) continue;
     (byGroup[post.group] = byGroup[post.group] || {})[post.lang] = post.url;
   }
+  // Un cluster est propre à une langue : un article FR ne doit lister que des
+  // articles FR du même cluster, jamais leurs traductions EN/DE.
+  const byCluster = {};
   for (const post of posts) {
-    fs.writeFileSync(path.join(OUT, `${post.slug}.html`), renderPost(post, byGroup[post.group] || {}));
+    if (!post.cluster) continue;
+    const clef = `${post.cluster}::${post.lang}`;
+    (byCluster[clef] = byCluster[clef] || []).push(post);
+  }
+  for (const post of posts) {
+    const clusterPosts = post.cluster ? byCluster[`${post.cluster}::${post.lang}`] || [] : [];
+    fs.writeFileSync(path.join(OUT, `${post.slug}.html`), renderPost(post, byGroup[post.group] || {}, clusterPosts));
   }
   const legal = buildLegal();
   console.log(`blog: ${posts.length} article(s) généré(s) dans /blog`);

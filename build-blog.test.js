@@ -232,5 +232,26 @@ assert.ok(page.includes('netlify-honeypot="bot-field"'), 'honeypot absent');
 const partial = parsePost('x.md', '---\ntitle: T\ncomments:\n  - name: A\n  - message: Coucou\n---\n');
 assert.deepStrictEqual(partial.comments, [{ name: 'Anonymous', date: '', message: 'Coucou' }]);
 
+// Un article seul dans son cluster (les deux autres sont dans une autre langue) ne
+// doit montrer aucun bloc « Dans cette série ».
+const pilierFr = parsePost('pilier.md', '---\ntitle: Pilier\ncluster: histoire\npillar: true\n---\nA\n');
+assert.ok(!renderPost(pilierFr, {}, [pilierFr]).includes('article-cluster'), 'bloc de série affiché alors que l\'article est seul');
+
+// Un cluster à plusieurs membres : le pilier liste tout le monde sans lien de retour ;
+// un enfant liste les autres et pointe vers le pilier, mais jamais vers lui-même.
+const enfantA = parsePost('enfant-a.md', '---\ntitle: Le daguerréotype\ncluster: histoire\n---\nA\n');
+const enfantB = parsePost('enfant-b.md', '---\ntitle: Le collodion humide\ncluster: histoire\n---\nB\n');
+const clusterPosts = [pilierFr, enfantA, enfantB];
+
+const pagePilier = renderPost(pilierFr, {}, clusterPosts);
+assert.ok(pagePilier.includes('article-cluster'), 'bloc de série absent sur le pilier');
+assert.ok(pagePilier.includes('Le daguerréotype') && pagePilier.includes('Le collodion humide'), 'enfants absents du sommaire du pilier');
+assert.ok(!pagePilier.includes('cluster-pillar-link'), 'lien de retour affiché sur le pilier lui-même');
+
+const pageEnfant = renderPost(enfantA, {}, clusterPosts);
+assert.ok(pageEnfant.includes('cluster-pillar-link') && pageEnfant.includes('href="/blog/pilier.html"'), 'lien vers le pilier absent');
+assert.ok(pageEnfant.includes('Le collodion humide'), 'le sibling absent du sommaire');
+assert.ok(!pageEnfant.match(/blog-card[^>]*href="\/blog\/enfant-a\.html"/), 'l\'article se liste lui-même');
+
 fs.rmSync(dir, { recursive: true, force: true });
 console.log('build-blog: OK');

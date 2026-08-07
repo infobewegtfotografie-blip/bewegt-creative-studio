@@ -1754,6 +1754,12 @@ details{border-color:rgba(42,33,27,.12)}
 .article-bibliographie li{border-left:2px solid var(--line);padding-left:16px;margin-bottom:14px}
 .article-bibliographie a{color:var(--gold)}
 .article-appareil li:target{background:rgba(198,161,91,.14);border-radius:4px}
+
+/* Bloc « Dans cette série » : sommaire du cluster, sous l'article. */
+.article-cluster{border-top:1px solid var(--line);padding:56px clamp(24px,6vw,80px) 8px}
+.article-cluster>.eyebrow{max-width:1280px;margin:0 auto 4px}
+.cluster-pillar-link{display:block;max-width:1280px;margin:0 auto 28px;color:var(--gold);text-decoration:underline;text-underline-offset:2px;font-size:15px}
+.cluster-grid{margin-bottom:0}
 @media(max-width:780px){
   .post-hero{min-height:76svh}
   .post-hero .hero-overlay{background:linear-gradient(0deg,rgba(17,16,14,.9) 0%,rgba(17,16,14,.46) 72%,rgba(17,16,14,.36))}
