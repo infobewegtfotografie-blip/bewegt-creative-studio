@@ -273,9 +273,17 @@ const FOOTER = `
 <script src="/consent.js" defer></script>
 <script src="/script.js" defer></script>`;
 
-function shell({ title, description, url, image, main, bodyClass = '' }) {
+function shell({ title, description, url, image, main, bodyClass = '', lang = 'en', author = '', publishDate = '', modifyDate = '', versions = {} }) {
+  const ogLocaleMap = { fr: 'fr_FR', de: 'de_DE', en: 'en_US' };
+  const ogLocale = ogLocaleMap[lang] || 'en_US';
+  const hreflangAlternates = Object.entries(versions).length
+    ? Object.entries(versions).map(([l, u]) => `  <link rel="alternate" hreflang="${l}" href="${esc(SITE + u)}">`).join('\n') + '\n'
+    : '';
+  const schemaLD = author && publishDate
+    ? `\n<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"${esc(title)}","description":"${esc(description)}","image":"${esc(SITE + image)}","author":{"@type":"Organization","name":"${esc(author)}"},"datePublished":"${esc(publishDate)}"${modifyDate ? `,"dateModified":"${esc(modifyDate)}"` : ''},"publisher":{"@type":"Organization","name":"BEWEGT CREATIVE STUDIO","logo":{"@type":"ImageObject","url":"${esc(SITE + '/img/brand/bewegt-logo-horizontal-ivory.png')}"}}}</script>`
+    : '';
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -288,16 +296,17 @@ function shell({ title, description, url, image, main, bodyClass = '' }) {
 <meta name="description" content="${esc(description)}">
   <meta name="author" content="BEWEGT CREATIVE STUDIO">
   <link rel="canonical" href="${esc(SITE + url)}">
-  <meta property="og:type" content="article">
+${hreflangAlternates}  <meta property="og:type" content="article">
   <meta property="og:title" content="${esc(title)} — BEWEGT CREATIVE STUDIO">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${esc(SITE + url)}">
   <meta property="og:site_name" content="BEWEGT CREATIVE STUDIO">
   <meta property="og:image" content="${esc(SITE + image)}">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="${ogLocale}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)} — BEWEGT CREATIVE STUDIO">
   <meta name="twitter:description" content="${esc(description)}">
+${schemaLD}
   <meta name="twitter:image" content="${esc(SITE + image)}">
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -481,6 +490,10 @@ function renderPost(post, versions = {}) {
     url: post.url,
     image: post.partage,
     bodyClass: post.aCouverture ? '' : 'article-sobre',
+    lang: post.lang,
+    author: post.author,
+    publishDate: post.date,
+    versions,
     main: `${enTete}
 
   <article class="post-body article-texte" lang="${esc(post.lang)}"${
