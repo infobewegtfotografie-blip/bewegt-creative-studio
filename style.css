@@ -2162,7 +2162,7 @@ details{border-color:rgba(42,33,27,.12)}
 .post-hero .hero-overlay{background:linear-gradient(90deg,rgba(8,11,11,.94) 0%,rgba(8,11,11,.67) 45%,rgba(8,11,11,.08) 80%),linear-gradient(0deg,rgba(8,11,11,.7),transparent 48%)}
 .post-hero .page-hero-content{width:min(1240px,100%);max-width:none;padding:150px clamp(28px,6vw,88px) clamp(46px,6vw,72px)}
 .post-hero .eyebrow{color:#6f91ff;margin-bottom:18px;font-size:10px;letter-spacing:.16em}
-.post-hero h1{font-family:var(--quote);font-size:clamp(48px,6vw,84px);font-weight:520;font-style:italic;line-height:.94;letter-spacing:-.025em;max-width:11ch;margin:0;text-transform:none;text-wrap:balance}
+.post-hero h1{font-family:var(--quote);font-size:clamp(48px,6vw,84px);font-weight:520;font-style:italic;line-height:.94;letter-spacing:-.025em;max-width:11ch;margin:0;text-transform:none;text-wrap:balance;word-break:normal;overflow-wrap:normal}
 .post-hero .page-hero-content>p:not(.eyebrow):not(.article-meta){max-width:46ch;margin:24px 0 0;font-family:var(--body);font-size:clamp(15px,1.4vw,18px);font-style:normal;line-height:1.55;color:rgba(255,255,255,.82)}
 .post-hero .article-meta{border:0;padding:0;margin:30px 0 0;color:rgba(255,255,255,.72);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 
