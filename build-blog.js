@@ -358,7 +358,23 @@ const renderBlogCard = (p) => `      <a class="blog-card" data-lang="${esc(p.lan
       </a>`;
 
 function renderIndex(posts) {
-  const cards = posts.length ? posts.map(renderBlogCard).join('\n') : '';
+  const featured = posts[0];
+  const remaining = posts.slice(1);
+  const featureMarkup = featured ? `
+    <article class="featured-story">
+      <a href="${esc(featured.url)}" class="featured-story-link">
+        <div class="featured-story-image">
+          <img src="${esc(cdn(featured.cover, 1600))}" srcset="${esc(srcset(featured.cover, [800, 1200, 1600]))}" sizes="(max-width: 780px) 100vw, 62vw" alt="${esc(featured.coverAlt)}" width="1600" height="1067" loading="eager">
+        </div>
+        <div class="featured-story-copy">
+          <span class="featured-story-label">Featured story</span>
+          <h2>${esc(featured.title)}</h2>
+          <p>${esc(featured.summary)}</p>
+          <span class="featured-story-meta">${esc(featured.category || 'Journal')} · ${esc(humanDate(featured.date))}</span>
+        </div>
+      </a>
+    </article>` : '';
+  const cards = remaining.length ? remaining.map(renderBlogCard).join('\n') : '';
 
   return shell({
     title: 'Journal',
@@ -380,6 +396,7 @@ function renderIndex(posts) {
       <p class="eyebrow">Studio notes</p>
       <h2>Thoughts, process and stories from the field.</h2>
     </div>
+    ${featureMarkup ? `<div class="featured-story-wrap">${featureMarkup}</div>` : ''}
     <div class="blog-grid">
 ${cards}
     </div>
@@ -440,6 +457,37 @@ function renderEditorialMedia(post) {
     : '';
   const cta = post.cta.label && post.cta.url
     ? `<aside class="post-cta"><p>${esc(post.cta.label)}</p><a href="${esc(post.cta.url)}"${post.cta.url.startsWith('https://') ? ' target="_blank" rel="noopener"' : ''}>Découvrir <span aria-hidden="true">→</span></a></aside>`
+    : '';
+  // La visionneuse du site s'accroche à .design-card ; son conteneur doit être sur la page.
+  const lightbox = post.gallery.length
+    ? `<div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Fermer">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Photo précédente">&#10094;</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Photo suivante">&#10095;</button>
+    <p id="lightboxCaption"></p>
+  </div>`
+    : '';
+  return gallery + localVideo + audio + documents + cta + lightbox;
+}
+
+function renderSidebarMedia(post) {
+  const gallery = post.gallery.length
+    ? `<section class="post-gallery article-sidebar-section" aria-label="Galerie photo">${post.gallery.map((item) => `
+      <figure class="design-card article-sidebar-card" data-full="${esc(cdn(item.image, 2000))}" data-caption="${esc(item.caption || item.alt)}"><img src="${esc(cdn(item.image, 1200))}" srcset="${esc(srcset(item.image, [480, 800, 1200]))}" sizes="(max-width: 780px) 90vw, 100vw" alt="${esc(item.alt)}" loading="lazy" decoding="async">${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}
+    </section>`
+    : '';
+  const localVideo = post.localVideo
+    ? `<figure class="post-media article-sidebar-section post-media-video">${post.mediaTitle ? `<figcaption>${esc(post.mediaTitle)}</figcaption>` : ''}<video controls preload="metadata" playsinline${post.videoPoster ? ` poster="${esc(cdn(post.videoPoster, 1200))}"` : ''}><source src="${esc(post.localVideo)}">Votre navigateur ne peut pas lire cette vidéo.</video><a class="media-download" href="${esc(post.localVideo)}" download>Télécharger la vidéo</a></figure>`
+    : '';
+  const audio = post.localAudio
+    ? `<figure class="post-media article-sidebar-section post-media-audio"><figcaption>${esc(post.mediaTitle || 'Écouter')}</figcaption><audio controls preload="metadata" src="${esc(post.localAudio)}">Votre navigateur ne peut pas lire cet audio.</audio></figure>`
+    : '';
+  const documents = post.documents.length
+    ? `<section class="post-documents article-sidebar-section" aria-label="Documents à télécharger"><h2>Documents</h2>${post.documents.map((document) => `<a class="post-document" href="${esc(document.file)}" download><span aria-hidden="true">PDF</span><strong>${esc(document.title)}</strong>${document.description ? `<small>${esc(document.description)}</small>` : ''}<b aria-hidden="true">↓</b></a>`).join('')}</section>`
+    : '';
+  const cta = post.cta.label && post.cta.url
+    ? `<aside class="post-cta article-sidebar-section"><p>${esc(post.cta.label)}</p><a href="${esc(post.cta.url)}"${post.cta.url.startsWith('https://') ? ' target="_blank" rel="noopener"' : ''}>Découvrir <span aria-hidden="true">→</span></a></aside>`
     : '';
   // La visionneuse du site s'accroche à .design-card ; son conteneur doit être sur la page.
   const lightbox = post.gallery.length
@@ -536,6 +584,9 @@ function renderPost(post, versions = {}, clusterPosts = []) {
     ? `\n  <aside class="article-suite"><b>${esc(mots.suite)}</b>${esc(post.next)}</aside>`
     : '';
 
+  const articleBody = `${videoEmbed(post.video, post.title)}${post.body}`;
+  const articleSidebar = renderSidebarMedia(post);
+
   return shell({
     title: post.title,
     description: post.summary,
@@ -567,7 +618,14 @@ function renderPost(post, versions = {}, clusterPosts = []) {
   <article class="post-body article-texte" lang="${esc(post.lang)}"${
       Object.keys(versions).length ? ` data-translations="${esc(JSON.stringify(versions))}"` : ''
     }>
-${videoEmbed(post.video, post.title)}${post.body}${renderEditorialMedia(post)}${suite}${renderAppareil(post, mots)}
+    <div class="article-layout">
+      <div class="article-main">
+${articleBody}${suite}${renderAppareil(post, mots)}
+      </div>
+      <aside class="article-sidebar">
+${articleSidebar}
+      </aside>
+    </div>
   </article>
 ${renderCluster(post, mots, clusterPosts)}
 
