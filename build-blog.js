@@ -348,7 +348,10 @@ ${FOOTER}
 const renderBlogCard = (p) => `      <a class="blog-card" data-lang="${esc(p.lang)}" lang="${esc(p.lang)}" href="${esc(p.url)}">
         <img src="${esc(cdn(p.cover, 800))}" srcset="${esc(srcset(p.cover, [480, 800, 1200]))}" sizes="(max-width: 780px) 90vw, (max-width: 1100px) 46vw, 30vw" alt="${esc(p.coverAlt)}" width="1200" height="800" loading="lazy">
         <div class="blog-card-body">
-          <time datetime="${esc(p.date)}">${esc(humanDate(p.date))}</time>
+          <div class="blog-card-meta">
+            <span class="blog-card-tag">${esc(p.category || 'Journal')}</span>
+            <time datetime="${esc(p.date)}">${esc(humanDate(p.date))}</time>
+          </div>
           <h2>${esc(p.title)}</h2>
           <p>${esc(p.summary)}</p>
         </div>
@@ -373,6 +376,10 @@ function renderIndex(posts) {
   </section>
 
   <section class="blog-section">
+    <div class="blog-intro">
+      <p class="eyebrow">Studio notes</p>
+      <h2>Thoughts, process and stories from the field.</h2>
+    </div>
     <div class="blog-grid">
 ${cards}
     </div>

@@ -8,6 +8,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <meta name="theme-color" content="#0a0a0a">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>BEWEGT CREATIVE STUDIO — Visual experiences that move.</title>
 <meta name="description" content="Creative studio for photography, video, live streaming, design and podcast — between Germany, Europe and Africa.">
   <meta name="keywords" content="creative studio, photography, video production, live streaming, graphic design, podcast production, Germany, Africa, Togo">
@@ -182,6 +184,7 @@
 
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header class="nav" id="nav">
   <a class="brand brand-logo" href="index.html" aria-label="BEWEGT CREATIVE STUDIO"><img class="brand-mark brand-mark-light" src="img/brand/bewegt-logo-horizontal-ivory.png" width="1188" height="285" alt="BEWEGT CREATIVE STUDIO"><img class="brand-mark brand-mark-dark" src="img/brand/bewegt-logo-horizontal-black.png" width="1188" height="285" alt="" aria-hidden="true"></a>
@@ -225,8 +228,8 @@
   </div>
 </header>
 
-<main>
-  <section class="hero">
+<main id="main-content">
+  <section class="hero" aria-labelledby="hero-title">
     <picture>
       <source srcset="img/hero.webp" type="image/webp">
       <img src="img/hero.jpg" width="1376" height="768" alt="BEWEGT Creative Studio film crew" fetchpriority="high" decoding="async">
@@ -234,11 +237,20 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="eyebrow">Germany — Europe — Africa</p>
-      <h1>BEWEGT<br><span>CREATIVE STUDIO</span></h1>
+      <h1 id="hero-title">BEWEGT<br><span>CREATIVE STUDIO</span></h1>
       <p data-i18n="hero.subtitle">Visual experiences that move people.</p>
       <div class="hero-actions">
         <a class="btn btn-light" href="#contact" data-i18n="buttons.start">Start a Project</a>
       </div>
+    </div>
+  </section>
+
+  <section class="trust-bar" aria-label="Business strengths">
+    <div class="trust-items">
+      <div><strong>Germany</strong><span>based / international</span></div>
+      <div><strong>Europe + Africa</strong><span>cross-market production</span></div>
+      <div><strong>Fast planning</strong><span>clear timelines</span></div>
+      <div><strong>Premium finish</strong><span>cinematic output</span></div>
     </div>
   </section>
 
@@ -618,6 +630,11 @@
       <p class="eyebrow" data-i18n="nav.contact">Contact</p>
       <h2 data-i18n-html="cta.heading">Let’s Work<br>Together.</h2>
       <p data-i18n="cta.sub">Tell us your story. Photography, film production, live streaming, podcast production or graphic design.</p>
+      <div class="contact-trust-steps" aria-label="How it works">
+        <div><strong>01</strong><span>Tell us your idea</span></div>
+        <div><strong>02</strong><span>We define the scope</span></div>
+        <div><strong>03</strong><span>We produce with clarity</span></div>
+      </div>
       <form class="contact-form" id="projectInquiryForm" name="project-inquiry" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="project-inquiry">
         <p class="contact-honeypot" hidden aria-hidden="true">
@@ -652,8 +669,8 @@
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       </form>
       <div class="contact-alternatives">
-        <a class="btn btn-outline" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" data-i18n="buttons.whatsapp">Start on WhatsApp</a>
-        <a class="contact-email" href="mailto:contact@bewegtcreative.com">contact@bewegtcreative.com</a>
+        <a class="btn btn-outline" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" data-i18n="buttons.whatsapp">Start on WhatsApp</a>
+        <a class="contact-email" href="mailto:contact@bewegtcreative.com" rel="noopener noreferrer">contact@bewegtcreative.com</a>
       </div>
     </div>
   </section>
@@ -676,12 +693,12 @@
     </div>
     <div>
       <span data-i18n="footer.contact">Contact</span>
-      <a href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">WhatsApp</a>
-      <a href="mailto:contact@bewegtcreative.com">contact@bewegtcreative.com</a>
+      <a href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="mailto:contact@bewegtcreative.com" rel="noopener noreferrer">contact@bewegtcreative.com</a>
     </div>
     <div>
       <span data-i18n="footer.social">Social</span>
-      <a href="https://www.youtube.com/@bewegtcreativestudio" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.youtube.com/@bewegtcreativestudio" target="_blank" rel="noopener noreferrer">YouTube</a>
     </div>
   </div>
   <!-- ═══ Newsletter ═══ -->
@@ -724,7 +741,7 @@
 </div>
 <audio id="siteSound" preload="none"></audio>
 
-<a class="whatsapp-float" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">
+<a class="whatsapp-float" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">
   <span class="whatsapp-pulse"></span>
   <span>WhatsApp</span>
 </a>
