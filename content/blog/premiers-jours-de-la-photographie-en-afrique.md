@@ -8,6 +8,25 @@ summary: Le 7 novembre 1839, devant un palais d'Alexandrie, deux Français réal
 cover: /img/blog/mosquee-sultan-al-hakim-caire-girault-de-prangey.jpg
 coverAlt: Daguerréotype de la mosquée du sultan al-Hakim au Caire par Girault de Prangey, 1842-1843
 draft: false
+gallery:
+  - image: /img/blog/chambre-daguerreotype-susse-freres-1839.jpg
+    alt: Chambre photographique Susse Frères de 1839, boîte de bois et objectif en laiton
+    caption: "01. Chambre daguerréotype Susse Frères, 1839"
+  - image: /img/blog/portrait-louis-daguerre-1844.jpg
+    alt: Daguerréotype anonyme représentant Louis-Jacques-Mandé Daguerre, vers 1844
+    caption: "02. Louis Daguerre, portrait anonyme, v. 1844"
+  - image: /img/blog/colonne-pompee-alexandrie-girault-de-prangey.jpg
+    alt: Daguerréotype de la colonne de Pompée à Alexandrie par Girault de Prangey, 1842
+    caption: "03. Colonne de Pompée, Alexandrie — 1842"
+  - image: /img/blog/temple-philae-palmiers-girault-de-prangey.jpg
+    alt: Daguerréotype du temple de Philae bordé de palmiers-dattiers par Girault de Prangey, 1844
+    caption: "04. Temple de Philae — 1844"
+  - image: /img/blog/portrait-jeune-femme-girault-de-prangey.jpg
+    alt: Daguerréotype d'un portrait de jeune femme par Girault de Prangey, vers 1842
+    caption: "05. Portrait de jeune femme — v. 1842"
+  - image: /img/blog/felouque-jules-itier-nil-1845.jpg
+    alt: Daguerréotype de la felouque de Jules Itier voguant sur le Nil, vers 1845-1846
+    caption: "06. Felouque de Jules Itier sur le Nil, 1845-1846"
 readMore:
   - '**Erin Haney**, *Photography and Africa*, Reaktion Books, coll. « Exposures », 2010. Refuse le projet d''une histoire linéaire de la photographie africaine.'
   - '**Giulia Paoletti**, *Portrait and Place: Photography in Senegal, 1840-1960*, Princeton University Press, 2024.'

@@ -8,6 +8,25 @@ summary: On 7 November 1839, in front of a palace in Alexandria, two Frenchmen m
 cover: /img/blog/mosquee-sultan-al-hakim-caire-girault-de-prangey.jpg
 coverAlt: Daguerreotype of the sultan al-Hakim mosque in Cairo by Girault de Prangey, 1842-1843
 draft: false
+gallery:
+  - image: /img/blog/chambre-daguerreotype-susse-freres-1839.jpg
+    alt: Susse Frères photographic camera from 1839, with a wooden body and brass lens
+    caption: "01. Susse Frères daguerreotype camera, 1839"
+  - image: /img/blog/portrait-louis-daguerre-1844.jpg
+    alt: Anonymous daguerreotype portrait of Louis-Jacques-Mandé Daguerre, c. 1844
+    caption: "02. Louis Daguerre, anonymous portrait, c. 1844"
+  - image: /img/blog/colonne-pompee-alexandrie-girault-de-prangey.jpg
+    alt: Daguerreotype of Pompey's Pillar in Alexandria by Girault de Prangey, 1842
+    caption: "03. Pompey's Pillar, Alexandria — 1842"
+  - image: /img/blog/temple-philae-palmiers-girault-de-prangey.jpg
+    alt: Daguerreotype of the temple of Philae lined with date palms by Girault de Prangey, 1844
+    caption: "04. Temple of Philae — 1844"
+  - image: /img/blog/portrait-jeune-femme-girault-de-prangey.jpg
+    alt: Daguerreotype portrait of a young woman by Girault de Prangey, c. 1842
+    caption: "05. Portrait of a young woman — c. 1842"
+  - image: /img/blog/felouque-jules-itier-nil-1845.jpg
+    alt: Daguerreotype of Jules Itier's cange sailing on the Nile around 1845-1846
+    caption: "06. Jules Itier's cange on the Nile, 1845-1846"
 readMore:
   - '**Erin Haney**, *Photography and Africa*, Reaktion Books, "Exposures" series, 2010. Rejects the project of a single, linear history of African photography.'
   - '**Giulia Paoletti**, *Portrait and Place: Photography in Senegal, 1840-1960*, Princeton University Press, 2024.'

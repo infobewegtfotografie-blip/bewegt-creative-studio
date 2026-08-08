@@ -8,6 +8,25 @@ summary: Am 7. November 1839 entsteht vor einem Palast in Alexandria die erste d
 cover: /img/blog/mosquee-sultan-al-hakim-caire-girault-de-prangey.jpg
 coverAlt: Daguerreotypie der Sultan-al-Hakim-Moschee in Kairo von Girault de Prangey, 1842-1843
 draft: false
+gallery:
+  - image: /img/blog/chambre-daguerreotype-susse-freres-1839.jpg
+    alt: Fotokamera von Susse Frères aus dem Jahr 1839 mit Holzkasten und Messingobjektiv
+    caption: "01. Daguerreotypie-Kamera Susse Frères, 1839"
+  - image: /img/blog/portrait-louis-daguerre-1844.jpg
+    alt: Anonyme Daguerreotypie-Porträt von Louis-Jacques-Mandé Daguerre, um 1844
+    caption: "02. Louis Daguerre, anonymes Porträt, um 1844"
+  - image: /img/blog/colonne-pompee-alexandrie-girault-de-prangey.jpg
+    alt: Daguerreotypie der Pompejussäule in Alexandria von Girault de Prangey, 1842
+    caption: "03. Pompejussäule, Alexandria — 1842"
+  - image: /img/blog/temple-philae-palmiers-girault-de-prangey.jpg
+    alt: Daguerreotypie des von Dattelpalmen gesäumten Tempels von Philae von Girault de Prangey, 1844
+    caption: "04. Tempel von Philae — 1844"
+  - image: /img/blog/portrait-jeune-femme-girault-de-prangey.jpg
+    alt: Daguerreotypie eines Porträts einer jungen Frau von Girault de Prangey, um 1842
+    caption: "05. Porträt einer jungen Frau — um 1842"
+  - image: /img/blog/felouque-jules-itier-nil-1845.jpg
+    alt: Daguerreotypie der Feluke von Jules Itier auf dem Nil um 1845-1846
+    caption: "06. Feluke von Jules Itier auf dem Nil, 1845–1846"
 readMore:
   - '**Erin Haney**, *Photography and Africa*, Reaktion Books, Reihe „Exposures“, 2010. Lehnt das Projekt einer linearen Geschichte der afrikanischen Fotografie ab.'
   - '**Giulia Paoletti**, *Portrait and Place: Photography in Senegal, 1840-1960*, Princeton University Press, 2024.'
