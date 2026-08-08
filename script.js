@@ -946,21 +946,22 @@
     });
   }
 
-  const cards = Array.from(document.querySelectorAll('.design-card'));
   const lightbox = document.getElementById('lightbox');
   const img = document.getElementById('lightboxImg');
   const caption = document.getElementById('lightboxCaption');
   const close = document.getElementById('lightboxClose');
   const prev = document.getElementById('lightboxPrev');
   const next = document.getElementById('lightboxNext');
+  const zoomableImages = Array.from(document.querySelectorAll('.design-card img, .article-main img, .article-sidebar img, .post-body img, .post-gallery img'))
+    .filter((image) => !(image.closest('.nav-service-link')) && !image.closest('.lightbox'));
   let index = 0;
 
   function openLightbox(i){
-    if(!lightbox || !cards.length || !img) return;
-    index = (i + cards.length) % cards.length;
-    const card = cards[index];
-    img.src = card.dataset.full || card.querySelector('img').src;
-    caption.textContent = card.dataset.caption || '';
+    if(!lightbox || !zoomableImages.length || !img) return;
+    index = (i + zoomableImages.length) % zoomableImages.length;
+    const image = zoomableImages[index];
+    img.src = image.dataset.full || image.currentSrc || image.src;
+    caption.textContent = image.dataset.caption || image.alt || '';
     lightbox.classList.add('is-open');
     document.body.classList.add('no-scroll');
     lightbox.setAttribute('aria-hidden','false');
@@ -974,7 +975,27 @@
   }
   function show(delta){ openLightbox(index + delta); }
 
-  cards.forEach((card, i) => card.addEventListener('click', () => openLightbox(i)));
+  zoomableImages.forEach((image, i) => {
+    const fullSrc = image.dataset.full || image.currentSrc || image.src;
+    image.dataset.full = fullSrc;
+    image.dataset.caption = image.dataset.caption || image.alt || image.closest('figure')?.querySelector('figcaption')?.textContent || '';
+    image.style.cursor = 'zoom-in';
+    image.setAttribute('tabindex', '0');
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', 'Afficher l’image en grand');
+    image.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openLightbox(i);
+    });
+    image.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openLightbox(i);
+      }
+    });
+  });
+
   if(close) close.addEventListener('click', closeLightbox);
   if(prev) prev.addEventListener('click', () => show(-1));
   if(next) next.addEventListener('click', () => show(1));
