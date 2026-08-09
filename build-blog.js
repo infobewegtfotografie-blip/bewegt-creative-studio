@@ -45,7 +45,7 @@ function videoEmbed(url, title) {
 // Netlify redimensionne et convertit en WebP à la volée : rien à installer,
 // rien à stocker, et l'original reste intact dans le dépôt.
 const cdn = (src, w) =>
-  /^\/(img|portfolio-designs)\//.test(String(src))
+  process.env.NETLIFY && /^\/(img|portfolio-designs)\//.test(String(src))
     ? `/.netlify/images?url=${encodeURIComponent(src)}&w=${w}&fm=webp&q=80`
     : src;
 
@@ -507,15 +507,21 @@ function renderSidebarMedia(post) {
 const MENTIONS = {
   fr: {
     par: 'Par', lecture: (n) => `Lecture ${n} min`, sources: 'Sources', plusLoin: 'Pour aller plus loin', suite: 'Dans le prochain article',
-    serie: 'Dans cette série', versLePilier: 'Voir toute la série —',
+    serie: 'Dans cette série', versLePilier: 'Voir toute la série —', publie: 'Publié le', auteur: 'Auteur', temps: 'Lecture',
+    precedent: 'Article précédent', suivant: 'Article suivant', navigation: 'Continuer la lecture', autour: 'Autour de cet article',
+    projet: 'Votre prochain projet', rendezVous: 'Prenez rendez-vous avec le studio', service: 'Service BEWEGT', realisation: 'Réalisation', decouvrir: 'Découvrir BEWEGT', precedentPromo: 'Promotion précédente', suivantPromo: 'Promotion suivante',
   },
   en: {
     par: 'By', lecture: (n) => `${n} min read`, sources: 'Sources', plusLoin: 'Further reading', suite: 'In the next article',
-    serie: 'In this series', versLePilier: 'See the full series —',
+    serie: 'In this series', versLePilier: 'See the full series —', published: 'Published', auteur: 'Author', temps: 'Reading time',
+    precedent: 'Previous article', suivant: 'Next article', navigation: 'Continue reading', autour: 'Around this article',
+    projet: 'Your next project', rendezVous: 'Book a call with the studio', service: 'BEWEGT service', realisation: 'Selected work', decouvrir: 'Discover BEWEGT', precedentPromo: 'Previous promotion', suivantPromo: 'Next promotion',
   },
   de: {
     par: 'Von', lecture: (n) => `${n} Min. Lesezeit`, sources: 'Quellen', plusLoin: 'Zum Weiterlesen', suite: 'Im nächsten Beitrag',
-    serie: 'In dieser Serie', versLePilier: 'Zur ganzen Serie —',
+    serie: 'In dieser Serie', versLePilier: 'Zur ganzen Serie —', publie: 'Veröffentlicht', auteur: 'Autor', temps: 'Lesezeit',
+    precedent: 'Vorheriger Artikel', suivant: 'Nächster Artikel', navigation: 'Weiterlesen', autour: 'Rund um diesen Artikel',
+    projet: 'Ihr nächstes Projekt', rendezVous: 'Termin mit dem Studio buchen', service: 'BEWEGT Leistung', realisation: 'Referenzprojekt', decouvrir: 'BEWEGT entdecken', precedentPromo: 'Vorherige Empfehlung', suivantPromo: 'Nächste Empfehlung',
   },
 };
 
@@ -555,10 +561,66 @@ ${post.readMore.map((r) => `      <li>${renderMarkdown(r).html.replace(/^<p>|<\/
     : '';
 }
 
-function renderPost(post, versions = {}, clusterPosts = []) {
+function renderArticleRail(post, mots, posts) {
+  const langue = posts.filter((item) => item.lang === post.lang);
+  const index = langue.findIndex((item) => item.url === post.url);
+  const precedent = index >= 0 ? langue[index + 1] : null;
+  const suivant = index > 0 ? langue[index - 1] : null;
+  const navigation = [
+    precedent && { label: mots.precedent, post: precedent },
+    suivant && { label: mots.suivant, post: suivant },
+  ].filter(Boolean).map(({ label, post: item }) => `<a class="rail-story" href="${esc(item.url)}">
+          <span>${esc(label)}</span>
+          <strong>${esc(item.title)}</strong>
+          <small>${esc(item.category || 'Journal')}</small>
+        </a>`).join('');
+  const promotions = [
+    { label: mots.projet, title: mots.rendezVous, url: '/index.html#contact', image: '/img/behind.webp' },
+    { label: mots.service, title: 'Photography', url: '/photography.html', image: '/img/craft-photography.webp' },
+    { label: mots.service, title: 'Video Production', url: '/video-production.html', image: '/img/craft-video.webp' },
+    { label: mots.service, title: 'Graphic Design', url: '/graphic-design.html', image: '/img/craft-design.webp' },
+    { label: mots.realisation, title: 'Un apôtre du développement', url: '/un-apotre-du-developpement.html', image: '/img/blog/chancy-brown-augustus-washington-liberia-1856.jpg' },
+  ];
+  return `<aside class="article-context" aria-label="${esc(mots.autour)}">
+        <div class="rail-facts">
+          <p><span>${esc(mots.publie || mots.published)}</span><time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time></p>
+          <p><span>${esc(mots.temps)}</span><strong>${esc(post.tempsLecture)} min</strong></p>
+        </div>
+        ${navigation ? `<nav class="rail-reading" aria-label="${esc(mots.navigation)}">${navigation}</nav>` : ''}
+        <section class="rail-promos" data-rail-carousel aria-label="${esc(mots.decouvrir)}">
+          <div class="rail-slides">
+            ${promotions.map((item, i) => `<a class="rail-promo${i === 0 ? ' is-active' : ''}" href="${esc(item.url)}" ${i ? 'tabindex="-1" aria-hidden="true"' : ''}>
+              <img src="${esc(item.image)}" alt="" loading="lazy">
+              <span>${esc(item.label)}</span><strong>${esc(item.title)}</strong><b aria-hidden="true">↗</b>
+            </a>`).join('')}
+          </div>
+          <div class="rail-controls"><button type="button" data-rail-prev aria-label="${esc(mots.precedentPromo)}">←</button><span data-rail-status>1 / ${promotions.length}</span><button type="button" data-rail-next aria-label="${esc(mots.suivantPromo)}">→</button></div>
+        </section>
+      </aside>`;
+}
+
+function renderJournalTicker(mots) {
+  const items = [
+    { label: 'Photography', url: '/photography.html' },
+    { label: 'Video Production', url: '/video-production.html' },
+    { label: 'Live Streaming', url: '/live-streaming.html' },
+    { label: 'Graphic Design', url: '/graphic-design.html' },
+    { label: 'Podcast Production', url: '/podcast-production.html' },
+    { label: mots.realisation, url: '/un-apotre-du-developpement.html' },
+    { label: mots.rendezVous, url: '/index.html#contact' },
+  ];
+  const track = items.map((item) => `<a href="${esc(item.url)}">${esc(item.label)}<span aria-hidden="true">↗</span></a>`).join('');
+  return `<nav class="journal-ticker" aria-label="${esc(mots.decouvrir)}">
+    <div class="journal-ticker-track">${track}</div>
+    <div class="journal-ticker-track" aria-hidden="true">${track}</div>
+  </nav>`;
+}
+
+function renderPost(post, versions = {}, clusterPosts = [], allPosts = []) {
   const mots = MENTIONS[post.lang] || MENTIONS.en;
   const meta = `<p class="article-meta">${esc(mots.par)} ${esc(post.author)} · <time datetime="${esc(post.date)}">${esc(humanDate(post.date))}</time> · ${esc(mots.lecture(post.tempsLecture))}</p>`;
   const surtitre = post.category ? `<p class="eyebrow">${esc(post.category)}</p>` : '';
+  const contexte = renderArticleRail(post, mots, allPosts);
 
   // Avec une photo de couverture : article porté par l'image.
   // Sans : ouverture sobre, le texte commence tout de suite.
@@ -585,7 +647,7 @@ function renderPost(post, versions = {}, clusterPosts = []) {
     : '';
 
   const articleBody = `${videoEmbed(post.video, post.title)}${post.body}`;
-  const articleSidebar = renderSidebarMedia(post);
+  const editorialMedia = renderEditorialMedia(post);
 
   return shell({
     title: post.title,
@@ -614,17 +676,16 @@ function renderPost(post, versions = {}, clusterPosts = []) {
       },
     },
     main: `${enTete}
+${renderJournalTicker(mots)}
 
   <article class="post-body article-texte" lang="${esc(post.lang)}"${
       Object.keys(versions).length ? ` data-translations="${esc(JSON.stringify(versions))}"` : ''
     }>
     <div class="article-layout">
+      ${contexte}
       <div class="article-main">
-${articleBody}${suite}${renderAppareil(post, mots)}
+${articleBody}${editorialMedia}${suite}${renderAppareil(post, mots)}
       </div>
-      <aside class="article-sidebar">
-${articleSidebar}
-      </aside>
     </div>
   </article>
 ${renderCluster(post, mots, clusterPosts)}
@@ -715,7 +776,7 @@ function build() {
   }
   for (const post of posts) {
     const clusterPosts = post.cluster ? byCluster[`${post.cluster}::${post.lang}`] || [] : [];
-    fs.writeFileSync(path.join(OUT, `${post.slug}.html`), renderPost(post, byGroup[post.group] || {}, clusterPosts));
+    fs.writeFileSync(path.join(OUT, `${post.slug}.html`), renderPost(post, byGroup[post.group] || {}, clusterPosts, posts));
   }
   const legal = buildLegal();
   console.log(`blog: ${posts.length} article(s) généré(s) dans /blog`);

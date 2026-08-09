@@ -51,7 +51,7 @@ const hostileMarkdown = renderMarkdown(`
 assert.ok(hostileMarkdown.includes('<h1>Titre sûr</h1>'), 'titre Markdown supprimé');
 assert.ok(hostileMarkdown.includes('href="https://bewegtcreative.com/blog/"'), 'lien HTTPS légitime supprimé');
 assert.ok(hostileMarkdown.includes('alt="Photo"'), 'attribut alt légitime supprimé');
-assert.ok(hostileMarkdown.includes('/.netlify/images'), 'optimisation des images locales perdue');
+assert.ok(hostileMarkdown.includes('src="/img/blog/photo.png"'), 'image locale indisponible hors Netlify');
 assert.ok(!hostileMarkdown.includes('<script'), 'balise script conservée');
 assert.ok(!hostileMarkdown.includes('onerror'), 'gestionnaire événementiel conservé');
 assert.ok(!/href=["']\s*javascript:/i.test(hostileMarkdown), 'lien javascript actif conservé');
@@ -132,10 +132,10 @@ assert.ok(liee.includes('bonjour.html'), 'version française non reliée');
 assert.ok(!renderPost(enPost, {}).includes('data-translations='), 'table présente à tort');
 assert.strictEqual(parsePost('x.md', '---\ntitle: T\n---\n').group, '');
 
-// Les images locales passent par le CDN Netlify, les adresses externes non.
+// En local, les images restent directement accessibles ; Netlify les optimise au déploiement.
 const avecImages = parsePost('i.md', '---\ntitle: T\ncover: https://exemple.org/p.jpg\n---\n![a](/img/blog/photo.png)\n');
 assert.strictEqual(avecImages.cover, 'https://exemple.org/p.jpg', 'adresse externe réécrite à tort');
-assert.ok(avecImages.body.includes('/.netlify/images'), 'image locale non optimisée');
+assert.ok(avecImages.body.includes('src="/img/blog/photo.png"'), 'image locale non accessible');
 assert.ok(avecImages.body.includes('srcset='), 'srcset absent');
 assert.ok(avecImages.body.includes('loading="lazy"'), 'chargement différé absent');
 
