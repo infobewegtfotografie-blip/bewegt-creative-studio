@@ -1053,6 +1053,17 @@
     const copy = hero.querySelector('[data-hero-copy]');
     const cta = hero.querySelector('[data-hero-cta]');
     const status = hero.querySelector('[data-hero-status]');
+    const dotsContainer = hero.querySelector('.hero-slider-dots');
+    slides.forEach((_, slideIndex) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-selected', String(slideIndex === 0));
+      dot.setAttribute('aria-label', `Slide ${slideIndex + 1}`);
+      dot.dataset.heroDot = String(slideIndex);
+      if(slideIndex === 0) dot.classList.add('is-active');
+      dotsContainer?.appendChild(dot);
+    });
     const dots = Array.from(hero.querySelectorAll('[data-hero-dot]'));
     const previous = hero.querySelector('[data-hero-prev]');
     const following = hero.querySelector('[data-hero-next]');
@@ -1062,7 +1073,15 @@
     const localized = (slide, key) => slide.dataset[`${key}${(document.documentElement.lang || 'en').replace(/^./, char => char.toUpperCase())}`] || slide.dataset[`${key}En`] || '';
     const displayHero = (target) => {
       current = (target + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === current));
+      slides.forEach((slide, slideIndex) => {
+        const active = slideIndex === current;
+        slide.classList.toggle('is-active', active);
+        const video = slide.querySelector('video');
+        if(video){
+          if(active) video.play().catch(() => {});
+          else { video.pause(); video.currentTime = 0; }
+        }
+      });
       dots.forEach((dot, dotIndex) => {
         const active = dotIndex === current;
         dot.classList.toggle('is-active', active);
@@ -1080,7 +1099,7 @@
     const startHero = () => {
       stopHero();
       if(slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        heroTimer = window.setInterval(() => displayHero(current + 1), 4200);
+        heroTimer = window.setInterval(() => displayHero(current + 1), 5000);
       }
     };
 
