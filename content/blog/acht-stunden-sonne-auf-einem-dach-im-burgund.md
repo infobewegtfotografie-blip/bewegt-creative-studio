@@ -1,12 +1,17 @@
 ---
-title: Acht Stunden Sonne auf einem Dach im Burgund
+title: Acht Sonnenstunden auf einem Dach im Burgund
 date: 2026-08-03
 lang: de
 group: niepce
 category: Die Kunst der Fotografie — 1
 summary: Wie die erste Fotografie ein Problem erfand, das wir bis heute nicht gelöst haben
+cover: /img/blog/point_de_vue_du_gras_by_niépce-_1826.jpg
 coverAlt: "Point de vue du Gras, die älteste erhaltene Fotografie, Nicéphore Niépce, 1827"
 draft: false
+gallery:
+  - image: /img/blog/point_de_vue_du_gras_by_niépce-_1826.jpg
+    alt: "Point de vue du Gras, die älteste erhaltene Fotografie, Nicéphore Niépce, 1827"
+    caption: "Point de vue du Gras, Nicéphore Niépce, 1827"
 next: Wie eine Kamera, die in eine Tasche passte, verändert hat, worauf Fotografen blickten — und warum die Straße erst zum Thema wurde, als man sie ohne Stativ begehen konnte.
 readMore:
   - '**Geoffrey Batchen**, *Burning with Desire: The Conception of Photography*, MIT Press, 1997. Warum die Idee der Fotografie um 1800 gleichzeitig bei mehreren Erfindern auftauchte.'

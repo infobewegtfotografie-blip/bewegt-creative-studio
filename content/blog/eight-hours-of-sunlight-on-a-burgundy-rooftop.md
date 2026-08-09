@@ -5,8 +5,13 @@ lang: en
 group: niepce
 category: The art of photography — 1
 summary: How the first photograph invented a problem we still have not solved
+cover: /img/blog/point_de_vue_du_gras_by_niépce-_1826.jpg
 coverAlt: "Point de vue du Gras, the oldest surviving photograph, Nicéphore Niépce, 1827"
 draft: false
+gallery:
+  - image: /img/blog/point_de_vue_du_gras_by_niépce-_1826.jpg
+    alt: "Point de vue du Gras, the oldest surviving photograph, Nicéphore Niépce, 1827"
+    caption: "Point de vue du Gras, Nicéphore Niépce, 1827"
 next: How a camera that fitted in a pocket changed what photographers looked at — and why the street only became a subject once you could walk down it without a tripod.
 readMore:
   - '**Geoffrey Batchen**, *Burning with Desire: The Conception of Photography*, MIT Press, 1997. Why the idea of photography surfaced in several inventors at once around 1800.'

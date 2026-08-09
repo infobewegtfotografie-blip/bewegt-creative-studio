@@ -7,9 +7,14 @@ summary: Comment la première photographie a inventé un problème que nous n'av
   toujours pas résolu
 author: BEWEGT CREATIVE STUDIO
 category: L'art de la photographie — 1
+cover: /img/blog/point_de_vue_du_gras_by_niépce-_1826.jpg
 coverAlt: Point de vue du Gras, la plus ancienne photographie connue, Nicéphore
   Niépce, 1827
 draft: false
+gallery:
+  - image: /img/blog/point_de_vue_du_gras_by_niépce-_1826.jpg
+    alt: Point de vue du Gras, la plus ancienne photographie connue, Nicéphore Niépce, 1827
+    caption: Point de vue du Gras, Nicéphore Niépce, 1827
 next: Comment un appareil qui tenait dans une poche a changé ce que les
   photographes regardaient — et pourquoi la rue n'est devenue un sujet qu'à
   partir du moment où on a pu y marcher sans trépied.
