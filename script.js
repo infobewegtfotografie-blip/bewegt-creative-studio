@@ -1076,6 +1076,10 @@
       slides.forEach((slide, slideIndex) => {
         const active = slideIndex === current;
         slide.classList.toggle('is-active', active);
+        if(active && slide.classList.contains('hero-slide-motion')){
+          const motionImage = slide.querySelector('img');
+          if(motionImage) motionImage.replaceWith(motionImage.cloneNode(true));
+        }
         const video = slide.querySelector('video');
         if(video){
           if(active) video.play().catch(() => {});
