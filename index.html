@@ -230,18 +230,43 @@
 
 <main id="main-content">
   <section class="hero" aria-labelledby="hero-title">
-    <picture>
+    <div class="hero-slides" data-home-hero>
+    <picture class="hero-slide is-active" data-kicker-en="Germany — Europe — Africa" data-kicker-fr="Allemagne — Europe — Afrique" data-kicker-de="Deutschland — Europa — Afrika" data-title-en="BEWEGT CREATIVE STUDIO" data-title-fr="BEWEGT CREATIVE STUDIO" data-title-de="BEWEGT CREATIVE STUDIO" data-copy-en="Visual experiences that move people." data-copy-fr="Des expériences visuelles qui touchent." data-copy-de="Visuelle Erlebnisse, die Menschen bewegen." data-cta-en="Start a Project" data-cta-fr="Démarrer un projet" data-cta-de="Projekt starten" data-href="#contact">
       <source srcset="img/hero.webp" type="image/webp">
       <img src="img/hero.jpg" width="1376" height="768" alt="BEWEGT Creative Studio film crew" fetchpriority="high" decoding="async">
     </picture>
+    <picture class="hero-slide" data-kicker-en="Photography" data-kicker-fr="Photographie" data-kicker-de="Fotografie" data-title-en="Images with feeling." data-title-fr="Des images qui touchent." data-title-de="Bilder mit Gefühl." data-copy-en="Portraits, weddings and visual stories shaped with a cinematic eye." data-copy-fr="Portraits, mariages et récits visuels façonnés avec un regard cinématographique." data-copy-de="Porträts, Hochzeiten und visuelle Geschichten mit filmischem Blick." data-cta-en="Explore Photography" data-cta-fr="Découvrir la photographie" data-cta-de="Fotografie entdecken" data-href="/photography.html">
+      <source srcset="/portfolio-designs/portfolio-designs/43-african-wedding-gold.webp" type="image/webp">
+      <img src="/portfolio-designs/portfolio-designs/43-african-wedding-gold.webp" width="1600" height="1067" alt="BEWEGT wedding photography" loading="eager" decoding="async">
+    </picture>
+    <picture class="hero-slide" data-kicker-en="Video Production" data-kicker-fr="Production vidéo" data-kicker-de="Videoproduktion" data-title-en="Stories in motion." data-title-fr="Des histoires en mouvement." data-title-de="Geschichten in Bewegung." data-copy-en="Films, documentaries and interviews built around stories that matter." data-copy-fr="Films, documentaires et interviews construits autour d’histoires qui comptent." data-copy-de="Filme, Dokumentationen und Interviews für Geschichten, die zählen." data-cta-en="Explore Video" data-cta-fr="Découvrir la vidéo" data-cta-de="Video entdecken" data-href="/video-production.html">
+      <source srcset="/portfolio-designs/portfolio-designs/30-video-production-set.webp" type="image/webp">
+      <img src="/portfolio-designs/portfolio-designs/30-video-production-set.webp" width="1600" height="1067" alt="BEWEGT video production set" loading="lazy" decoding="async">
+    </picture>
+    <picture class="hero-slide" data-kicker-en="Live Streaming" data-kicker-fr="Diffusion en direct" data-kicker-de="Live Streaming" data-title-en="Make the moment live." data-title-fr="Faites vivre le moment." data-title-de="Den Moment live erleben." data-copy-en="Reliable multi-camera production for events, churches and conferences." data-copy-fr="Une réalisation multicaméra fiable pour événements, églises et conférences." data-copy-de="Zuverlässige Multikamera-Produktion für Events, Gemeinden und Konferenzen." data-cta-en="Plan a Live Stream" data-cta-fr="Planifier un direct" data-cta-de="Live Stream planen" data-href="/live-streaming.html">
+      <source srcset="/portfolio-designs/portfolio-designs/45-concert-live-streaming.webp" type="image/webp">
+      <img src="/portfolio-designs/portfolio-designs/45-concert-live-streaming.webp" width="1600" height="1067" alt="BEWEGT live streaming production" loading="lazy" decoding="async">
+    </picture>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="eyebrow">Germany — Europe — Africa</p>
-      <h1 id="hero-title">BEWEGT<br><span>CREATIVE STUDIO</span></h1>
-      <p data-i18n="hero.subtitle">Visual experiences that move people.</p>
+      <p class="eyebrow" data-hero-kicker>Germany — Europe — Africa</p>
+      <h1 id="hero-title" data-hero-title>BEWEGT CREATIVE STUDIO</h1>
+      <p data-hero-copy>Visual experiences that move people.</p>
       <div class="hero-actions">
-        <a class="btn btn-light" href="#contact" data-i18n="buttons.start">Start a Project</a>
+        <a class="btn btn-light" href="#contact" data-hero-cta>Start a Project</a>
       </div>
+    </div>
+    <div class="hero-slider-controls" aria-label="Hero navigation">
+      <button type="button" data-hero-prev aria-label="Previous slide">←</button>
+      <div class="hero-slider-dots" role="tablist" aria-label="Choose a slide">
+        <button class="is-active" type="button" role="tab" aria-selected="true" aria-label="Slide 1" data-hero-dot="0"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Slide 2" data-hero-dot="1"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Slide 3" data-hero-dot="2"></button>
+        <button type="button" role="tab" aria-selected="false" aria-label="Slide 4" data-hero-dot="3"></button>
+      </div>
+      <span data-hero-status>01 / 04</span>
+      <button type="button" data-hero-next aria-label="Next slide">→</button>
     </div>
   </section>
 

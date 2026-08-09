@@ -1044,6 +1044,59 @@
     start();
   });
 
+  const homeHero = document.querySelector('[data-home-hero]');
+  if(homeHero){
+    const hero = homeHero.closest('.hero');
+    const slides = Array.from(homeHero.querySelectorAll('.hero-slide'));
+    const kicker = hero.querySelector('[data-hero-kicker]');
+    const title = hero.querySelector('[data-hero-title]');
+    const copy = hero.querySelector('[data-hero-copy]');
+    const cta = hero.querySelector('[data-hero-cta]');
+    const status = hero.querySelector('[data-hero-status]');
+    const dots = Array.from(hero.querySelectorAll('[data-hero-dot]'));
+    const previous = hero.querySelector('[data-hero-prev]');
+    const following = hero.querySelector('[data-hero-next]');
+    let current = 0;
+    let heroTimer;
+
+    const localized = (slide, key) => slide.dataset[`${key}${(document.documentElement.lang || 'en').replace(/^./, char => char.toUpperCase())}`] || slide.dataset[`${key}En`] || '';
+    const displayHero = (target) => {
+      current = (target + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === current));
+      dots.forEach((dot, dotIndex) => {
+        const active = dotIndex === current;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', String(active));
+      });
+      const slide = slides[current];
+      kicker.textContent = localized(slide, 'kicker');
+      title.textContent = localized(slide, 'title');
+      copy.textContent = localized(slide, 'copy');
+      cta.textContent = localized(slide, 'cta');
+      cta.href = slide.dataset.href;
+      status.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    };
+    const stopHero = () => window.clearInterval(heroTimer);
+    const startHero = () => {
+      stopHero();
+      if(slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        heroTimer = window.setInterval(() => displayHero(current + 1), 4200);
+      }
+    };
+
+    previous?.addEventListener('click', () => { displayHero(current - 1); startHero(); });
+    following?.addEventListener('click', () => { displayHero(current + 1); startHero(); });
+    dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => { displayHero(dotIndex); startHero(); }));
+    hero.addEventListener('mouseenter', stopHero);
+    hero.addEventListener('mouseleave', startHero);
+    hero.addEventListener('focusin', stopHero);
+    hero.addEventListener('focusout', startHero);
+    document.addEventListener('visibilitychange', () => document.hidden ? stopHero() : startHero());
+    document.addEventListener('bewegt:languagechange', () => displayHero(current));
+    displayHero(0);
+    startHero();
+  }
+
   document.addEventListener('contextmenu', (e) => {
     if(e.target && e.target.tagName === 'IMG') e.preventDefault();
   });
