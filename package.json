@@ -5,12 +5,17 @@
   "description": "Site BEWEGT CREATIVE STUDIO — generateur de blog statique",
   "scripts": {
     "build": "node build-blog.js && node build-admin.js",
-    "test": "node build-blog.test.js"
+    "test": "node build-blog.test.js",
+    "workers:dev": "wrangler dev",
+    "workers:deploy": "wrangler deploy"
   },
   "dependencies": {
     "decap-cms": "^3.15.1",
     "gray-matter": "^4.0.3",
     "marked": "^18.0.7",
     "sanitize-html": "2.17.6"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
   }
 }

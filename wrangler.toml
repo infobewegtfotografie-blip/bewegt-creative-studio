@@ -1,0 +1,10 @@
+name = "bewegt-oauth-workers"
+main = "workers/index.js"
+compatibility_date = "2024-08-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+# OAuth environment variables (set these in Cloudflare dashboard or via wrangler secret)
+# OAUTH_CLIENT_ID
+# OAUTH_CLIENT_SECRET
