@@ -1,0 +1,23 @@
+---
+// Markup shell for the image lightbox (ported from index.html:708-714).
+// Behavior lives in src/islands/lightbox.ts, loaded client:visible so it
+// doesn't cost anything until a portfolio/gallery grid actually scrolls
+// into view.
+---
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" type="button">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button">&#10094;</button>
+  <img id="lightboxImg" src="" alt="" />
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button">&#10095;</button>
+  <p id="lightboxCaption"></p>
+</div>
+
+<script>
+  import { initLightbox } from '../islands/lightbox';
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLightbox);
+  } else {
+    initLightbox();
+  }
+</script>

@@ -1,0 +1,71 @@
+---
+// Site header: brand mark, primary nav + services mega-menu, language switcher.
+// Markup ported 1:1 from the legacy index.html <header class="nav"> (all pages
+// shared this exact header) — classes/ids kept identical so style.css and the
+// nav-chrome behavior (src/lib/nav-chrome.ts) keep working unmodified.
+import { SERVICES } from '../lib/services';
+
+export interface Props {
+  /** Absolute-from-root href for the brand mark, e.g. "/" or "/index.html". */
+  homeHref?: string;
+}
+
+const { homeHref = '/' } = Astro.props;
+---
+
+<header class="nav" id="nav">
+  <a class="brand brand-logo" href={homeHref} aria-label="BEWEGT CREATIVE STUDIO">
+    <img
+      class="brand-mark brand-mark-light"
+      src="/img/brand/bewegt-logo-horizontal-ivory.png"
+      width="1188"
+      height="285"
+      alt="BEWEGT CREATIVE STUDIO"
+    />
+    <img
+      class="brand-mark brand-mark-dark"
+      src="/img/brand/bewegt-logo-horizontal-black.png"
+      width="1188"
+      height="285"
+      alt=""
+      aria-hidden="true"
+    />
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span>
+  </button>
+  <nav class="nav-links" id="navLinks">
+    <a href="/index.html#studio" data-i18n="nav.studio">Studio</a>
+    <div class="nav-dropdown">
+      <button type="button" aria-haspopup="true" aria-expanded="false" data-i18n="nav.services">Services</button>
+      <div class="nav-dropdown-menu service-mega-menu">
+        {SERVICES.map((service) => (
+          <a class="nav-service-link" href={service.href}>
+            <img
+              src={service.craftImage}
+              srcset={service.craftImageSrcset}
+              sizes="(max-width: 780px) 74px, 112px"
+              width={service.craftImageWidth}
+              height={service.craftImageHeight}
+              alt={service.title}
+              loading="lazy"
+            />
+            <span>
+              <strong data-i18n={`service.${service.slug}.title`}>{service.title}</strong>
+              <small data-i18n={`service.${service.slug}.tagline`}>{service.tagline}</small>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+    <a href="/index.html#work" data-i18n="nav.work">Work</a>
+    <a href="/blog/" data-i18n="nav.blog">Blog</a>
+    <a href="/index.html#faq" data-i18n="nav.faq">FAQ</a>
+    <a class="nav-cta" href="/index.html#contact" data-i18n="nav.start">Start a Project</a>
+  </nav>
+  <div class="lang-switcher">
+    <button type="button" class="lang-btn is-active" data-lang="en" aria-label="English">🇬🇧</button>
+    <button type="button" class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷</button>
+    <button type="button" class="lang-btn" data-lang="de" aria-label="Deutsch">🇩🇪</button>
+  </div>
+</header>

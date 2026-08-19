@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you.html
+Disallow: /admin/
+Disallow: /oauth/
+
+Sitemap: https://bewegtcreative.com/sitemap.xml
+
+Sitemap: https://bewegtcreative.com/blog/sitemap.xml

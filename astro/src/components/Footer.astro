@@ -1,0 +1,67 @@
+---
+// Site footer: brand summary, contact, social, newsletter signup, legal links.
+// Markup ported from legacy index.html <footer class="footer"> (lines 716-756).
+// Newsletter submits via AJAX to /api/newsletter (Turnstile + server
+// validation), replacing Netlify Forms.
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+---
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <strong>BEWEGT CREATIVE STUDIO</strong>
+      <p data-i18n="footer.tagline">Visual experiences that move people.</p>
+      <p>Germany ↔ Europe ↔ Africa</p>
+    </div>
+    <div>
+      <span data-i18n="footer.contact">Contact</span>
+      <a
+        href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project."
+        target="_blank"
+        rel="noopener noreferrer">WhatsApp</a
+      >
+      <a href="mailto:contact@bewegtcreative.com" rel="noopener noreferrer">contact@bewegtcreative.com</a>
+    </div>
+    <div>
+      <span data-i18n="footer.social">Social</span>
+      <a href="https://www.youtube.com/@bewegtcreativestudio" target="_blank" rel="noopener noreferrer">YouTube</a>
+    </div>
+  </div>
+
+  <div class="newsletter-section">
+    <form class="newsletter-form" id="newsletterForm" name="newsletter" method="POST" action="/api/newsletter">
+      <p hidden aria-hidden="true"><input name="bot-nl-field" tabindex="-1" autocomplete="off" /></p>
+      <p class="eyebrow" data-i18n="newsletter.eyebrow">Newsletter</p>
+      <p data-i18n="newsletter.heading">Stay in the loop</p>
+      <div class="newsletter-input-row">
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          maxlength="254"
+          required
+          autocomplete="email"
+          aria-label="Email address"
+        />
+        <button type="submit" class="btn btn-light" data-i18n="newsletter.submit">Subscribe</button>
+      </div>
+      {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>}
+      <p class="newsletter-note" data-i18n="newsletter.note">No spam. Occasional updates on new work and projects.</p>
+      <p class="newsletter-status" id="newsletterStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <p class="legal-links"><a href="/legal/impressum.html">Impressum</a><a href="/legal/datenschutz.html">Datenschutz</a></p>
+  <p class="copyright" data-i18n="footer.legal">© 2026 BEWEGT CREATIVE STUDIO. All Rights Reserved.</p>
+</footer>
+
+<script>
+  import { initFormSubmit } from '../islands/forms';
+  initFormSubmit({
+    formId: 'newsletterForm',
+    statusId: 'newsletterStatus',
+    successMessage: 'Thanks — you’re on the list.',
+    loadingMessage: 'Subscribing…',
+    genericErrorMessage: 'Something went wrong. Please try again.',
+  });
+</script>

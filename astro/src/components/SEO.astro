@@ -1,0 +1,48 @@
+---
+// Centralizes every <head> SEO tag: title, description, canonical, robots,
+// Open Graph, Twitter Card, and the JSON-LD @graph. Every page renders this
+// once so meta strategy lives in one place instead of copy-pasted per page
+// (as it was in the legacy static HTML).
+import { SITE_URL, buildPageJsonLd, type SeoProps } from '../lib/seo';
+
+export type Props = SeoProps;
+
+const {
+  title,
+  description,
+  path,
+  ogImage = '/img/og-image.jpg',
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+  lang = 'en',
+  index = true,
+} = Astro.props;
+
+const canonical = `${SITE_URL}${path}`;
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
+const jsonLd = buildPageJsonLd(Astro.props);
+---
+
+<meta name="robots" content={index ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' : 'noindex, nofollow'} />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content="BEWEGT CREATIVE STUDIO" />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content="BEWEGT CREATIVE STUDIO" />
+<meta property="og:image" content={ogImageAbsolute} />
+<meta property="og:image:width" content={String(ogImageWidth)} />
+<meta property="og:image:height" content={String(ogImageHeight)} />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : lang === 'fr' ? 'fr_FR' : 'de_DE'} />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:locale:alternate" content="fr_FR" />
+<meta property="og:locale:alternate" content="de_DE" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageAbsolute} />
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />

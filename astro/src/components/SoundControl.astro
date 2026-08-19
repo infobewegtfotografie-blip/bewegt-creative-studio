@@ -1,0 +1,27 @@
+---
+// Ambient soundscape widget (bottom-left floating control). Markup ported
+// from index.html:758-771 (the fuller version with prev/next track skip —
+// used site-wide instead of the reduced variant some legacy pages had, so
+// every page gets the same, already-tested control). Behavior lives in
+// src/islands/ambient-player.ts.
+---
+
+<div class="sound-control" id="soundControl">
+  <button class="sound-skip sound-prev" id="soundPrev" type="button" aria-label="Previous track">‹</button>
+  <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Play site mood">
+    <img class="sound-mascot" src="/img/music-smile-headphones.png?v=3" width="346" height="445" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    <span class="sound-copy" data-i18n="sound.play">Play</span>
+    <span class="sound-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+  <button class="sound-skip sound-next" id="soundNext" type="button" aria-label="Next track">›</button>
+  <label class="sound-volume" for="soundVolume">
+    <span class="sound-volume-label">Vol</span>
+    <input id="soundVolume" type="range" min="0" max="100" value="45" aria-label="Sound volume" />
+  </label>
+</div>
+<audio id="siteSound" preload="none"></audio>
+
+<script>
+  import { initAmbientPlayer } from '../islands/ambient-player';
+  initAmbientPlayer();
+</script>

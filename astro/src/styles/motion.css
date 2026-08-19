@@ -1,0 +1,61 @@
+/**
+ * Motion Design System — tokens + the scroll-reveal utility class.
+ * Legacy site had no generic scroll-reveal (only prefers-reduced-motion
+ * guards on the hero autoplay and rail carousel — see style.css:2287,2305);
+ * this is new, additive infrastructure, kept deliberately restrained per
+ * the "static first, dynamic where valuable" brief: one reveal pattern
+ * (fade + short rise), applied by src/islands/scroll-reveal.ts to section
+ * headings and card grids, not to every element on the page.
+ */
+:root {
+  --motion-distance: 18px;
+  --motion-duration: var(--duration-base);
+  --motion-duration-slow: var(--duration-slow);
+  --motion-easing: var(--ease);
+  --motion-stagger: 60ms;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--motion-distance));
+  transition: opacity var(--motion-duration) var(--motion-easing), transform var(--motion-duration) var(--motion-easing);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/*
+ * Native cross-document view transitions (not Astro's ClientRouter/SPA
+ * mode — deliberately not used here, see the comment on `<html>` in
+ * BaseLayout.astro). `navigation: auto` opts every full-page navigation
+ * into a browser-native cross-fade in browsers that support the feature
+ * (Chromium today) and is a no-op everywhere else — zero JS, no island
+ * re-init concerns, browser history stays completely untouched.
+ */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-base);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

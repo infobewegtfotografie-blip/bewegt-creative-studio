@@ -1,0 +1,128 @@
+---
+// Homepage. Ported section-by-section from the legacy index.html
+// (hero → trust bar → studio statement → services → pricing → portfolio →
+// testimonials → FAQ → booking → contact), same copy, same structure.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PricingSection from '../components/PricingSection.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SERVICES } from '../lib/services';
+---
+
+<BaseLayout
+  title="BEWEGT Creative Studio | Photography, Video & Design"
+  description="BEWEGT Creative Studio — also known as BEWEGT Creative and BEWEGT Studio — creates photography, video, live streaming, design and podcasts across Germany, Europe and Africa."
+  path="/index.html"
+>
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/img/hero.webp" type="image/webp" fetchpriority="high" />
+  </Fragment>
+
+  <Hero />
+
+  <section class="trust-bar" aria-label="Business strengths">
+    <div class="trust-items">
+      <div><strong>Germany</strong><span>based / international</span></div>
+      <div><strong>Europe + Africa</strong><span>cross-market production</span></div>
+      <div><strong>Fast planning</strong><span>clear timelines</span></div>
+      <div><strong>Premium finish</strong><span>cinematic output</span></div>
+    </div>
+  </section>
+
+  <section class="statement" id="studio">
+    <div class="studio-story">
+      <p data-i18n-html="studio.statement"><strong>BEWEGT CREATIVE STUDIO</strong> is an international visual production studio working between Germany, Europe and Africa — photography, film, live experiences, design and sound for people telling something true.</p>
+      <figure class="studio-image">
+        <picture><source srcset="/img/behind.webp" type="image/webp" /><img src="/img/behind.jpg" width="1537" height="1023" alt="BEWEGT CREATIVE STUDIO team working on visual production" loading="lazy" /></picture>
+      </figure>
+    </div>
+  </section>
+
+  <section class="visual-services" id="services" aria-label="Services">
+    {SERVICES.map((service, i) => (
+      <a class="visual-service" href={service.href}>
+        <picture><source srcset={service.craftImage} type="image/webp" /><img src={service.craftImage.replace('.webp', '.jpg')} width={service.craftImageWidth} height={service.craftImageHeight} alt={service.title} loading="lazy" /></picture>
+        <div>
+          <span>{String(i + 1).padStart(2, '0')}</span>
+          <h2 data-i18n={`service.${service.slug}.title`}>{service.title}</h2>
+        </div>
+      </a>
+    ))}
+  </section>
+
+  <PricingSection mode="index" />
+
+  <section class="work-section" id="work">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="work.eyebrow">Selected Work</p>
+      <h2 data-i18n="work.heading">Graphic Design Portfolio</h2>
+      <p data-i18n="work.sub">Posters, creative portraits, birthday visuals and event campaigns designed for digital communication.</p>
+    </div>
+    <ProjectGrid />
+  </section>
+
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="testimonials.eyebrow">What clients say</p>
+      <h2 data-i18n="testimonials.heading">Testimonials</h2>
+    </div>
+    <div class="testimonials-grid">
+      <figure class="testimonial-card">
+        <blockquote data-i18n="testimonial.1.quote">"BEWEGT captured our wedding with sensitivity and precision. Every image tells our story exactly as we lived it."</blockquote>
+        <figcaption>
+          <strong data-i18n="testimonial.1.name">Marie &amp; Kofi</strong>
+          <span data-i18n="testimonial.1.service">Wedding Photography — Cologne</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial-card">
+        <blockquote data-i18n="testimonial.2.quote">"Our live stream reached 2,000 viewers across three continents. The production quality was flawless."</blockquote>
+        <figcaption>
+          <strong data-i18n="testimonial.2.name">Grace Fellowship Church</strong>
+          <span data-i18n="testimonial.2.service">Live Streaming — Frankfurt</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial-card">
+        <blockquote data-i18n="testimonial.3.quote">"The graphic designs BEWEGT produced for our event campaign exceeded all our expectations."</blockquote>
+        <figcaption>
+          <strong data-i18n="testimonial.3.name">AfricaConnect e.V.</strong>
+          <span data-i18n="testimonial.3.service">Graphic Design — Berlin</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="testimonials-actions">
+      <a class="btn btn-light" href="https://www.google.com/search?q=BEWEGT+CREATIVE+STUDIO+avis" target="_blank" rel="noopener" data-i18n="testimonials.cta">Leave a Google Review</a>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2 data-i18n="faq.heading">Before we start</h2>
+    </div>
+    <details><summary data-i18n="faq.q1">Do you work across Europe and Africa?</summary><p data-i18n="faq.a1">Yes. BEWEGT CREATIVE STUDIO is based in Germany and available for selected projects across Europe and Africa.</p></details>
+    <details><summary data-i18n="faq.q2">What kind of projects do you produce?</summary><p data-i18n="faq.a2">Photography, video production, documentaries, live streaming, graphic design and podcast production.</p></details>
+    <details><summary data-i18n="faq.q3">How do I start a project?</summary><p data-i18n="faq.a3">Send a WhatsApp message with your idea, event date, location and the type of production you need.</p></details>
+  </section>
+
+  <section class="booking-section" id="booking">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="booking.eyebrow">Book a call</p>
+      <h2 data-i18n="booking.heading">Schedule a free discovery call</h2>
+      <p data-i18n="booking.sub">30 minutes to discuss your project. No commitment.</p>
+    </div>
+    <div class="calendly-wrapper" id="calendlyWidget">
+      <!-- BEWEGT: when your Calendly account is ready, swap this placeholder
+           for the embed code (https://calendly.com → Event type → Embed). -->
+      <div class="booking-placeholder">
+        <div class="booking-placeholder-inner">
+          <p class="eyebrow" data-i18n="booking.eyebrow">Book a call</p>
+          <p data-i18n="booking.soon">Booking calendar coming soon.</p>
+          <a class="btn btn-dark" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%2C%20I%20would%20like%20to%20schedule%20a%20discovery%20call." target="_blank" rel="noopener" data-i18n="booking.whatsapp">Book via WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm />
+</BaseLayout>

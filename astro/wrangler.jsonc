@@ -1,0 +1,20 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"compatibility_date": "2026-08-11",
+	// nodejs_compat: the blog markdown pipeline (sanitize-html → postcss →
+	// path/fs/url) needs Node built-ins even though the site itself has no
+	// server-side Node dependency at runtime (everything blog-related is
+	// prerendered at build time, not executed per-request).
+	"compatibility_flags": ["global_fetch_strictly_public", "nodejs_compat"],
+	"name": "bewegt-creative-studio",
+	"main": "@astrojs/cloudflare/entrypoints/server",
+	"assets": {
+		"directory": "./dist/client",
+		"binding": "ASSETS",
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "404-page"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

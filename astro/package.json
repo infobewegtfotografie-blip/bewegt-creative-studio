@@ -1,0 +1,31 @@
+{
+  "name": "bewegt-creative-studio-astro",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BEWEGT Creative Studio — Astro + TypeScript + Cloudflare",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/fix-blog-index.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate-types": "wrangler types",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.2.1",
+    "astro": "^7.2.1",
+    "marked": "^18.0.9",
+    "sanitize-html": "^2.17.6",
+    "wrangler": "^4.121.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/sanitize-html": "^2.16.1",
+    "patch-package": "^8.0.1",
+    "typescript": "^6.0.3"
+  }
+}

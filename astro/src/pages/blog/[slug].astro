@@ -1,0 +1,274 @@
+---
+// Blog article page — port of build-blog.js's renderPost() (lines 619-700)
+// plus renderArticleRail/renderJournalTicker/renderCluster/renderComments/
+// renderEditorialMedia. Same URL shape (/blog/<slug>.html), same hreflang
+// via the `group` field, same cluster/pillar series grouping, same
+// Article JSON-LD.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import { getAllPosts, getGroupVersions, getClusterPosts, humanDate, type Post } from '../../lib/blog';
+import { MENTIONS, getPromotions, getTickerItems } from '../../lib/blog-i18n';
+import { videoEmbed } from '../../lib/markdown';
+import { SITE_URL } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+const mentions = MENTIONS[post.lang];
+const allPosts = await getAllPosts();
+const versions = await getGroupVersions(post);
+const clusterPosts = await getClusterPosts(post);
+const clusterSiblings = clusterPosts.filter((p) => p.url !== post.url);
+const clusterPillar = !post.pillar ? clusterPosts.find((p) => p.pillar) : undefined;
+
+const sameLang = allPosts.filter((p) => p.lang === post.lang);
+const index = sameLang.findIndex((p) => p.url === post.url);
+const precedent = index >= 0 ? sameLang[index + 1] : undefined;
+const suivant = index > 0 ? sameLang[index - 1] : undefined;
+
+const promotions = getPromotions(mentions);
+const tickerItems = getTickerItems(mentions);
+const embed = videoEmbed(post.video, post.title);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.summary,
+  image: [`${SITE_URL}${post.partage}`],
+  datePublished: post.date,
+  dateModified: post.date,
+  inLanguage: post.lang,
+  articleSection: post.category || 'Journal',
+  wordCount: post.nombreMots,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}${post.url}` },
+  author: { '@type': 'Organization', name: post.author, url: SITE_URL },
+  publisher: {
+    '@type': 'Organization',
+    name: 'BEWEGT CREATIVE STUDIO',
+    url: SITE_URL,
+    logo: { '@type': 'ImageObject', url: `${SITE_URL}/img/brand/bewegt-logo-horizontal-black.png` },
+  },
+};
+---
+
+<BaseLayout
+  title={`${post.title} — BEWEGT CREATIVE STUDIO`}
+  description={post.summary}
+  path={post.url}
+  ogImage={post.partage}
+  lang={post.lang}
+  bodyClass={post.aCouverture ? undefined : 'article-sobre'}
+>
+  <Fragment slot="head">
+    {Object.entries(versions).map(([code, href]) => <link rel="alternate" hreflang={code} href={`${SITE_URL}${href}`} />)}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  </Fragment>
+
+  {post.aCouverture ? (
+    <section class="page-hero post-hero">
+      <img src={post.cover} width="1600" height="1067" alt={post.coverAlt} />
+      <div class="hero-overlay"></div>
+      <div class="page-hero-content">
+        {post.category && <p class="eyebrow">{post.category}</p>}
+        <h1 lang={post.lang}>{post.title}</h1>
+        {post.summary && <p lang={post.lang}>{post.summary}</p>}
+        <p class="article-meta">{mentions.par} {post.author} · <time datetime={post.date}>{humanDate(post.date)}</time> · {mentions.lecture(post.tempsLecture)}</p>
+      </div>
+    </section>
+  ) : (
+    <header class="article-tete article-tete-sobre">
+      {post.category && <p class="eyebrow">{post.category}</p>}
+      <h1 lang={post.lang}>{post.title}</h1>
+      {post.summary && <p class="article-chapo" lang={post.lang}>{post.summary}</p>}
+      <p class="article-meta">{mentions.par} {post.author} · <time datetime={post.date}>{humanDate(post.date)}</time> · {mentions.lecture(post.tempsLecture)}</p>
+    </header>
+  )}
+
+  <nav class="journal-ticker" aria-label={mentions.decouvrir}>
+    <div class="journal-ticker-track">
+      {tickerItems.map((item) => <a href={item.url}>{item.label}<span aria-hidden="true">↗</span></a>)}
+    </div>
+    <div class="journal-ticker-track" aria-hidden="true">
+      {tickerItems.map((item) => <a href={item.url}>{item.label}<span aria-hidden="true">↗</span></a>)}
+    </div>
+  </nav>
+
+  <article class="post-body article-texte" lang={post.lang} data-translations={Object.keys(versions).length ? JSON.stringify(versions) : undefined}>
+    <div class="article-layout">
+      <aside class="article-context" aria-label={mentions.autour}>
+        <div class="rail-facts">
+          <p><span>{mentions.publie}</span><time datetime={post.date}>{humanDate(post.date)}</time></p>
+          <p><span>{mentions.temps}</span><strong>{post.tempsLecture} min</strong></p>
+        </div>
+        {(precedent || suivant) && (
+          <nav class="rail-reading" aria-label={mentions.navigation}>
+            {precedent && (
+              <a class="rail-story" href={precedent.url}>
+                <span>{mentions.precedent}</span>
+                <strong>{precedent.title}</strong>
+                <small>{precedent.category || 'Journal'}</small>
+              </a>
+            )}
+            {suivant && (
+              <a class="rail-story" href={suivant.url}>
+                <span>{mentions.suivant}</span>
+                <strong>{suivant.title}</strong>
+                <small>{suivant.category || 'Journal'}</small>
+              </a>
+            )}
+          </nav>
+        )}
+        <section class="rail-promos" data-rail-carousel aria-label={mentions.decouvrir}>
+          <div class="rail-slides">
+            {promotions.map((item, i) => (
+              <a class:list={['rail-promo', i === 0 && 'is-active']} href={item.url} tabindex={i ? -1 : undefined} aria-hidden={i ? 'true' : undefined}>
+                <img src={item.image} alt="" loading="lazy" />
+                <span>{item.label}</span><strong>{item.title}</strong><b aria-hidden="true">↗</b>
+              </a>
+            ))}
+          </div>
+          <div class="rail-controls">
+            <button type="button" data-rail-prev aria-label={mentions.precedentPromo}>←</button>
+            <span data-rail-status>1 / {promotions.length}</span>
+            <button type="button" data-rail-next aria-label={mentions.suivantPromo}>→</button>
+          </div>
+        </section>
+      </aside>
+
+      <div class="article-main">
+        <Fragment set:html={embed} />
+        <Fragment set:html={post.body} />
+
+        {post.gallery.length > 0 && (
+          <section class="post-gallery" aria-label="Galerie photo">
+            {post.gallery.map((item) => (
+              <figure class="design-card" data-full={item.image} data-caption={item.caption || item.alt}>
+                <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
+                {item.caption && <figcaption>{item.caption}</figcaption>}
+              </figure>
+            ))}
+          </section>
+        )}
+
+        {post.localVideo && (
+          <figure class="post-media post-media-video">
+            {post.mediaTitle && <figcaption>{post.mediaTitle}</figcaption>}
+            <video controls preload="metadata" playsinline poster={post.videoPoster || undefined}>
+              <source src={post.localVideo} />
+              Your browser cannot play this video.
+            </video>
+            <a class="media-download" href={post.localVideo} download>Download the video</a>
+          </figure>
+        )}
+
+        {post.localAudio && (
+          <figure class="post-media post-media-audio">
+            <figcaption>{post.mediaTitle || 'Listen'}</figcaption>
+            <audio controls preload="metadata" src={post.localAudio}>Your browser cannot play this audio.</audio>
+          </figure>
+        )}
+
+        {post.documents.length > 0 && (
+          <section class="post-documents" aria-label="Downloadable documents">
+            <h2>Documents</h2>
+            {post.documents.map((doc) => (
+              <a class="post-document" href={doc.file} download>
+                <span aria-hidden="true">PDF</span>
+                <strong>{doc.title}</strong>
+                {doc.description && <small>{doc.description}</small>}
+                <b aria-hidden="true">↓</b>
+              </a>
+            ))}
+          </section>
+        )}
+
+        {post.cta.label && post.cta.url && (
+          <aside class="post-cta">
+            <p>{post.cta.label}</p>
+            <a href={post.cta.url} target={post.cta.url.startsWith('https://') ? '_blank' : undefined} rel={post.cta.url.startsWith('https://') ? 'noopener' : undefined}>
+              Discover <span aria-hidden="true">→</span>
+            </a>
+          </aside>
+        )}
+
+        {post.next && (
+          <aside class="article-suite"><b>{mentions.suite}</b>{post.next}</aside>
+        )}
+
+        {(post.notes.length > 0 || post.readMore.length > 0) && (
+          <section class="article-appareil">
+            {post.notes.length > 0 && (
+              <>
+                <h2>{mentions.sources}</h2>
+                <ol class="article-sources">
+                  {post.notes.map((n) => (
+                    <li id={`note-${n.numero}`}>
+                      <Fragment set:html={n.contenu} /> <a class="retour" href={`#appel-${n.numero}`} aria-label="Back to text">↩</a>
+                    </li>
+                  ))}
+                </ol>
+              </>
+            )}
+            {post.readMore.length > 0 && (
+              <>
+                <h2>{mentions.plusLoin}</h2>
+                <ul class="article-bibliographie">
+                  {post.readMore.map((r) => <li set:html={r} />)}
+                </ul>
+              </>
+            )}
+          </section>
+        )}
+      </div>
+    </div>
+  </article>
+
+  {post.cluster && clusterSiblings.length > 0 && (
+    <section class="article-cluster">
+      <p class="eyebrow">{mentions.serie}</p>
+      {clusterPillar && <a class="cluster-pillar-link" href={clusterPillar.url}>{mentions.versLePilier} {clusterPillar.title}</a>}
+      <div class="blog-grid cluster-grid">
+        {clusterSiblings.map((p) => <BlogCard post={p} />)}
+      </div>
+    </section>
+  )}
+
+  <section class="comments" id="comments">
+    <div class="comments-inner">
+      <p class="eyebrow">Comments</p>
+      <h2>{post.comments.length ? 'What readers said' : 'Be the first to comment'}</h2>
+      {post.comments.length > 0 && (
+        <ul class="comment-list">
+          {post.comments.map((c) => (
+            <li class="comment">
+              <p class="comment-head"><strong>{c.name}</strong>{c.date && <time datetime={c.date}>{humanDate(c.date)}</time>}</p>
+              <p class="comment-text" set:html={c.message.replace(/\r?\n/g, '<br>')} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <form class="comment-form" name="comment" method="POST" action="/comment-received.html">
+        <input type="hidden" name="post" value={post.slug} />
+        <p class="comment-hp"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <label for="c-name">Your name</label>
+        <input id="c-name" name="name" type="text" required maxlength="80" autocomplete="name" />
+        <label for="c-email"><span>Your email</span> <span class="note">— not published, only so we can reply</span></label>
+        <input id="c-email" name="email" type="email" maxlength="120" autocomplete="email" />
+        <label for="c-message">Your comment</label>
+        <textarea id="c-message" name="message" rows="5" required maxlength="2000"></textarea>
+        <label class="comment-consent"><input type="checkbox" name="consent" required /> <span>I agree that my name and comment may be published on this page.</span></label>
+        <button class="btn btn-dark" type="submit">Send comment</button>
+        <p class="comment-note">Comments are reviewed before they appear. We never publish your email address.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="next-services">
+    <p class="eyebrow" data-i18n="blog.eyebrow">Journal</p>
+    <div><a href="/blog/" data-i18n="blog.all">All stories</a><a href="/index.html#contact">Start a Project</a></div>
+  </section>
+</BaseLayout>

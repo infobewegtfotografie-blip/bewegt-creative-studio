@@ -1,0 +1,69 @@
+---
+// Project-inquiry contact section (CTA + form). Ported from index.html:656-705.
+// Submits via AJAX to /api/contact (Turnstile + server validation + Resend),
+// replacing Netlify Forms. Honeypot field kept for defense in depth.
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+---
+
+<section class="cta" id="contact">
+  <picture><source srcset="/img/contact.webp" type="image/webp" /><img src="/img/contact.jpg" width="1536" height="1024" alt="Contact BEWEGT" loading="lazy" /></picture>
+  <div>
+    <p class="eyebrow" data-i18n="nav.contact">Contact</p>
+    <h2 data-i18n-html="cta.heading">Let's Work<br />Together.</h2>
+    <p data-i18n="cta.sub">Tell us your story. Photography, film production, live streaming, podcast production or graphic design.</p>
+    <div class="contact-trust-steps" aria-label="How it works">
+      <div><strong>01</strong><span>Tell us your idea</span></div>
+      <div><strong>02</strong><span>We define the scope</span></div>
+      <div><strong>03</strong><span>We produce with clarity</span></div>
+    </div>
+    <form class="contact-form" id="projectInquiryForm" name="project-inquiry" method="POST" action="/api/contact">
+      <p class="contact-honeypot" hidden aria-hidden="true">
+        <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
+      <div class="contact-form-grid">
+        <label>
+          <span data-i18n="form.name">Name</span>
+          <input type="text" name="name" autocomplete="name" maxlength="120" required />
+        </label>
+        <label>
+          <span data-i18n="form.email">Email</span>
+          <input type="email" name="email" autocomplete="email" maxlength="254" required />
+        </label>
+      </div>
+      <label>
+        <span data-i18n="form.service">Service needed</span>
+        <select name="service" required>
+          <option value="" data-i18n="form.service.placeholder">Choose a service</option>
+          <option value="Photography" data-i18n="service.photography.title">Photography</option>
+          <option value="Video Production" data-i18n="service.video-production.title">Video Production</option>
+          <option value="Live Streaming" data-i18n="service.live-streaming.title">Live Streaming</option>
+          <option value="Graphic Design" data-i18n="service.graphic-design.title">Graphic Design</option>
+          <option value="Podcast Production" data-i18n="service.podcast-production.title">Podcast Production</option>
+        </select>
+      </label>
+      <label>
+        <span data-i18n="form.message">Tell us about your project</span>
+        <textarea name="message" rows="5" maxlength="5000" required></textarea>
+      </label>
+      {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey}></div>}
+      <button class="btn btn-light" type="submit" data-i18n="form.submit">Send project request</button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+    <div class="contact-alternatives">
+      <a class="btn btn-outline" href="https://wa.me/4917670064700?text=Hello%20BEWEGT%20CREATIVE%20STUDIO%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" data-i18n="buttons.whatsapp">Start on WhatsApp</a>
+      <a class="contact-email" href="mailto:contact@bewegtcreative.com" rel="noopener noreferrer">contact@bewegtcreative.com</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initFormSubmit } from '../islands/forms';
+  initFormSubmit({
+    formId: 'projectInquiryForm',
+    statusId: 'formStatus',
+    successRedirect: '/thank-you.html',
+    successMessage: 'Sent — redirecting…',
+    loadingMessage: 'Sending…',
+    genericErrorMessage: 'Something went wrong. Please try WhatsApp or email instead.',
+  });
+</script>

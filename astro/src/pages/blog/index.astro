@@ -1,0 +1,56 @@
+---
+// Blog index. Port of build-blog.js's renderIndex() (lines 360-406):
+// a featured story (most recent post) followed by the card grid.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import { getAllPosts, humanDate } from '../../lib/blog';
+
+const posts = await getAllPosts();
+const [featured, ...remaining] = posts;
+---
+
+<BaseLayout
+  title="Journal — BEWEGT CREATIVE STUDIO"
+  description="Stories, behind the scenes and visual work from BEWEGT CREATIVE STUDIO."
+  path="/blog/"
+>
+  <section class="page-hero">
+    <picture><source srcset="/img/behind.webp" type="image/webp" /><img src="/img/behind.jpg" width="1600" height="1067" alt="BEWEGT behind the scenes" /></picture>
+    <div class="hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="eyebrow" data-i18n="blog.eyebrow">Journal</p>
+      <h1 data-i18n="blog.title">Stories</h1>
+      <p data-i18n="blog.sub">Behind the scenes, projects and thoughts from the studio.</p>
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <div class="blog-intro">
+      <p class="eyebrow">Studio notes</p>
+      <h2>Thoughts, process and stories from the field.</h2>
+    </div>
+
+    {featured && (
+      <div class="featured-story-wrap">
+        <article class="featured-story">
+          <a href={featured.url} class="featured-story-link">
+            <div class="featured-story-image">
+              <img src={featured.cover} alt={featured.coverAlt} width="1600" height="1067" loading="eager" />
+            </div>
+            <div class="featured-story-copy">
+              <span class="featured-story-label">Featured story</span>
+              <h2>{featured.title}</h2>
+              <p>{featured.summary}</p>
+              <span class="featured-story-meta">{featured.category || 'Journal'} · {humanDate(featured.date)}</span>
+            </div>
+          </a>
+        </article>
+      </div>
+    )}
+
+    <div class="blog-grid">
+      {remaining.map((post) => <BlogCard post={post} />)}
+    </div>
+    <p class="blog-empty" data-i18n="blog.empty" hidden={posts.length > 0}>No stories published yet. Come back soon.</p>
+  </section>
+</BaseLayout>

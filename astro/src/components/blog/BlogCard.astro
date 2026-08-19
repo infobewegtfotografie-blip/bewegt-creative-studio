@@ -1,0 +1,30 @@
+---
+// Article card used in the blog index grid and "in this series" cluster
+// grids. Ported from build-blog.js's renderBlogCard() (lines 348-358).
+import type { Post } from '../../lib/blog';
+import { humanDate } from '../../lib/blog';
+
+export interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<a class="blog-card" data-lang={post.lang} lang={post.lang} href={post.url}>
+  <img
+    src={post.cover}
+    alt={post.coverAlt}
+    width="1200"
+    height="800"
+    loading="lazy"
+  />
+  <div class="blog-card-body">
+    <div class="blog-card-meta">
+      <span class="blog-card-tag">{post.category || 'Journal'}</span>
+      <time datetime={post.date}>{humanDate(post.date)}</time>
+    </div>
+    <h2>{post.title}</h2>
+    <p>{post.summary}</p>
+  </div>
+</a>

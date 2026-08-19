@@ -1,0 +1,25 @@
+---
+// Legal pages (Impressum, Datenschutz), rendered from the `legal` content
+// collection. Ported from build-blog.js's renderLegal() — same structure
+// (eyebrow + title header, then the markdown body in a .post-body article).
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('legal');
+  return pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={`${page.data.title} — BEWEGT CREATIVE STUDIO`} description={page.data.summary ?? page.data.title} path={`/legal/${page.id}.html`} lang="de">
+  <section class="legal-head">
+    <p class="eyebrow">{page.data.eyebrow ?? 'Rechtliches'}</p>
+    <h1>{page.data.title}</h1>
+  </section>
+  <article class="post-body" lang="de">
+    <Content />
+  </article>
+</BaseLayout>

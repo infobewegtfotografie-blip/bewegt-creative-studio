@@ -1,0 +1,95 @@
+---
+// Shared template for the 5 service landing pages (photography,
+// video-production, live-streaming, graphic-design, podcast-production).
+// Ported from the near-identical structure of the 5 legacy *.html files:
+// page-hero → intro → 6 offer items → locked pricing engine → portfolio →
+// "explore more" cross-links → compact contact CTA.
+import BaseLayout from './BaseLayout.astro';
+import PricingSection from '../components/PricingSection.astro';
+import { SERVICES } from '../lib/services';
+import type { ServiceContent } from '../lib/service-content';
+
+export interface Props {
+  content: ServiceContent;
+}
+
+const { content } = Astro.props;
+const otherServices = SERVICES.filter((s) => s.slug !== content.slug);
+const whatsappHref = `https://wa.me/4917670064700?text=${encodeURIComponent(
+  `Hello BEWEGT CREATIVE STUDIO, I would like to discuss a ${content.whatsappServiceLabel} project.`,
+)}`;
+---
+
+<BaseLayout
+  title={`${content.title} — BEWEGT CREATIVE STUDIO`}
+  description={content.metaDescription}
+  path={`/${content.slug}.html`}
+>
+  <section class="page-hero">
+    <picture>
+      <source srcset={`${content.heroImage}.webp`} type="image/webp" />
+      <img src={`${content.heroImage}.jpg`} width={content.heroImageWidth} height={content.heroImageHeight} alt={content.title} />
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="eyebrow" data-i18n="page.service">Service</p>
+      {content.titleLines ? (
+        <h1 class="video-production-title">
+          <span data-i18n={`service.${content.slug}.hero.line1`}>{content.titleLines[0]}</span>
+          <span data-i18n={`service.${content.slug}.hero.line2`}>{content.titleLines[1]}</span>
+        </h1>
+      ) : (
+        <h1 data-i18n={`service.${content.slug}.title`}>{content.title}</h1>
+      )}
+      <p data-i18n={`service.${content.slug}.tagline`}>{content.tagline}</p>
+    </div>
+  </section>
+
+  <section class="service-intro">
+    <p data-i18n={`service.${content.slug}.intro`}>{content.intro}</p>
+  </section>
+
+  <section class="service-list">
+    {content.items.map((item, i) => (
+      <article>
+        <h3 data-i18n={`service.${content.slug}.item${i}.title`}>{item.title}</h3>
+        <p data-i18n={`service.${content.slug}.item${i}.desc`}>{item.desc}</p>
+      </article>
+    ))}
+  </section>
+
+  <PricingSection mode={content.pricingKey} />
+
+  <section class="work-section service-work">
+    <div class="section-head">
+      <p class="eyebrow">{content.title} Work</p>
+      <h2>{content.workHeading}</h2>
+    </div>
+    <div class="design-grid">
+      {content.workItems.map((item) => (
+        <figure class="design-card" data-full={item.full} data-caption={item.caption}>
+          <img src={item.src} srcset={item.srcset} sizes={item.sizes} width={item.width} height={item.height} alt={item.alt} loading="lazy" />
+          <figcaption>{item.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="next-services">
+    <p class="eyebrow" data-i18n="page.explore">Explore more</p>
+    <div>
+      {otherServices.map((s) => (
+        <a href={s.href} data-i18n={`service.${s.slug}.title`}>{s.title}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="cta compact" id="contact">
+    <div>
+      <p class="eyebrow" data-i18n="buttons.start">Start a Project</p>
+      <h2 data-i18n={`service.${content.slug}.cta`}>{content.ctaHeading}</h2>
+      <p data-i18n="page.share">Share your idea, date, location and the kind of production you need.</p>
+      <a class="btn btn-light" href={whatsappHref} target="_blank" rel="noopener">WhatsApp BEWEGT</a>
+    </div>
+  </section>
+</BaseLayout>

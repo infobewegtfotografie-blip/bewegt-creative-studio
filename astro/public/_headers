@@ -1,0 +1,57 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://cdn.clarity.ms https://calendly.com https://assets.calendly.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com https://calendly.com https://open.spotify.com https://podcasters.spotify.com https://challenges.cloudflare.com; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com https://www.clarity.ms https://i.ytimg.com https://img.youtube.com; font-src 'self' https://assets.calendly.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://region1.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.clarity.ms https://c.bing.com https://calendly.com https://open.er-api.com https://challenges.cloudflare.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
+/
+  Cache-Control: no-cache, must-revalidate
+
+/*.html
+  Cache-Control: no-cache, must-revalidate
+
+/blog/*
+  Cache-Control: no-cache, must-revalidate
+
+/portfolio-designs/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/img/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/fonts/*
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/audio/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/*.css
+  Cache-Control: no-cache, must-revalidate
+
+/*.js
+  Cache-Control: no-cache, must-revalidate
+
+# Back-office /admin — its own CSP, stricter than the public site is not
+# possible here (Decap needs unsafe-eval + GitHub API access), so it's a
+# deliberately separate, wider policy scoped to just this path.
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache, must-revalidate
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://avatars.githubusercontent.com https://raw.githubusercontent.com; font-src 'self' data:; connect-src 'self' blob: data: https://api.github.com https://github.com https://uploads.githubusercontent.com https://raw.githubusercontent.com https://avatars.githubusercontent.com; frame-src 'self' blob:; worker-src 'self' blob:; child-src 'self' blob:; media-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
+# Editor bundle: versioned filenames, safe to cache long.
+/admin/cms/*
+  Cache-Control: public, max-age=604800, must-revalidate
+
+# Auth endpoints must never be cached.
+/oauth/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
+
+# API endpoints: never cached, never indexed.
+/api/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow

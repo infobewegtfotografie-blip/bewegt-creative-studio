@@ -1,0 +1,25 @@
+# Bare service-page paths (/photography -> /photography.html) are
+# intentionally NOT redirected here: @astrojs/cloudflare's own
+# matchStaticAsset()/fallbackToAssets() strip ".html" internally and fetch
+# the bare path from the assets binding to resolve prerendered pages (see
+# wrangler.jsonc's comment). An explicit redirect rule for the exact same
+# bare path creates a redirect loop with that internal resolution. The
+# platform's default html_handling ("auto-trailing-slash") already serves
+# /photography.html's content directly at /photography with no redirect
+# needed, and the canonical <link> tag (SEO.astro) points at the *.html
+# URL regardless of which form was requested.
+
+# Bot traps (wp-admin, .env, .git, phpmyadmin, etc.) are intentionally not
+# listed here: Cloudflare Workers Assets' _redirects only allows 200/301/
+# 302/303/307/308, not 404 — and these paths don't exist as real files
+# anyway, so they already 404 through the site's normal 404.html without
+# needing an explicit rule.
+/.well-known/security.txt /security.txt 200
+
+# Short addresses for the legal pages.
+/impressum /legal/impressum.html 301
+/datenschutz /legal/datenschutz.html 301
+
+# The opening article was born from the test post: keep the old address alive.
+/blog/cvezucgob /blog/huit-heures-de-soleil-sur-un-toit-de-bourgogne.html 301
+/blog/cvezucgob.html /blog/huit-heures-de-soleil-sur-un-toit-de-bourgogne.html 301

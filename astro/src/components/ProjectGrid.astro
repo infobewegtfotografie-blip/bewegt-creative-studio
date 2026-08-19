@@ -1,0 +1,34 @@
+---
+// Graphic-design portfolio grid, driven by src/lib/portfolio.ts. Ported
+// 1:1 from index.html's .design-grid — same items, same order, same
+// responsive srcset. The featured case-study card links to the standalone
+// "un-apotre-du-developpement" project page.
+import { PORTFOLIO_ITEMS } from '../lib/portfolio';
+---
+
+<div class="design-grid">
+  <a class="design-card featured-project-card" href="/un-apotre-du-developpement.html" aria-label="Découvrir le projet Un apôtre du développement">
+    <img
+      class="official-cover-media"
+      src="/img/projects/un-apotre-du-developpement/couverture-officielle-1200w.webp"
+      srcset="/img/projects/un-apotre-du-developpement/couverture-officielle-640w.webp 640w, /img/projects/un-apotre-du-developpement/couverture-officielle-1200w.webp 1200w, /img/projects/un-apotre-du-developpement/couverture-officielle.webp 1796w"
+      sizes="(max-width: 780px) 90vw, (max-width: 1100px) 94vw, 80vw"
+      width="1796"
+      height="1276"
+      alt="Couverture officielle complète du livre Un apôtre du développement"
+      loading="lazy"
+    />
+    <span class="featured-project-copy">
+      <small>Design éditorial · Étude de cas</small>
+      <strong>Un apôtre du développement</strong>
+      <em>Découvrir le projet →</em>
+    </span>
+  </a>
+
+  {PORTFOLIO_ITEMS.map((item) => (
+    <figure class="design-card" data-full={item.full} data-caption={item.caption}>
+      <img src={item.src} srcset={item.srcset} sizes={item.sizes} width={item.width} height={item.height} alt={item.alt} loading="lazy" />
+      <figcaption>{item.caption}</figcaption>
+    </figure>
+  ))}
+</div>

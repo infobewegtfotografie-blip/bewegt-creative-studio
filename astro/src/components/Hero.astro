@@ -1,0 +1,61 @@
+---
+// Homepage cinematic hero slider. Renders src/lib/hero-slides.ts into the
+// same DOM shape/data-attributes the legacy site used (index.html:242-275)
+// so src/islands/hero-slider.ts (a direct port of script.js's slider logic)
+// keeps working unmodified. Loaded client:load since it's above the fold.
+import { HERO_SLIDES } from '../lib/hero-slides';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-slides" data-home-hero>
+    {HERO_SLIDES.map((slide, i) => (
+      <picture
+        class:list={['hero-slide', slide.id === 'showreel' && 'hero-slide-motion', i === 0 && 'is-active']}
+        style={slide.position ? `--hero-position:${slide.position}` : undefined}
+        data-kicker-en={slide.en.kicker}
+        data-kicker-fr={slide.fr.kicker}
+        data-kicker-de={slide.de.kicker}
+        data-title-en={slide.en.title}
+        data-title-fr={slide.fr.title}
+        data-title-de={slide.de.title}
+        data-copy-en={slide.en.copy}
+        data-copy-fr={slide.fr.copy}
+        data-copy-de={slide.de.copy}
+        data-cta-en={slide.en.cta}
+        data-cta-fr={slide.fr.cta}
+        data-cta-de={slide.de.cta}
+        data-href={slide.href}
+      >
+        <img
+          src={slide.image}
+          width={slide.imageWidth}
+          height={slide.imageHeight}
+          alt={i === 0 ? 'BEWEGT Creative Studio motion showreel' : slide.en.title}
+          loading={slide.loading ?? (i < 2 ? undefined : 'lazy')}
+          fetchpriority={slide.fetchpriority}
+          decoding="async"
+        />
+      </picture>
+    ))}
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow" data-hero-kicker>Germany — Europe — Africa</p>
+    <h1 id="hero-title" data-hero-title>BEWEGT CREATIVE STUDIO</h1>
+    <p data-hero-copy>Visual experiences that move people.</p>
+    <div class="hero-actions">
+      <a class="btn btn-light" href="#contact" data-hero-cta>Start a Project</a>
+    </div>
+  </div>
+  <div class="hero-slider-controls" aria-label="Hero navigation">
+    <button type="button" data-hero-prev aria-label="Previous slide">←</button>
+    <div class="hero-slider-dots" role="tablist" aria-label="Choose a slide"></div>
+    <span data-hero-status>01 / {String(HERO_SLIDES.length).padStart(2, '0')}</span>
+    <button type="button" data-hero-next aria-label="Next slide">→</button>
+  </div>
+</section>
+
+<script>
+  import { initHeroSlider } from '../islands/hero-slider';
+  initHeroSlider();
+</script>

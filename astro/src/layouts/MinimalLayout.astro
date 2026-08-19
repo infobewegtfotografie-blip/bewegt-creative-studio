@@ -1,0 +1,25 @@
+---
+// Bare-bones shell for the 3 utility pages (thank-you, comment-received,
+// 404) — no header/footer/nav/lightbox/sound-control, matching the legacy
+// pages exactly. Always noindex, no JSON-LD (nothing to index).
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body class="thank-you-page">
+    <slot />
+  </body>
+</html>

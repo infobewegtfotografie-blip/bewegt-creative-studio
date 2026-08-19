@@ -1,0 +1,39 @@
+diff --git a/node_modules/@astrojs/cloudflare/dist/utils/cf-helpers.js b/node_modules/@astrojs/cloudflare/dist/utils/cf-helpers.js
+index f3bf070..5c1bec2 100644
+--- a/node_modules/@astrojs/cloudflare/dist/utils/cf-helpers.js
++++ b/node_modules/@astrojs/cloudflare/dist/utils/cf-helpers.js
+@@ -2,11 +2,24 @@ import { getValidatedIpFromHeader } from "@astrojs/internal-helpers/request";
+ function matchStaticAsset(manifest, requestUrl, env) {
+   const { pathname } = new URL(requestUrl);
+   if (manifest.assets.has(pathname)) {
+-    return env.ASSETS.fetch(requestUrl.replace(/\.html$/, ""));
++    return env.ASSETS.fetch(requestUrl);
+   }
+   return void 0;
+ }
+ async function fallbackToAssets(requestUrl, env) {
++  const exact = await env.ASSETS.fetch(requestUrl);
++  if (exact.status !== 404) {
++    return exact;
++  }
++  const url = new URL(requestUrl);
++  if (url.pathname.endsWith("/")) {
++    const indexedUrl = new URL(url);
++    indexedUrl.pathname += "index.html";
++    const indexed = await env.ASSETS.fetch(indexedUrl);
++    if (indexed.status !== 404) {
++      return indexed;
++    }
++  }
+   const asset = await env.ASSETS.fetch(
+     requestUrl.replace(/index.html$/, "").replace(/\.html$/, "")
+   );
+@@ -17,7 +30,7 @@ async function fallbackToAssets(requestUrl, env) {
+ }
+ function createErrorPageFetch(env) {
+   return async (url) => {
+-    return env.ASSETS.fetch(url.replace(/\.html$/, ""));
++    return env.ASSETS.fetch(url);
+   };
+ }
+ function createLocals(ctx) {

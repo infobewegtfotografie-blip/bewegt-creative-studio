@@ -1,0 +1,73 @@
+---
+// Shared shell for every page: <head> boilerplate + SEO + global styles,
+// skip-link, Header, page content, Footer, and the two global behavior
+// modules (nav chrome + consent banner) that every legacy page loaded.
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SoundControl from '../components/SoundControl.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import Lightbox from '../components/Lightbox.astro';
+import SEO, { type Props as SeoProps } from '../components/SEO.astro';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/motion.css';
+
+// Page transitions use the native cross-document View Transition API
+// (motion.css's `@view-transition { navigation: auto; }`) instead of
+// Astro's ClientRouter: the brief asks for transitions "compatible with
+// browser history" and explicitly not to turn the whole site into an SPA.
+// ClientRouter's client-side routing would require every island's init
+// script (nav chrome, i18n switch, lightbox, ambient player, hero slider)
+// to be rewritten to re-run on `astro:page-load` instead of once at
+// initial parse — real risk for no clear benefit here. The native API
+// gets a real cross-fade with zero JS and no routing changes.
+
+export interface Props extends SeoProps {
+  bodyClass?: string;
+}
+
+const { bodyClass, ...seoProps } = Astro.props;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+---
+
+<html lang={seoProps.lang ?? 'en'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="generator" content={Astro.generator} />
+    <!-- Satoshi drives every H1/hero title — the single most likely LCP
+         element on any page — so it's the one font worth preloading. -->
+    <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <SEO {...seoProps} />
+    {turnstileSiteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline />}
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <Lightbox />
+    <SoundControl />
+    <WhatsAppFloat />
+    <script>
+      import { initNavChrome } from '../lib/nav-chrome';
+      import { initConsent } from '../lib/consent';
+      import { initClickTracking } from '../lib/click-tracking';
+      import { initI18nSwitch } from '../islands/i18n-switch';
+      import { initScrollReveal } from '../islands/scroll-reveal';
+      initI18nSwitch();
+      initNavChrome();
+      initConsent();
+      initClickTracking();
+      initScrollReveal();
+    </script>
+  </body>
+</html>
